@@ -95,7 +95,7 @@ export default {
     data(){
         return{
             fields: {
-                max_user: 100,
+                max_user: 50,
             },
             errors: {},
 

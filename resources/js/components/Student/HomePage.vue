@@ -54,7 +54,7 @@
 
                                     <form id="section-form" method="POST" action="/section">
                                         <csrf></csrf>
-                                        <input type="hidden" id="schedule_id" name="student_schedule_id" readonly :value="this.schedules.student_schedule_id"></input>
+                                        <input type="hidden" id="schedule_id" name="student_schedule_id" readonly :value="this.schedules.student_schedule_id" />
                                     </form>
                                 </div>
 
@@ -137,7 +137,7 @@ export default {
             this.btnClass['is-loading'] = true;
 
             axios.post('/set-schedule').then(res=>{
-                console.log(res.data);
+                //console.log(res.data);
                 if(res.data.status === 'full'){
                     this.$buefy.dialog.alert({
                         title: 'NO SCHEDULE!',
@@ -157,7 +157,8 @@ export default {
                 if(res.data.status === 'schedule'){
                     this.$buefy.dialog.alert({
                         title: 'SCHEDULED!',
-                        message: 'You are successfully scheduled on ' + this.formatSchedFromDate(res.data.schedfrom),
+                        //message: 'You are successfully scheduled on ' + this.formatSchedFromDate(res.data.schedfrom),
+                        message: 'You are successfully scheduled on ' + new Date(res.data.schedfrom).toLocaleString(),
                         type: 'is-success',
                         onConfirm: ()=> this.getSchedule()
                     });
@@ -173,8 +174,8 @@ export default {
                     this.btnClass['is-loading'] = false;
                 }
             }).catch(err=>{
-                console.log(err.response);
-                 this.btnClass['is-loading'] = false;
+                
+                this.btnClass['is-loading'] = false;
             })
 
             this.btnClass['is-loading'] = false; //activate this for debugging only
@@ -237,7 +238,7 @@ export default {
         scheduleNiya: function(){
 
             if(this.schedules.from){
-                return this.formatSchedFromDate(this.schedules.from);
+                return new Date(this.schedules.from).toLocaleString();
             }else{
                 return '';
             }

@@ -12,11 +12,11 @@
                     </div>
 
                     <div class="buttons is-centered">
-                        <a class="button is-outlined is-primary" href="/login">
+                        <a class="button is-rounded is-outlined is-primary" href="/login">
                             <b-icon pack="fa" icon="arrow-right"></b-icon>
                             &nbsp; &nbsp;LOGIN NOW
                         </a>&nbsp; OR &nbsp;
-                        <a class="button is-outlined is-primary" href="/register">
+                        <a class="button is-rounded is-outlined is-primary" href="/register">
                             <b-icon pack="fa" icon="user"></b-icon>
                             &nbsp; &nbsp;REGISTER NOW
                         </a>

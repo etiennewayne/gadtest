@@ -33,7 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'first_program_choice', 'second_program_choice',
         'learning_mode',
-        'last-school_attended',
+        'last_school_attended',
         'province', 'city', 'barangay', 'barangay_id', 'street',
         'password', 'role'
     ];

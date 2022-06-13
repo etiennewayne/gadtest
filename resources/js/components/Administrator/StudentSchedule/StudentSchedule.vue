@@ -57,11 +57,11 @@
                         </b-table-column>
 
                         <b-table-column field="from" label="From" v-slot="props">
-                            {{ props.row.from }}
+                            {{ new Date(props.row.from).toLocaleString() }}
                         </b-table-column>
 
                         <b-table-column field="to" label="To" v-slot="props">
-                            {{ props.row.to }}
+                            {{ new Date(props.row.to).toLocaleString() }}
                         </b-table-column>
 
                         <b-table-column field="max_user" label="Max Examinee" v-slot="props">

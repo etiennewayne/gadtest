@@ -57,6 +57,9 @@ class UserController extends Controller
 
     public function store(Request $req){
 
+        return $req;
+        
+
         $validate = $req->validate([
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'lname' => ['required', 'string', 'max:255'],
