@@ -86,7 +86,7 @@
                                                      :message="this.errors.status ? this.errors.status : ''">
                                                 <b-select placeholder="Category" v-model="fields.status" expanded required>
                                                     <option value="NEW">NEW</option>
-                                                    <option value="RETURNEE">RETURNEE</option>
+                                                    <!-- <option value="RETURNEE">RETURNEE</option> -->
                                                     <option value="TRANSFEREE">TRANSFEREE</option>
                                                 </b-select>
                                             </b-field>
@@ -332,9 +332,6 @@ export default {
                 //console.log(err.response.data)
                  this.btnClass['is-loading'] = false;
 
-                 if(err.response.status === 500){
-                     this.btnClass['is-loading'] = false;
-                 }
             })
         },
 
