@@ -21,7 +21,7 @@
                                             <b-field label="Username" label-position="on-border"
                                                 :type="this.errors.username ? 'is-danger' : ''"
                                                 :message="this.errors.username ? this.errors.username : ''">
-                                                <b-input type="text" placeholder="Username" v-model="fields.username"  />
+                                                <b-input type="text" maxlength="20" placeholder="Username" v-model="fields.username"  />
                                             </b-field>
                                         </div>
                                     </div>
@@ -50,14 +50,14 @@
                                             <b-field label="Lastname" label-position="on-border"
                                                      :type="this.errors.lname ? 'is-danger' : ''"
                                                      :message="this.errors.lname ? this.errors.lname : ''">
-                                                <b-input type="text" placeholder="Lastname" v-model="fields.lname" required/>
+                                                <b-input type="text" maxlength="30" placeholder="Lastname" v-model="fields.lname" required/>
                                             </b-field>
                                         </div>
                                         <div class="column">
                                             <b-field label="Firstname" label-position="on-border"
                                                      :type="this.errors.fname ? 'is-danger' : ''"
                                                      :message="this.errors.fname ? this.errors.fname : ''">
-                                                <b-input type="text" placeholder="Firstname" v-model="fields.fname" required />
+                                                <b-input type="text" maxlength="30" placeholder="Firstname" v-model="fields.fname" required />
                                             </b-field>
                                         </div>
                                     </div>
@@ -65,7 +65,7 @@
                                     <div class="columns">
                                         <div class="column">
                                             <b-field label="Middlename" label-position="on-border">
-                                                <b-input type="text" v-model="fields.mname" placeholder="Middlename" />
+                                                <b-input type="text" maxlength="30" v-model="fields.mname" placeholder="Middlename" />
                                             </b-field>
                                         </div>
 
