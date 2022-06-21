@@ -152,7 +152,9 @@
                                             </b-field>
                                         </div>
                                         <div class="column">
-                                            <b-field label="Email" label-position="on-border">
+                                            <b-field label="Email" label-position="on-border"
+                                                :type="this.errors.email ? 'is-danger' : ''"
+                                                :message="this.errors.email ? this.errors.email : ''">
                                                 <b-input type="email" placeholder="Email" v-model="fields.email" required />
                                             </b-field>
                                         </div>
@@ -315,30 +317,17 @@ export default {
             this.btnClass['is-loading'] = true;
 
             axios.post('/register', this.fields).then(res=>{
-                console.log(res);
                 window.location = '/home'
-                // if(res.data.status === 'saved'){
-                //     this.$buefy.dialog.alert({
-                //         title: 'REGISTERED!',
-                //         message: 'Account successfully registered. You can login now.',
-                //         type: 'is-success',
-                //         onConfirm: ()=> 
-                //     });
-                //     this.btnClass['is-loading'] = false;
-                // }
                 this.btnClass['is-loading'] = false;
             }).catch(err=>{
                 this.errors = err.response.data.errors;
-                //console.log(err.response.data)
-                 this.btnClass['is-loading'] = false;
-
+                this.btnClass['is-loading'] = false;
             })
         },
 
         initData: function(){
             this.programs = JSON.parse(this.dataPrograms);
             this.learningModes = JSON.parse(this.propLearningModes);
-            //console.log(this.propLearningModes);
         }
 
     },
