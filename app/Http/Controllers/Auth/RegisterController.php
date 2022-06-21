@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Contracts\Validation\Rule;
+
 use App\Models\Program;
 use App\Models\LearningModality;
 
@@ -91,6 +93,8 @@ class RegisterController extends Controller
                 'password.confirmed' => 'Your password does not match.',
             ]
         );
+
+        
     }
 
     /**

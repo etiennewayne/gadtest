@@ -74,8 +74,6 @@ Route::get('/get-schedule', [App\Http\Controllers\Student\StudentScheduleControl
 //STUDENT //////////////STUDENT /////////////STUDENT
 
 
-
-
 //ADMINISTRATOR
 
 //LOGIN OF PANEL CONTROLLER

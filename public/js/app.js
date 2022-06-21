@@ -7086,6 +7086,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7253,12 +7268,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['propUserId'],
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       fields: {},
       bdate: null,
-      errors: {}
-    };
+      errors: {},
+      userId: 0
+    }, _defineProperty(_ref, "fields", {
+      username: null,
+      password: null,
+      password_confirmation: null,
+      lname: null,
+      fname: null,
+      mname: null,
+      sex: null,
+      role: null,
+      bdate: null,
+      birthplace: null,
+      contact_no: null,
+      email: null,
+      last_school_attended: null,
+      province: null,
+      city: null,
+      barangay: null,
+      street: null
+    }), _defineProperty(_ref, "provinces", []), _defineProperty(_ref, "cities", []), _defineProperty(_ref, "barangays", []), _ref;
   },
   methods: {
     submit: function submit() {
@@ -7282,11 +7319,85 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    loadProvince: function loadProvince() {
+      var _this2 = this;
+
+      axios.get('/provinces').then(function (res) {
+        _this2.provinces = res.data;
+      });
+    },
+    loadCity: function loadCity() {
+      var _this3 = this;
+
+      axios.get('/cities?province=' + this.fields.province).then(function (res) {
+        _this3.cities = res.data;
+      });
+    },
+    loadBarangay: function loadBarangay() {
+      var _this4 = this;
+
+      axios.get('/barangays?province=' + this.fields.province + '&city=' + this.fields.city).then(function (res) {
+        _this4.barangays = res.data;
+      });
+    },
+    //update code here
+    getData: function getData() {
+      var _this5 = this;
+
+      this.clearFields(); //nested axios for getting the address 1 by 1 or request by request
+
+      axios.get('/panel/user/' + this.userId).then(function (res) {
+        _this5.fields = res.data;
+        var tempData = res.data; //load city first
+
+        axios.get('/cities?province=' + _this5.fields.province).then(function (res) {
+          //load barangay
+          _this5.cities = res.data;
+          axios.get('/barangays?province=' + _this5.fields.province + '&city=' + _this5.fields.city).then(function (res) {
+            _this5.barangays.barangay_id = res.data.Brgy_ID;
+            console.log(res.data);
+            _this5.fields = tempData;
+          });
+        });
+      });
+    },
+    clearFields: function clearFields() {
+      this.fields = {
+        username: null,
+        password: null,
+        password_confirmation: null,
+        lname: null,
+        fname: null,
+        mname: null,
+        sex: null,
+        role: null,
+        bdate: null,
+        birthplace: null,
+        contact_no: null,
+        email: null,
+        last_school_attended: null,
+        province: null,
+        city: null,
+        barangay: null,
+        street: null
+      };
+    },
     formatDate: function formatDate() {
       var mydate = new Date(Date.parse(this.bdate));
       var realDate = mydate.getFullYear() + "-" + ("0" + (mydate.getMonth() + 1)).slice(-2) + "-" + ("0" + mydate.getDate()).slice(-2);
       this.fields.bdate = realDate;
+    },
+    initData: function initData() {
+      this.userId = parseInt(this.propUserId);
+
+      if (this.userId > 0) {
+        this.getData();
+      }
     }
+  },
+  mounted: function mounted() {
+    this.initData();
+    this.loadProvince();
   }
 });
 
@@ -41274,6 +41385,7 @@ var render = function() {
                             _c("b-input", {
                               attrs: {
                                 type: "text",
+                                maxlength: "20",
                                 placeholder: "Username",
                                 required: ""
                               },
@@ -41394,6 +41506,7 @@ var render = function() {
                             _c("b-input", {
                               attrs: {
                                 type: "text",
+                                maxlength: "30",
                                 placeholder: "Lastname",
                                 required: ""
                               },
@@ -41432,6 +41545,7 @@ var render = function() {
                             _c("b-input", {
                               attrs: {
                                 type: "text",
+                                maxlength: "30",
                                 placeholder: "Firstname",
                                 required: ""
                               },
@@ -41466,6 +41580,7 @@ var render = function() {
                             _c("b-input", {
                               attrs: {
                                 type: "text",
+                                maxlength: "30",
                                 placeholder: "Middlename"
                               },
                               model: {
@@ -41593,8 +41708,7 @@ var render = function() {
                           },
                           [
                             _c("b-datepicker", {
-                              attrs: { editable: "" },
-                              on: { input: _vm.formatDate },
+                              attrs: { editable: "", placeholder: "Birthdate" },
                               model: {
                                 value: _vm.bdate,
                                 callback: function($$v) {
@@ -41758,21 +41872,41 @@ var render = function() {
                           "b-field",
                           {
                             attrs: {
+                              label: "Province",
                               "label-position": "on-border",
-                              label: "Province"
+                              expanded: "",
+                              type: this.errors.province ? "is-danger" : "",
+                              message: this.errors.province
+                                ? this.errors.province[0]
+                                : ""
                             }
                           },
                           [
-                            _c("b-input", {
-                              attrs: { type: "text", placeholder: "Province" },
-                              model: {
-                                value: _vm.fields.province,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.fields, "province", $$v)
-                                },
-                                expression: "fields.province"
-                              }
-                            })
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { expanded: "" },
+                                on: { input: _vm.loadCity },
+                                model: {
+                                  value: _vm.fields.province,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.fields, "province", $$v)
+                                  },
+                                  expression: "fields.province"
+                                }
+                              },
+                              _vm._l(_vm.provinces, function(item, index) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: index,
+                                    domProps: { value: item.Prov_Name }
+                                  },
+                                  [_vm._v(_vm._s(item.Prov_Name))]
+                                )
+                              }),
+                              0
+                            )
                           ],
                           1
                         )
@@ -41788,24 +41922,41 @@ var render = function() {
                           "b-field",
                           {
                             attrs: {
+                              label: "City",
                               "label-position": "on-border",
-                              label: "City/Municipality"
+                              expanded: "",
+                              type: this.errors.city ? "is-danger" : "",
+                              message: this.errors.city
+                                ? this.errors.city[0]
+                                : ""
                             }
                           },
                           [
-                            _c("b-input", {
-                              attrs: {
-                                type: "text",
-                                placeholder: "City/Municipality"
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { expanded: "" },
+                                on: { input: _vm.loadBarangay },
+                                model: {
+                                  value: _vm.fields.city,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.fields, "city", $$v)
+                                  },
+                                  expression: "fields.city"
+                                }
                               },
-                              model: {
-                                value: _vm.fields.city,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.fields, "city", $$v)
-                                },
-                                expression: "fields.city"
-                              }
-                            })
+                              _vm._l(_vm.cities, function(item, index) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: index,
+                                    domProps: { value: item.City_Name }
+                                  },
+                                  [_vm._v(_vm._s(item.City_Name))]
+                                )
+                              }),
+                              0
+                            )
                           ],
                           1
                         )
@@ -41823,21 +41974,45 @@ var render = function() {
                           "b-field",
                           {
                             attrs: {
+                              label: "Barangay",
                               "label-position": "on-border",
-                              label: "Barangay"
+                              expanded: "",
+                              type: this.errors.barangay ? "is-danger" : "",
+                              message: this.errors.barangay
+                                ? this.errors.barangay[0]
+                                : ""
                             }
                           },
                           [
-                            _c("b-input", {
-                              attrs: { type: "text", placeholder: "Barangay" },
-                              model: {
-                                value: _vm.fields.barangay,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.fields, "barangay", $$v)
-                                },
-                                expression: "fields.barangay"
-                              }
-                            })
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { expanded: "" },
+                                model: {
+                                  value: _vm.fields.barangay,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.fields, "barangay", $$v)
+                                  },
+                                  expression: "fields.barangay"
+                                }
+                              },
+                              _vm._l(_vm.barangays, function(item, index) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: index,
+                                    domProps: {
+                                      value: {
+                                        barangay_id: item.Brgy_ID,
+                                        barangay: item.Bgry_Name
+                                      }
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(item.Bgry_Name))]
+                                )
+                              }),
+                              0
+                            )
                           ],
                           1
                         )
@@ -41853,13 +42028,13 @@ var render = function() {
                           "b-field",
                           {
                             attrs: {
-                              "label-position": "on-border",
-                              label: "Street"
+                              label: "Street",
+                              "label-position": "on-border"
                             }
                           },
                           [
                             _c("b-input", {
-                              attrs: { type: "text", placeholder: "Street" },
+                              attrs: { placeholder: "Street", required: "" },
                               model: {
                                 value: _vm.fields.street,
                                 callback: function($$v) {
@@ -43473,6 +43648,7 @@ var render = function() {
                                 _c("b-input", {
                                   attrs: {
                                     type: "text",
+                                    maxlength: "20",
                                     placeholder: "Username"
                                   },
                                   model: {
@@ -43596,6 +43772,7 @@ var render = function() {
                                 _c("b-input", {
                                   attrs: {
                                     type: "text",
+                                    maxlength: "30",
                                     placeholder: "Lastname",
                                     required: ""
                                   },
@@ -43634,6 +43811,7 @@ var render = function() {
                                 _c("b-input", {
                                   attrs: {
                                     type: "text",
+                                    maxlength: "30",
                                     placeholder: "Firstname",
                                     required: ""
                                   },
@@ -43670,6 +43848,7 @@ var render = function() {
                                 _c("b-input", {
                                   attrs: {
                                     type: "text",
+                                    maxlength: "30",
                                     placeholder: "Middlename"
                                   },
                                   model: {

@@ -24,6 +24,10 @@ class UserController extends Controller
         return view('panel.user.user');
     }
 
+    public function show($id){
+        return User::find($id);
+    }
+
     public function index_data(Request $req){
         
         $sort = explode('.', $req->sort_by);
@@ -52,13 +56,11 @@ class UserController extends Controller
     }
 
     public function create(){
-        return view('panel.user.user-create');
+        return view('panel.user.user-create')
+            ->with('userid', 0);
     }
 
     public function store(Request $req){
-
-        return $req;
-        
 
         $validate = $req->validate([
             'username' => ['required', 'string', 'max:255', 'unique:users'],
@@ -87,7 +89,9 @@ class UserController extends Controller
             'role' => strtoupper($req->role),
         ]);
 
-        return ['status' => 'saved'];
+        return repsonse()->json([
+            'status' => 'saved'
+        ], 200);
     }
 
     public function edit($id){
@@ -95,8 +99,8 @@ class UserController extends Controller
         $learningmodes = LearningModality::all();
 
         $data = User::find($id);
-        return view('panel.user.user-edit')
-            ->with('data', $data)
+        return view('panel.user.user-create')
+            ->with('userid', $id)
             ->with('programs', $programs ? $programs : '')
             ->with('learningmodes', $learningmodes);
     }
@@ -113,7 +117,7 @@ class UserController extends Controller
             ]);
         }else{
             $validate = $req->validate([
-                'username' => ['required', 'string', 'max:50', 'unique:users,username,' .$id.',user_id'],
+                'username' => ['required', 'string', 'max:50', 'unique:users,username,' . $id . ',user_id'],
                 'lname' => ['required', 'string', 'max:255'],
                 'fname' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'. $id. ',user_id'],
@@ -145,7 +149,9 @@ class UserController extends Controller
         }
         $data->save();
 
-        return ['status' => 'updated'];
+        return repsonse()->json([
+            'status' => 'updated'
+        ], 200);
     }
 
     public function destroy($id){
