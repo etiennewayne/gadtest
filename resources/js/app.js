@@ -107,8 +107,6 @@ Vue.component('student-result', require('./components/Administrator/StudentResul
 //USER
 Vue.component('user-page', require('./components/Administrator/User/UserPage.vue').default);
 Vue.component('user-page-create', require('./components/Administrator/User/UserPageCreate.vue').default);
-Vue.component('user-page-edit', require('./components/Administrator/User/UserPageEdit.vue').default);
-
 
 //ADMIN REPORT
 Vue.component('students-result', require('./components/Administrator/Admission/StudentsResult.vue').default);

@@ -90,7 +90,7 @@
                     </b-table-column>
 
                     <b-table-column field="email_verified_at" label="Verified At" v-slot="props">
-                        {{ props.row.email_verified_at }}
+                        {{ new Date(props.row.email_verified_at).toLocaleString() }}
                     </b-table-column>
 
                     <b-table-column field="role" label="Role" v-slot="props">

@@ -62,6 +62,9 @@ class UserController extends Controller
 
     public function store(Request $req){
 
+        $ndate = date("Y-m-d", strtotime($req->bdate)); //convert to date format UNIX
+        //birthdate
+
         $validate = $req->validate([
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'lname' => ['required', 'string', 'max:255'],
@@ -70,6 +73,8 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:4', 'confirmed'],
         ]);
 
+      
+
         User::create([
             'username' => $req->username,
             'password' => Hash::make($req->password),
@@ -77,14 +82,15 @@ class UserController extends Controller
             'fname' => strtoupper($req->fname),
             'mname' => strtoupper($req->mname),
             'sex' => strtoupper($req->sex),
-            'bdate' => $req->bdate,
+            'bdate' => $ndate,
             'birthplace' => strtoupper($req->birthplace),
             'contact_no' => $req->contact_no,
             'email' => $req->email,
             'last_school_attended' => strtoupper($req->last_school_attended),
-            'province' => strtoupper($req->province),
-            'city' => strtoupper($req->city),
-            'barangay' => strtoupper($req->barangay),
+            'province' => $req->province,
+            'city' => $req->city,
+            'barangay' => $req->barangay['barangay'],
+            'barangay_id' => $req->barangay['barangay_id'],
             'street' => strtoupper($req->street),
             'role' => strtoupper($req->role),
         ]);
@@ -106,6 +112,7 @@ class UserController extends Controller
     }
 
     public function update(Request $req, $id){
+        $ndate = date("Y-m-d", strtotime($req->bdate)); //convert to date format UNIX
 
         if($req->password != ''){
             $validate = $req->validate([
@@ -131,7 +138,7 @@ class UserController extends Controller
         $data->mname = strtoupper($req->mname);
         $data->sex = strtoupper($req->sex);
         $data->status = strtoupper($req->status);
-        $data->bdate = $req->bdate;
+        $data->bdate = $ndate;
         $data->birthplace = strtoupper($req->birthplace);
         $data->contact_no = strtoupper($req->contact_no);
         $data->email = $req->email;
@@ -139,17 +146,16 @@ class UserController extends Controller
         $data->second_program_choice = $req->second_program_choice;
         $data->learning_mode = $req->learning_mode;
         $data->last_school_attended = strtoupper($req->last_school_attended);
-//        $data->province = strtoupper($req->province);
-//        $data->city = strtoupper($req->city);
-//        $data->barangay = strtoupper($req->barangay);
-//        $data->street = strtoupper($req->street);
+        $data->province = $req->province;
+        $data->city = $req->city;
+        $data->barangay = $req->barangay['barangay'];
+        $data->barangay_id = $req->barangay['barangay_id'];
+        $data->street = strtoupper($req->street);
         $data->role = strtoupper($req->role);
-        if($req->password != ''){
-            $data->password = Hash::make($req->password);
-        }
+     
         $data->save();
 
-        return repsonse()->json([
+        return response()->json([
             'status' => 'updated'
         ], 200);
     }
