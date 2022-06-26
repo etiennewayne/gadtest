@@ -18,4 +18,9 @@ class Section extends Model
     protected $fillable = ['section'];
 
 
+//    public function taking_test(){
+//        return $this->hasOne(TakingTest::class, 'section_id', 'section_id');
+//    }
+
+
 }

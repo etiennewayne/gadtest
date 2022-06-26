@@ -25,6 +25,19 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <b-field label="Search ID">
+                                    <b-input type="text" v-model="search.id" placeholder="Search ID..." @keyup.native.enter="loadAsyncData" />
+                                </b-field>
+                            </div>
+                        </div>
+
+                    </div>
+
+
                     <div style="display:flex; justify-content: flex-end;">
                         <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
                     </div>
@@ -32,6 +45,7 @@
                         :data="data"
                         :loading="loading"
                         paginated
+                        detailed
                         backend-pagination
                         :total="total"
                         :per-page="perPage"
@@ -75,6 +89,19 @@
                             </div>
                         </b-table-column>
 
+                        <template #detail="props">
+                            <div>
+                                <strong>USER ID:</strong> {{ props.row.user_id }}
+                            </div>
+                            <div>
+                                <strong>EMAIL:</strong> {{ props.row.email }}
+                            </div>
+                            <div>
+                                <strong>USERNAME:</strong> {{ props.row.username }}
+                            </div>
+
+                        </template>
+
                     </b-table>
 
                     <div class="buttons mt-3">
@@ -99,7 +126,7 @@ export default {
             sortField: 'student_schedule_id',
             sortOrder: 'desc',
             page: 1,
-            perPage: 5,
+            perPage: 20,
             defaultSortDirection: 'asc',
 
             isModalActive: false,
@@ -119,6 +146,7 @@ export default {
             },
 
             search: {
+                id: '',
                 lname: '',
             }
 
@@ -130,7 +158,8 @@ export default {
                 `sort_by=${this.sortField}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
                 `page=${this.page}`,
-                `lname=${this.search.lname}`
+                `lname=${this.search.lname}`,
+                `id=${this.search.id}`
             ].join('&')
 
             this.loading = true

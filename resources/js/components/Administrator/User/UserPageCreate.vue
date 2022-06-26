@@ -232,7 +232,7 @@ export default {
                     if(res.data.status === 'updated'){
                         this.$buefy.dialog.alert({
                             title: 'SAVED!',
-                            message: 'User added successfully.',
+                            message: 'User updated successfully.',
                             type: 'is-success',
                             onConfirm: ()=> window.location = '/panel/user'
                         });

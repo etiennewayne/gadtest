@@ -34,6 +34,17 @@
                 </div>
             </div>
 
+            <div class="level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <b-field label="Search ID" label-position="on-border">
+                            <b-input type="text" placeholder="Search ID..."
+                                     v-model="search.id" @keyup.native.enter="loadAsyncData" />
+                        </b-field>
+                    </div>
+                </div>
+            </div>
+
             <div style="display:flex; justify-content: flex-end;">
                 <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
             </div>
@@ -126,6 +137,7 @@ export default {
             },
 
             search: {
+                id:'',
                 lname: '',
                 fname: '',
             }
@@ -139,6 +151,7 @@ export default {
                 `perpage=${this.perPage}`,
                 `page=${this.page}`,
                 `lname=${this.search.lname}`,
+                `id=${this.search.id}`,
                 `fname=${this.search.fname}`
             ].join('&')
 

@@ -58,8 +58,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/section', [App\Http\Controllers\Student\SectionPageController::class, 'index']);
 Route::resource('/section-question', App\Http\Controllers\Student\SectionQuestionController::class);
 
-Route::post('/taking-exam', [App\Http\Controllers\Student\TakingExamController::class, 'index']);
 
+Route::post('/taking-exam', [App\Http\Controllers\Student\TakingExamController::class, 'index']);
 
 Route::get('/taking-exam-question/{sectionid}', [App\Http\Controllers\Student\TakingExamController::class, 'examineeQuestion']);
 Route::get('/result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'index']);
@@ -72,7 +72,6 @@ Route::post('/set-schedule', [App\Http\Controllers\Student\StudentScheduleContro
 Route::get('/get-schedule', [App\Http\Controllers\Student\StudentScheduleController::class, 'getSchedule']);
 
 //STUDENT //////////////STUDENT /////////////STUDENT
-
 
 //ADMINISTRATOR
 
@@ -141,13 +140,12 @@ Route::resource('/panel/students-result', App\Http\Controllers\Administrator\Stu
 
 
 
-
 //USER
 Route::resource('/panel/user', App\Http\Controllers\Administrator\UserController::class);
-Route::get('/axios-users', [App\Http\Controllers\Administrator\UserController::class, 'index_data']);
+Route::get('/get-users', [App\Http\Controllers\Administrator\UserController::class, 'getUsers']);
 Route::get('/fetch-students', [App\Http\Controllers\Administrator\UserController::class, 'allStudents']);
 Route::post('/verify-email-students/{userid}', [App\Http\Controllers\Administrator\UserController::class, 'verifyEmailStudents']);
-
+Route::post('/user-reset-password/{id}', [App\Http\Controllers\Administrator\UserController::class, 'resetPassword']);
 
 
 

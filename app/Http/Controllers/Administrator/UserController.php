@@ -28,7 +28,7 @@ class UserController extends Controller
         return User::find($id);
     }
 
-    public function index_data(Request $req){
+    public function getUsers(Request $req){
         
         $sort = explode('.', $req->sort_by);
         return User::where('lname', 'like', $req->lname . '%')
@@ -81,6 +81,7 @@ class UserController extends Controller
             'lname' => strtoupper($req->lname),
             'fname' => strtoupper($req->fname),
             'mname' => strtoupper($req->mname),
+            'suffix' => strtoupper($req->suffix),
             'sex' => strtoupper($req->sex),
             'bdate' => $ndate,
             'birthplace' => strtoupper($req->birthplace),
@@ -95,7 +96,7 @@ class UserController extends Controller
             'role' => strtoupper($req->role),
         ]);
 
-        return repsonse()->json([
+        return response()->json([
             'status' => 'saved'
         ], 200);
     }
@@ -112,6 +113,7 @@ class UserController extends Controller
     }
 
     public function update(Request $req, $id){
+
         $ndate = date("Y-m-d", strtotime($req->bdate)); //convert to date format UNIX
 
         if($req->password != ''){
@@ -136,6 +138,7 @@ class UserController extends Controller
         $data->lname = strtoupper($req->lname);
         $data->fname = strtoupper($req->fname);
         $data->mname = strtoupper($req->mname);
+        $data->suffix = strtoupper($req->suffix);
         $data->sex = strtoupper($req->sex);
         $data->status = strtoupper($req->status);
         $data->bdate = $ndate;
@@ -162,5 +165,19 @@ class UserController extends Controller
 
     public function destroy($id){
         User::destroy($id);
+    }
+
+    public function resetPassword(Request $req, $id){
+        $req->validate([
+            'password' => ['required',  'confirmed', 'min:4']
+        ]);
+
+        $data = User::find($id);
+        $data->password = Hash::make($req->password);
+        $data->save();
+
+        return response()->json([
+            'status' => 'reset'
+        ]);
     }
 }

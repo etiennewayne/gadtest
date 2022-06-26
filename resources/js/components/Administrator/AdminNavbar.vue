@@ -36,7 +36,6 @@
                 </b-navbar-item>
             </b-navbar-dropdown>
 
-
             <b-navbar-dropdown label="Schedule">
                 <b-navbar-item href="/panel/test-schedule">
                     Schedules

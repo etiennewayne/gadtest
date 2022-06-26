@@ -41,6 +41,7 @@ class StudentSectionTakenController extends Controller
                 'f.description as schedule_description', 'f.from', 'f.to', 'f.max_user')
             ->where('lname', 'like', $req->lname . '%')
             ->where('fname', 'like', $req->fname . '%')
+            ->where('a.user_id', 'like', $req->id . '%')
             ->paginate($req->perpage);
         return $data;
     }

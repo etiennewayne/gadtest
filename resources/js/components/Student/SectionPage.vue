@@ -6,6 +6,11 @@
                     <img :src="'/img/' + item.img_filename" class="img-size" alt="..." />
                     <p>SECTION: {{ item.section }}</p>
                     <p>TIME: {{ item.set_time }} minutes</p>
+                    <p>STATUS:
+                        <span v-if="item.user_id" class="status-done">DONE</span>
+                        <span v-else class="status-available">AVAILABLE</span>
+
+                    </p>
                 </div>
             </div>
 
@@ -95,5 +100,16 @@ export default {
         }
 
     } */
+
+    .status-available{
+        font-weight: bold;
+        color: green;
+
+    }
+
+    .status-done{
+        font-weight: bold;
+        color: red;
+    }
 </style>
 
