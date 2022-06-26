@@ -8536,8 +8536,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
 //
 //
 //
@@ -8725,35 +8724,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['propUserId'],
   data: function data() {
-    var _ref;
-
-    return _ref = {
-      fields: {},
+    return {
       errors: {},
-      userId: 0
-    }, _defineProperty(_ref, "fields", {
-      username: null,
-      password: null,
-      password_confirmation: null,
-      lname: null,
-      fname: null,
-      mname: null,
-      sex: null,
-      suffix: null,
-      role: null,
-      bdate: null,
-      birthplace: null,
-      contact_no: null,
-      email: null,
-      last_school_attended: null,
-      province: null,
-      city: null,
-      barangay: {
-        barangay_id: null,
-        barangay: null
+      userId: 0,
+      fields: {
+        username: null,
+        password: null,
+        password_confirmation: null,
+        lname: null,
+        fname: null,
+        mname: null,
+        sex: null,
+        suffix: null,
+        role: null,
+        bdate: null,
+        birthplace: null,
+        contact_no: null,
+        email: null,
+        last_school_attended: null,
+        province: null,
+        city: null,
+        barangay: {
+          barangay_id: null,
+          barangay: null
+        },
+        street: null
       },
-      street: null
-    }), _defineProperty(_ref, "bdate", null), _defineProperty(_ref, "provinces", []), _defineProperty(_ref, "cities", []), _defineProperty(_ref, "barangays", []), _ref;
+      bdate: null,
+      provinces: [],
+      cities: [],
+      barangays: []
+    };
   },
   methods: {
     submit: function submit() {
@@ -46155,6 +46156,88 @@ var render = function() {
                       1
                     )
                   ]),
+                  _vm._v(" "),
+                  _vm.userId < 1
+                    ? _c("div", { staticClass: "columns" }, [
+                        _c(
+                          "div",
+                          { staticClass: "column" },
+                          [
+                            _c(
+                              "b-field",
+                              {
+                                attrs: {
+                                  label: "Password",
+                                  type: this.errors.password ? "is-danger" : "",
+                                  message: this.errors.password
+                                    ? this.errors.password[0]
+                                    : "",
+                                  "label-position": "on-border"
+                                }
+                              },
+                              [
+                                _c("b-input", {
+                                  attrs: {
+                                    type: "password",
+                                    "password-reveal": "",
+                                    placeholder: "Password",
+                                    required: ""
+                                  },
+                                  model: {
+                                    value: _vm.fields.password,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.fields, "password", $$v)
+                                    },
+                                    expression: "fields.password"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "column" },
+                          [
+                            _c(
+                              "b-field",
+                              {
+                                attrs: {
+                                  label: "Confirm Password",
+                                  "label-position": "on-border"
+                                }
+                              },
+                              [
+                                _c("b-input", {
+                                  attrs: {
+                                    type: "password",
+                                    "password-reveal": "",
+                                    placeholder: "Confirm Password",
+                                    required: ""
+                                  },
+                                  model: {
+                                    value: _vm.fields.password_confirmation,
+                                    callback: function($$v) {
+                                      _vm.$set(
+                                        _vm.fields,
+                                        "password_confirmation",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "fields.password_confirmation"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("div", { staticClass: "columns" }, [
                     _c(

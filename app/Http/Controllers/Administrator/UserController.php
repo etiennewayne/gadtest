@@ -56,8 +56,14 @@ class UserController extends Controller
     }
 
     public function create(){
+        $programs = Program::where('programStat', 1)->get();
+        $learningmodes = LearningModality::all();
+
+
         return view('panel.user.user-create')
-            ->with('userid', 0);
+            ->with('userid', 0)
+            ->with('programs', $programs ? $programs : '')
+            ->with('learningmodes', $learningmodes);
     }
 
     public function store(Request $req){
@@ -105,7 +111,7 @@ class UserController extends Controller
         $programs = Program::where('programStat', 1)->get();
         $learningmodes = LearningModality::all();
 
-        $data = User::find($id);
+        //$data = User::find($id);
         return view('panel.user.user-create')
             ->with('userid', $id)
             ->with('programs', $programs ? $programs : '')

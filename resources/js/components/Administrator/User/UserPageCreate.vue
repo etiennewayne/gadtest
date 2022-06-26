@@ -18,7 +18,8 @@
                                     </div>
                                 </div>
 
-                                <!-- <div class="columns">
+
+                                <div class="columns" v-if="userId < 1">
                                     <div class="column">
                                         <b-field label="Password"
                                                  :type="this.errors.password ? 'is-danger' : ''"
@@ -33,7 +34,7 @@
                                             <b-input type="password" password-reveal v-model="fields.password_confirmation" placeholder="Confirm Password" required/>
                                         </b-field>
                                     </div>
-                                </div> -->
+                                </div>
 
 
                                 <div class="columns">
@@ -188,10 +189,7 @@ export default {
 
     data(){
         return {
-            fields: {
-                
-            },
-            
+
             errors: {},
 
             userId: 0,
