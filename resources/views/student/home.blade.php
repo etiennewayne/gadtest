@@ -6,8 +6,6 @@
                    already-visited-section="@if(session('error') == 'already_visited_section')visited @endif"
                     is-exist="@if(session('error') == 'exist')exist @endif"></home-page>
 
-        is_exist
-
 
 
 {{--    @isset($error)--}}

@@ -60,12 +60,18 @@
                                                 <b-input type="text" maxlength="30" placeholder="Firstname" v-model="fields.fname" required />
                                             </b-field>
                                         </div>
-                                    </div>
-
-                                    <div class="columns">
                                         <div class="column">
                                             <b-field label="Middlename" label-position="on-border">
                                                 <b-input type="text" maxlength="30" v-model="fields.mname" placeholder="Middlename" />
+                                            </b-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="columns">
+
+                                        <div class="column">
+                                            <b-field label="Suffix" label-position="on-border">
+                                                <b-input type="text" maxlength="30" v-model="fields.suffix" placeholder="Suffix" />
                                             </b-field>
                                         </div>
 
@@ -98,8 +104,7 @@
                                             <b-field label="Birthdate" label-position="on-border"
                                                      :type="this.errors.bdate ? 'is-danger' : ''"
                                                      :message="this.errors.bdate ? this.errors.bdate : ''">
-                                                <b-datepicker placeholder="Birthdate" v-model="bdate"
-                                                              @input="formattedDate" required trap-focus/>
+                                                <b-datepicker placeholder="Birthdate" v-model="bdate" required trap-focus/>
                                             </b-field>
                                         </div>
                                         <div class="column">
@@ -152,7 +157,9 @@
                                             </b-field>
                                         </div>
                                         <div class="column">
-                                            <b-field label="Email" label-position="on-border">
+                                            <b-field label="Email" label-position="on-border"
+                                                :type="this.errors.email ? 'is-danger' : ''"
+                                                :message="this.errors.email ? this.errors.email : ''">
                                                 <b-input type="email" placeholder="Email" v-model="fields.email" required />
                                             </b-field>
                                         </div>
@@ -303,42 +310,30 @@ export default {
             });
         },
 
-        formattedDate(){
-            let mydate = new Date(Date.parse(this.bdate));
-            let realDate = mydate.getFullYear() + "-" + ("0" + (mydate.getMonth() + 1)).slice(-2) + "-"+ ("0" + (mydate.getDate())).slice(-2);
-            this.fields.bdate = realDate;
-            // let dateoptions = {year:'numeric', month:'short', day:'numeric'};
-            // return dt.toLocaleDateString('en-GB', dateoptions);
-        },
 
         submit: function(){
+
             this.btnClass['is-loading'] = true;
+            let ndate = new Date(this.bdate);
+
+            this.fields.bdate = ndate.toLocaleDateString();
+
+           // console.log(ndate.toLocaleDateString());
 
             axios.post('/register', this.fields).then(res=>{
-                console.log(res);
                 window.location = '/home'
-                // if(res.data.status === 'saved'){
-                //     this.$buefy.dialog.alert({
-                //         title: 'REGISTERED!',
-                //         message: 'Account successfully registered. You can login now.',
-                //         type: 'is-success',
-                //         onConfirm: ()=> 
-                //     });
-                //     this.btnClass['is-loading'] = false;
-                // }
                 this.btnClass['is-loading'] = false;
             }).catch(err=>{
-                this.errors = err.response.data.errors;
-                //console.log(err.response.data)
-                 this.btnClass['is-loading'] = false;
-
+                if(err.response.status === 422){
+                    this.errors = err.response.data.errors;
+                }
+                this.btnClass['is-loading'] = false;
             })
         },
 
         initData: function(){
             this.programs = JSON.parse(this.dataPrograms);
             this.learningModes = JSON.parse(this.propLearningModes);
-            //console.log(this.propLearningModes);
         }
 
     },

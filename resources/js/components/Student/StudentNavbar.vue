@@ -35,7 +35,7 @@
             </b-navbar-item>
 
 
-            <b-navbar-dropdown :label="firstname" icon-pack="fa" icon="id-badge">
+            <b-navbar-dropdown :label="displayName" icon-pack="fa" icon="id-badge">
                 <b-navbar-item @click="logout">
                     <b-icon pack="fa" icon="sign-out"></b-icon>
                     &nbsp;LOGOUT
@@ -50,7 +50,7 @@
 
 <script>
 export default {
-    props: ['isAuth','firstname'],
+    props: ['isAuth','firstname', 'propId'],
     data(){
         return{
 
@@ -63,6 +63,12 @@ export default {
             });
         }
     },
+
+    computed: {
+        displayName(){
+            return this.firstname + ' (' + this.propId + ')';
+        }
+    }
 
 }
 </script>

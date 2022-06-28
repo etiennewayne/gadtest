@@ -231,18 +231,19 @@ export default {
 
     mounted(){
         this.getSchedule();
+
+       
     },
 
     computed:{
 
         scheduleNiya: function(){
-
             if(this.schedules.from){
+                 console.log(this.schedules.from);
                 return new Date(this.schedules.from).toLocaleString();
             }else{
                 return '';
             }
-
         }
     }
 

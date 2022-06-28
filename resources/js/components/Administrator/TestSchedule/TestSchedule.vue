@@ -102,7 +102,7 @@ export default {
             sortField: 'test_schedule_id',
             sortOrder: 'desc',
             page: 1,
-            perPage: 5,
+            perPage: 20,
             defaultSortDirection: 'asc',
 
             isModalActive: false,

@@ -6,8 +6,6 @@
                    already-visited-section="<?php if(session('error') == 'already_visited_section'): ?>visited <?php endif; ?>"
                     is-exist="<?php if(session('error') == 'exist'): ?>exist <?php endif; ?>"></home-page>
 
-        is_exist
-
 
 
 

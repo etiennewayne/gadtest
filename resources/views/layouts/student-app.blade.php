@@ -35,7 +35,7 @@
                 <student-navbar is-auth="0"></student-navbar>
             @endif
         @else
-            <student-navbar is-auth="1" firstname="{{ auth()->user()->fname }}"></student-navbar>
+            <student-navbar is-auth="1" firstname="{{ auth()->user()->fname }}" prop-id="{{ auth()->user()->user_id }}"></student-navbar>
         @endguest
 
         @yield('content')

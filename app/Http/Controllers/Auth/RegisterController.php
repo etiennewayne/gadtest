@@ -69,6 +69,7 @@ class RegisterController extends Controller
 
     protected function validator(array $data)
     {
+        
         return Validator::make($data, [
             'username' => ['string', 'max:255', 'required', 'unique:users'],
             'password' => ['string', 'max:50', 'min:4', 'required', 'confirmed'],
@@ -105,7 +106,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         //return $data['barangay']['barangay'];
-        
+
+        $ndate = date("Y-m-d", strtotime($data['bdate'])); //convert to date format UNIX
 
         return User::create([
             'username' => $data['username'],
@@ -113,9 +115,10 @@ class RegisterController extends Controller
             'lname' => strtoupper($data['lname']),
             'fname' => strtoupper($data['fname']),
             'mname' => strtoupper($data['mname']),
+            'suffix' => $data['suffix'],
             'sex' => $data['sex'],
             'status' => $data['status'],
-            'bdate' => $data['bdate'],
+            'bdate' => $ndate,
             'birthplace' => strtoupper($data['birthplace']),
             'contact_no' => $data['contact_no'],
             'email' => $data['email'],

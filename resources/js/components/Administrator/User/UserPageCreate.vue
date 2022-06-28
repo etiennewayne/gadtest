@@ -2,8 +2,8 @@
     <div>
         <div class="section">
             <div class="container">
-                <div class="columns">
-                    <div class="column is-8 is-offset-2">
+                <div class="columns is-centered">
+                    <div class="column is-10">
                         <div class="box">
                             <h1 class="title is-5">ADD/MODIFY USER</h1>
                             <form @submit.prevent="submit">
@@ -18,7 +18,8 @@
                                     </div>
                                 </div>
 
-                                <div class="columns">
+
+                                <div class="columns" v-if="userId < 1">
                                     <div class="column">
                                         <b-field label="Password"
                                                  :type="this.errors.password ? 'is-danger' : ''"
@@ -63,6 +64,11 @@
                                 </div>
 
                                 <div class="columns">
+                                    <div class="column">
+                                        <b-field label="Suffix" label-position="on-border">
+                                            <b-input type="text" maxlength="30" v-model="fields.suffix" placeholder="Suffix" />
+                                        </b-field>
+                                    </div>
 
                                     <div class="column">
                                         <b-field label-position="on-border" label="Sex" expanded>
@@ -88,7 +94,7 @@
                                 <div class="columns">
                                     <div class="column">
                                         <b-field label-position="on-border" label="Birthdate">
-                                            <b-datepicker editable v-model="bdate" placeholder="Birthdate">
+                                            <b-datepicker editable v-model="fields.bdate" placeholder="Birthdate">
                                             </b-datepicker>
                                         </b-field>
                                     </div>
@@ -183,8 +189,7 @@ export default {
 
     data(){
         return {
-            fields: {},
-            bdate: null,
+
             errors: {},
 
             userId: 0,
@@ -192,13 +197,23 @@ export default {
 
             fields: {
                 username: null,
-                password: null, password_confirmation : null,
-                lname: null, fname: null, mname: null, sex : null,
+                password: null, 
+                password_confirmation : null,
+                lname: null, fname: null, mname: null, 
+                sex : null,
+                suffix: null,
+
                 role: null, bdate: null, birthplace: null,
                 contact_no : null, email : null,
                 last_school_attended: null,
-                province: null, city: null, barangay: null, street: null
+                province: null, city: null, 
+                barangay: {
+                    barangay_id : null,
+                    barangay: null,
+                }, street: null
             },
+            bdate: null,
+
 
             provinces: [],
             cities: [],
@@ -210,21 +225,40 @@ export default {
     methods: {
 
         submit(){
-            axios.post('/panel/user', this.fields).then(res=>{
-                if(res.data.status === 'saved'){
-                    this.$buefy.dialog.alert({
-                        title: 'SAVED!',
-                        message: 'User added successfully.',
-                        type: 'is-success',
-                        onConfirm: ()=> window.location = '/panel/user'
-                    });
-                }
-            }).catch(err=>{
-                if(err.response.status === 422){
-                    this.errors = err.response.data.errors;
-                    console.log(err.response.data.errors);
-                }
-            })
+            if(this.userId > 0){
+                axios.put('/panel/user/'+this.userId, this.fields).then(res=>{
+                    if(res.data.status === 'updated'){
+                        this.$buefy.dialog.alert({
+                            title: 'SAVED!',
+                            message: 'User updated successfully.',
+                            type: 'is-success',
+                            onConfirm: ()=> window.location = '/panel/user'
+                        });
+                    }
+                }).catch(err=>{
+                    if(err.response.status === 422){
+                        this.errors = err.response.data.errors;
+                        console.log(err.response.data.errors);
+                    }
+                });
+            }else{
+                axios.post('/panel/user', this.fields).then(res=>{
+                    if(res.data.status === 'saved'){
+                        this.$buefy.dialog.alert({
+                            title: 'SAVED!',
+                            message: 'User added successfully.',
+                            type: 'is-success',
+                            onConfirm: ()=> window.location = '/panel/user'
+                        });
+                    }
+                }).catch(err=>{
+                    if(err.response.status === 422){
+                        this.errors = err.response.data.errors;
+                        console.log(err.response.data.errors);
+                    }
+                });
+            }
+            
         },
 
 
@@ -250,24 +284,43 @@ export default {
         
             //nested axios for getting the address 1 by 1 or request by request
             axios.get('/panel/user/'+this.userId).then(res=>{
-                this.fields = res.data;
-               
-                let tempData = res.data;
+
+                var tempData = res.data;
                 //load city first
+                this.fields.username = tempData.username;
+                this.fields.lname = tempData.lname;
+                this.fields.fname = tempData.fname;
+                this.fields.mname = tempData.mname;
+                this.fields.suffix = tempData.suffix;
+                this.fields.sex = tempData.sex;
+                this.fields.role = tempData.role;
+                this.fields.bdate = new Date(tempData.bdate);
+                this.fields.birthplace = tempData.birthplace;
+                this.fields.contact_no = tempData.contact_no;
+                this.fields.email = tempData.email;
+                this.fields.last_school_attended = tempData.last_school_attended;
+                this.fields.province = tempData.province;
+
                 axios.get('/cities?province=' + this.fields.province).then(res=>{
-                    //load barangay
+                    //load barangay 
                     this.cities = res.data;
+                    this.fields.city = tempData.city;
                     axios.get('/barangays?province=' + this.fields.province + '&city='+this.fields.city).then(res=>{
-                        this.barangays.barangay_id = res.data.Brgy_ID;
-                        console.log(res.data);
-                        this.fields = tempData;
+                        this.barangays = res.data;
+
+                        let objBrgy = {
+                            barangay_id: tempData.barangay_id,
+                            barangay: tempData.barangay
+                        };
+                        this.fields.barangay = objBrgy;
+                        this.fields.street = tempData.street;
                     });
                 });
             });
         },
 
         clearFields: function(){
-            this.fields ={
+            this.fields = {
                 username: null,
                 password: null, password_confirmation : null,
                 lname: null, fname: null, mname: null, sex : null,
@@ -276,12 +329,6 @@ export default {
                 last_school_attended: null,
                 province: null, city: null, barangay: null, street: null
             };
-        },
-
-        formatDate(){
-            let mydate = new Date(Date.parse(this.bdate));
-            let realDate = mydate.getFullYear() + "-" + ("0" + (mydate.getMonth() + 1)).slice(-2) + "-"+ ("0" + (mydate.getDate())).slice(-2);
-            this.fields.bdate = realDate;
         },
 
         initData(){
@@ -295,8 +342,9 @@ export default {
 
 
     mounted(){
-        this.initData();
         this.loadProvince();
+        this.initData();
+       
     }
 }
 </script>
