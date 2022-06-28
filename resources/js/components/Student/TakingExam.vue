@@ -178,6 +178,7 @@ export default {
                         confirmText: 'OK',
                     });
                 }
+                alert(err.response.data);
             });
         },
 

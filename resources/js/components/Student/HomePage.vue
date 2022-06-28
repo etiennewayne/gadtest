@@ -7,8 +7,26 @@
                     <div class="columns">
                         <div class="column is-6 is-offset-3">
                             <div class="box">
-                                <h1 class="title is-5">GADTEST SCHEDULE</h1><hr>
+                                <h1 class="title is-5">PROFILE</h1>
 
+                                <div>
+                                    Ref: <span style="font-weight: bold;">{{ this.user.user_id }}</span>
+                                </div>
+                                <div>
+                                    Name: {{ fullName }}
+                                </div>
+                                <div>
+                                    1st Program: {{ this.user.first_program_choice }}
+                                </div>
+                                <div>
+                                    2nd Program: {{ this.user.second_program_choice }}
+                                </div>
+                                <div>
+                                    Address: {{ userAddress }}
+                                </div>
+                                <hr>
+
+                                <h1 class="title is-5">GADTEST SCHEDULE</h1>
                                 <b-notification v-if="isNotScheduled == 1"
                                     type="is-danger"
                                     aria-close-label="Close notification"
@@ -33,6 +51,7 @@
                                 <p v-if="schedules" style="text-align:center;">Your schedule is on {{ scheduleNiya }}</p>
                                 <p v-else style="text-align:center;">To take the test, you must request a schedule first.</p>
 
+                                <hr>
                                 <div class="instruction">
                                     <p class="title is-5">ADMISSION TEST DIRECTIONS</p>
                                     <ul>
@@ -111,7 +130,7 @@
 <script>
 
 export default {
-    props: ['isNotScheduled', 'alreadyVisitedSection', 'isExist'],
+    props: ['isNotScheduled', 'alreadyVisitedSection', 'isExist', 'propUser'],
 
     data() {
         return {
@@ -122,6 +141,8 @@ export default {
                 'is-outlined': true,
                 'is-loading': false,
             },
+
+            user: {},
 
             isLoading: false,
 
@@ -232,6 +253,7 @@ export default {
     mounted(){
         this.getSchedule();
 
+        this.user = JSON.parse(this.propUser);
        
     },
 
@@ -239,11 +261,19 @@ export default {
 
         scheduleNiya: function(){
             if(this.schedules.from){
-                 console.log(this.schedules.from);
+                 //console.log(this.schedules.from);
                 return new Date(this.schedules.from).toLocaleString();
             }else{
                 return '';
             }
+        },
+
+        fullName(){
+            return this.user.lname + ', ' + this.user.fname + ' ' + this.user.mname;
+        },
+
+        userAddress(){
+            return this.user.province + ', ' + this.user.city + ' ' + this.user.barangay + ' ' + this.user.street;
         }
     }
 

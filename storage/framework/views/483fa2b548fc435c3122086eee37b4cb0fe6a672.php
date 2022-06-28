@@ -35,7 +35,7 @@
                 <student-navbar is-auth="0"></student-navbar>
             <?php endif; ?>
         <?php else: ?>
-            <student-navbar is-auth="1" firstname="<?php echo e(auth()->user()->fname); ?>"></student-navbar>
+            <student-navbar is-auth="1" firstname="<?php echo e(auth()->user()->fname); ?>" prop-id="<?php echo e(auth()->user()->user_id); ?>"></student-navbar>
         <?php endif; ?>
 
         <?php echo $__env->yieldContent('content'); ?>

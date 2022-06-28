@@ -4,7 +4,7 @@
 
         <home-page is-not-scheduled="@if(session('error') == 'not_scheduled')1 @endif"
                    already-visited-section="@if(session('error') == 'already_visited_section')visited @endif"
-                    is-exist="@if(session('error') == 'exist')exist @endif"></home-page>
+                    is-exist="@if(session('error') == 'exist')exist @endif" prop-user='@json(auth()->user())'></home-page>
 
 
 
