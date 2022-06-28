@@ -105,6 +105,8 @@
                                         <b-dropdown-item aria-role="listitem" @click="openModalResetPassword(props.row.user_id)">Reset Password</b-dropdown-item>
 
                                         <b-dropdown-item aria-role="listitem" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.user_id)">Delete</b-dropdown-item>
+                                        <b-dropdown-item aria-role="listitem" icon-pack="fa" icon-right="trash" :href="`/panel/user-test-info/${props.row.user_id}`">Info</b-dropdown-item>
+
                                     </b-dropdown>
                                 </b-table-column>
 

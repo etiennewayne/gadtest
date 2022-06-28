@@ -8370,6 +8370,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -45873,6 +45875,21 @@ var render = function() {
                                         }
                                       },
                                       [_vm._v("Delete")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-dropdown-item",
+                                      {
+                                        attrs: {
+                                          "aria-role": "listitem",
+                                          "icon-pack": "fa",
+                                          "icon-right": "trash",
+                                          href:
+                                            "/panel/user-test-info/" +
+                                            props.row.user_id
+                                        }
+                                      },
+                                      [_vm._v("Info")]
                                     )
                                   ],
                                   1

@@ -147,6 +147,10 @@ Route::get('/fetch-students', [App\Http\Controllers\Administrator\UserController
 Route::post('/verify-email-students/{userid}', [App\Http\Controllers\Administrator\UserController::class, 'verifyEmailStudents']);
 Route::post('/user-reset-password/{id}', [App\Http\Controllers\Administrator\UserController::class, 'resetPassword']);
 
+Route::get('/panel/user-test-info/{userid}', [App\Http\Controllers\Administrator\UserTestInfoController::class, 'userInfo']);
+
+
+
 
 
 //REPORT
