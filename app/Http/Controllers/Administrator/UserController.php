@@ -75,6 +75,8 @@ class UserController extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'lname' => ['required', 'string', 'max:255'],
             'fname' => ['required', 'string', 'max:255'],
+            'first_program_choice' => ['string', 'max:100', 'required', 'different:second_program_choice'],
+            'second_program_choice' => ['string', 'max:100', 'required', 'different:first_program_choice'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
         ]);
@@ -93,6 +95,9 @@ class UserController extends Controller
             'birthplace' => strtoupper($req->birthplace),
             'contact_no' => $req->contact_no,
             'email' => $req->email,
+            'first_program_choice' => strtoupper($req->first_program_choice),
+            'second_program_choice' => strtoupper($req->second_program_choice),
+            'learning_mode' => strtoupper($req->learning_mode),
             'last_school_attended' => strtoupper($req->last_school_attended),
             'province' => $req->province,
             'city' => $req->city,
@@ -127,6 +132,8 @@ class UserController extends Controller
                 'username' => ['required', 'string', 'max:50', 'unique:users,username,' .$id.',user_id'],
                 'lname' => ['required', 'string', 'max:255'],
                 'fname' => ['required', 'string', 'max:255'],
+                'first_program_choice' => ['string', 'max:100', 'required', 'different:second_program_choice'],
+                'second_program_choice' => ['string', 'max:100', 'required', 'different:first_program_choice'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'. $id. ',user_id'],
                 'password' => ['required', 'string', 'min:4', 'confirmed'],
             ]);
@@ -136,6 +143,8 @@ class UserController extends Controller
                 'lname' => ['required', 'string', 'max:255'],
                 'fname' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'. $id. ',user_id'],
+                'first_program_choice' => ['string', 'max:100', 'required', 'different:second_program_choice'],
+                'second_program_choice' => ['string', 'max:100', 'required', 'different:first_program_choice'],
             ]);
         }
 

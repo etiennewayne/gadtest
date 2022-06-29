@@ -103,9 +103,41 @@
                                             <b-input type="text" v-model="fields.birthplace"></b-input>
                                         </b-field>
                                     </div>
-
-
                                 </div>
+
+                                <div class="columns">
+                                    <div class="column">
+                                        <b-field label="1st Program Choice" label-position="on-border"
+                                                 :type="this.errors.first_program_choice ? 'is-danger' : ''"
+                                                 :message="this.errors.first_program_choice ? this.errors.first_program_choice : ''" expanded>
+                                            <b-select placeholder="1st program choice" v-model="fields.first_program_choice" required expanded>
+                                                <option :value="item.CCode" v-for="(item, index) in this.programs" :key="index">{{ item.CDesc }} ({{ item.CCode }})</option>
+                                            </b-select>
+                                        </b-field>
+                                    </div>
+                                    <div class="column">
+                                        <b-field label="2nd Program Choice" label-position="on-border" expanded
+                                                 :type="this.errors.second_program_choice ? 'is-danger' : ''"
+                                                 :message="this.errors.second_program_choice ? this.errors.second_program_choice : ''">
+                                            <b-select placeholder="2nd program choice" v-model="fields.second_program_choice" required expanded>
+                                                <option :value="item.CCode" v-for="(item, index) in this.programs" :key="index">{{ item.CDesc }} ({{ item.CCode }})</option>
+                                            </b-select>
+                                        </b-field>
+                                    </div>
+                                </div>
+
+                                <div class="columns">
+                                    <div class="column">
+                                        <b-field label="Mode of Learning" label-position="on-border" expanded
+                                                 :type="this.errors.learning_mode ? 'is-danger' : ''"
+                                                 :message="this.errors.learning_mode ? this.errors.learning_mode : ''">
+                                            <b-select placeholder="Mode of Learning" v-model="fields.learning_mode" required expanded>
+                                                <option :value="item.learning_mode" v-for="(item, index) in this.learningModes" :key="index">{{ item.learning_mode }} - {{ item.learning_desc }}</option>
+                                            </b-select>
+                                        </b-field>
+                                    </div>
+                                </div>
+
 
                                 <div class="columns">
                                     <div class="column">
@@ -185,7 +217,7 @@
 
 <script>
 export default {
-    props: ['propUserId'],
+    props: ['propUserId', 'propLearningModes', 'propPrograms'],
 
     data(){
         return {
@@ -218,6 +250,9 @@ export default {
             provinces: [],
             cities: [],
             barangays: [],
+
+            programs: [],
+            learningModes: [],
 
 
         }
@@ -298,6 +333,9 @@ export default {
                 this.fields.birthplace = tempData.birthplace;
                 this.fields.contact_no = tempData.contact_no;
                 this.fields.email = tempData.email;
+                this.fields.first_program_choice = tempData.first_program_choice;
+                this.fields.second_program_choice = tempData.second_program_choice;
+                this.fields.learning_mode = tempData.learning_mode;
                 this.fields.last_school_attended = tempData.last_school_attended;
                 this.fields.province = tempData.province;
 
@@ -333,6 +371,9 @@ export default {
 
         initData(){
             this.userId = parseInt(this.propUserId);
+            this.programs = JSON.parse(this.propPrograms);
+            this.learningModes = JSON.parse(this.propLearningModes);
+
 
             if(this.userId > 0){
                 this.getData();

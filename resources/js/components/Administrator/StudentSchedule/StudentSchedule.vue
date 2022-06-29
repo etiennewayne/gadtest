@@ -41,6 +41,11 @@
                     <div style="display:flex; justify-content: flex-end;">
                         <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
                     </div>
+
+                    <div class="buttons mt-3">
+                        <b-button icon-pack="fa" icon-left="plus" tag="a"
+                                  href="/panel/student-schedule/create" class="is-primary">New Student Schedule</b-button>
+                    </div>
                     <b-table
                         :data="data"
                         :loading="loading"

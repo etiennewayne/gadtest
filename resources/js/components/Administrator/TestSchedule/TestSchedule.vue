@@ -33,7 +33,11 @@
                         <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
                     </div>
 
-
+                    <div class="buttons mt-3">
+                        <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
+                        <b-button icon-pack="fa" icon-left="plus" tag="a"
+                                  :href="'/panel/test-schedule/create'" class="is-primary">New Schedule</b-button>
+                    </div>
                     <b-table
                         :data="data"
                         :loading="loading"
