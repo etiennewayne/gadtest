@@ -3,8 +3,6 @@
 @section('content')
 
 
-
-
         <user-page-create prop-user-id="{{ $userid }}"
             prop-learning-modes='@json($learningmodes)'
             prop-programs='@json($programs)'

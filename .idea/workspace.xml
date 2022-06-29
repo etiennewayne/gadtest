@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3f01a54b-5d45-4f60-96bd-b070252507bb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Student/HomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Student/HomePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Student/TakingExam.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Student/TakingExam.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/student/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/student/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panel/user/user-create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panel/user/user-create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/logs/laravel.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/laravel.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +174,8 @@
       <option name="presentableId" value="Default" />
       <updated>1656408371087</updated>
       <workItem from="1656408373808" duration="5308000" />
-      <workItem from="1656457979052" duration="2164000" />
+      <workItem from="1656457979052" duration="2192000" />
+      <workItem from="1656496793915" duration="236000" />
     </task>
     <servers />
   </component>
