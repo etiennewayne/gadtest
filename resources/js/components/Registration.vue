@@ -255,6 +255,7 @@ export default {
                 lname: '',
                 fname: '',
                 mname: '',
+                suffix: '',
                 sex: '',
                 bdate: '',
                 birthplace: '',
