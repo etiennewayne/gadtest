@@ -124,10 +124,9 @@
                                     </div>
 
                                     <div>
-                                        <strong>VERIFIED AT:</strong> {{ new Date(props.row.email_verified_at).toLocaleString() }}
+                                        <strong>VERIFIED AT:</strong> <span v-if="props.row.email_verified_at">{{ new Date(props.row.email_verified_at).toLocaleString() }}</span>
                                     </div>
                                 </template>
-
                             </b-table>
 
                             <div class="buttons mt-3">

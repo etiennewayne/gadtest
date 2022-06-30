@@ -8385,7 +8385,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -45916,15 +45915,18 @@ var render = function() {
                               _vm._v(" "),
                               _c("div", [
                                 _c("strong", [_vm._v("VERIFIED AT:")]),
-                                _vm._v(
-                                  " " +
-                                    _vm._s(
-                                      new Date(
-                                        props.row.email_verified_at
-                                      ).toLocaleString()
-                                    ) +
-                                    "\n                                "
-                                )
+                                _vm._v(" "),
+                                props.row.email_verified_at
+                                  ? _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          new Date(
+                                            props.row.email_verified_at
+                                          ).toLocaleString()
+                                        )
+                                      )
+                                    ])
+                                  : _vm._e()
                               ])
                             ]
                           }
