@@ -115,7 +115,7 @@ class RegisterController extends Controller
             'lname' => strtoupper($data['lname']),
             'fname' => strtoupper($data['fname']),
             'mname' => strtoupper($data['mname']),
-            'suffix' => $data['suffix'],
+            'suffix' => strtoupper($data['suffix']),
             'sex' => $data['sex'],
             'status' => $data['status'],
             'bdate' => $ndate,
