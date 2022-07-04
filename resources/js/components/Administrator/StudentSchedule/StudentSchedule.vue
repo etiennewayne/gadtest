@@ -29,14 +29,27 @@
                     <div class="level">
                         <div class="level-left">
                             <div class="level-item">
-                                <b-field label="Search ID">
-                                    <b-input type="text" v-model="search.id" placeholder="Search ID..." @keyup.native.enter="loadAsyncData" />
+                                <b-field label="Search Student Id">
+                                    <b-input type="text" v-model="search.id" placeholder="Search Student ID..." @keyup.native.enter="loadAsyncData" />
                                 </b-field>
                             </div>
                         </div>
-
                     </div>
 
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <b-field label="Schedule">
+                                    <b-datepicker v-model="search.date_sched" editable></b-datepicker>
+                                    <b-timepicker v-model="search.time_sched_from" editable></b-timepicker>
+                                    <b-timepicker v-model="search.time_sched_to" editable></b-timepicker>
+                                    <p class="control">
+                                        <b-button type="is-success" label="..." @click="loadAsyncData"></b-button>
+                                    </p>
+                                </b-field>
+                            </div>
+                        </div>
+                    </div>
 
                     <div style="display:flex; justify-content: flex-end;">
                         <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
@@ -153,18 +166,34 @@ export default {
             search: {
                 id: '',
                 lname: '',
+                date_sched: new Date(),
+                time_sched_from: null,
+                time_sched_to: null
             }
 
         }
     },
     methods: {
         loadAsyncData() {
+
+            let ndate = new Date(this.search.date_sched);
+            ndate = ndate.getFullYear() + '-' + (ndate.getMonth() + 1) + '-' + ndate.getDate();
+
+            let ntimefrom = new Date(this.search.time_sched_from);
+            ntimefrom = ntimefrom.getHours() + ":" + ntimefrom.getMinutes() + ":00";
+
+            let ntimeto = new Date(this.search.time_sched_to);
+            ntimeto = ntimeto.getHours() + ":" + ntimeto.getMinutes() + ":00";
+
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
                 `page=${this.page}`,
                 `lname=${this.search.lname}`,
-                `id=${this.search.id}`
+                `id=${this.search.id}`,
+                `ndate=${ndate}`,
+                `timefrom=${ntimefrom}`,
+                `timeto=${ntimeto}`,
             ].join('&')
 
             this.loading = true

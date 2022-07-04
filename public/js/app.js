@@ -6724,6 +6724,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -6747,7 +6760,10 @@ __webpack_require__.r(__webpack_exports__);
       },
       search: {
         id: '',
-        lname: ''
+        lname: '',
+        date_sched: new Date(),
+        time_sched_from: null,
+        time_sched_to: null
       }
     };
   },
@@ -6755,7 +6771,13 @@ __webpack_require__.r(__webpack_exports__);
     loadAsyncData: function loadAsyncData() {
       var _this = this;
 
-      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "lname=".concat(this.search.lname), "id=".concat(this.search.id)].join('&');
+      var ndate = new Date(this.search.date_sched);
+      ndate = ndate.getFullYear() + '-' + (ndate.getMonth() + 1) + '-' + ndate.getDate();
+      var ntimefrom = new Date(this.search.time_sched_from);
+      ntimefrom = ntimefrom.getHours() + ":" + ntimefrom.getMinutes() + ":00";
+      var ntimeto = new Date(this.search.time_sched_to);
+      ntimeto = ntimeto.getHours() + ":" + ntimeto.getMinutes() + ":00";
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "lname=".concat(this.search.lname), "id=".concat(this.search.id), "ndate=".concat(ndate), "timefrom=".concat(ntimefrom), "timeto=".concat(ntimeto)].join('&');
       this.loading = true;
       axios.get("/fetch-student-schedules?".concat(params)).then(function (_ref) {
         var data = _ref.data;
@@ -43244,10 +43266,13 @@ var render = function() {
                   [
                     _c(
                       "b-field",
-                      { attrs: { label: "Search ID" } },
+                      { attrs: { label: "Search Student Id" } },
                       [
                         _c("b-input", {
-                          attrs: { type: "text", placeholder: "Search ID..." },
+                          attrs: {
+                            type: "text",
+                            placeholder: "Search Student ID..."
+                          },
                           nativeOn: {
                             keyup: function($event) {
                               if (
@@ -43273,6 +43298,69 @@ var render = function() {
                             expression: "search.id"
                           }
                         })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "level" }, [
+              _c("div", { staticClass: "level-left" }, [
+                _c(
+                  "div",
+                  { staticClass: "level-item" },
+                  [
+                    _c(
+                      "b-field",
+                      { attrs: { label: "Schedule" } },
+                      [
+                        _c("b-datepicker", {
+                          attrs: { editable: "" },
+                          model: {
+                            value: _vm.search.date_sched,
+                            callback: function($$v) {
+                              _vm.$set(_vm.search, "date_sched", $$v)
+                            },
+                            expression: "search.date_sched"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("b-timepicker", {
+                          attrs: { editable: "" },
+                          model: {
+                            value: _vm.search.time_sched_from,
+                            callback: function($$v) {
+                              _vm.$set(_vm.search, "time_sched_from", $$v)
+                            },
+                            expression: "search.time_sched_from"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("b-timepicker", {
+                          attrs: { editable: "" },
+                          model: {
+                            value: _vm.search.time_sched_to,
+                            callback: function($$v) {
+                              _vm.$set(_vm.search, "time_sched_to", $$v)
+                            },
+                            expression: "search.time_sched_to"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "p",
+                          { staticClass: "control" },
+                          [
+                            _c("b-button", {
+                              attrs: { type: "is-success", label: "..." },
+                              on: { click: _vm.loadAsyncData }
+                            })
+                          ],
+                          1
+                        )
                       ],
                       1
                     )
