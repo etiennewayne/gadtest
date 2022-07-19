@@ -188,10 +188,13 @@ class ReportResultController extends Controller
                     'learning_mode' => $req->fields['learning_mode'
                 ],
             ]);
+            
 
-            $when = now()->addSeconds(10);
-            Mail::to($req->fields['email'])
-                ->later($when, new AcceptanceEmail($req->fields, $studentCode, $req->programs));
+            //GINOO NLAANG JUD NAKABLO GE UNSA NI NAKO
+
+            // $when = now()->addSeconds(10);
+            // Mail::to($req->fields['email'])
+            //     ->later($when, new AcceptanceEmail($req->fields, $studentCode, $req->programs));
       
 
             User::where('user_id', $req->fields['user_id'])
@@ -217,9 +220,9 @@ class ReportResultController extends Controller
     public function sendRejectEmail(Request $req){
         try{
             //Rejection Email
-            $when = now()->addSeconds(10);
-            Mail::to($req->fields['email'])
-                ->later($when, new RejectEmail($req->fields));
+            // $when = now()->addSeconds(10);
+            // Mail::to($req->fields['email'])
+            //     ->later($when, new RejectEmail($req->fields));
 
             User::where('user_id', $req->fields['user_id'])
                 ->update(['is_submitted' => 1, 

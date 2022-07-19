@@ -131,7 +131,7 @@ export default {
         this.loadResult();
     },
     computed: {
-        totalSum: function(){
+        totalSum(){
             let total = 0;
             this.results.forEach( element => {
                 total += parseInt(element.total_score);

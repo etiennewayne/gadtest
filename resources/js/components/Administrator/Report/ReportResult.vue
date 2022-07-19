@@ -444,7 +444,7 @@ export default {
             }
 
             this.isModalActive = false;
-            this.isLoading = true;
+            //this.isLoading = true;
 
             axios.post('/admit-student', {
                 fields: this.selectedData,
