@@ -65,9 +65,9 @@
                     Students Result
                 </b-navbar-item>
 
-                <b-navbar-item href="/panel/report-result">
+                <!-- <b-navbar-item href="/panel/report-result">
                     General Report
-                </b-navbar-item>
+                </b-navbar-item> -->
                 
             </b-navbar-dropdown>
 

@@ -35437,12 +35437,6 @@ var render = function() {
                   "b-navbar-item",
                   { attrs: { href: "/panel/students-result" } },
                   [_vm._v("\n                Students Result\n            ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-navbar-item",
-                  { attrs: { href: "/panel/report-result" } },
-                  [_vm._v("\n                General Report\n            ")]
                 )
               ],
               1
@@ -49555,7 +49549,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", [
                           _vm._v(
-                            "\n                                Thank you for your active participation in the GADTC Admission 2021-2022. \n                                We would like to inform you that after carefully examining your scores, \n                                your application has complied all necessary requirements of your chosen program.\n                            "
+                            "\n                                Thank you for your active participation in the GADTC Admission 2022-2023. \n                                We would like to inform you that after carefully examining your scores, \n                                your application has complied all necessary requirements of your chosen program.\n                            "
                           )
                         ]),
                         _vm._v(" "),
@@ -49592,7 +49586,7 @@ var render = function() {
                             _vm._v(_vm._s(this.results.admission_code))
                           ]),
                           _vm._v(
-                            " starting August 2, 2020 until August 13, 2020. \n                                Please click the BUTTON below to accept this offer.\n                            "
+                            " starting August 15, 2022 until August 19, 2022. \n                                Please click the BUTTON below to accept this offer.\n                            "
                           )
                         ]),
                         _vm._v(" "),
@@ -49605,14 +49599,14 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", [
                           _vm._v(
-                            "Enrollment period for Freshmen is on August 2-13, 2021 only. \n                                Failure to reply within those dates will mean forfeiture of your slot.\n                            "
+                            "Enrollment period for Freshmen is on August 15-19, 2022 only. \n                                Failure to reply within those dates will mean forfeiture of your slot.\n                            "
                           )
                         ]),
                         _c("br"),
                         _vm._v(" "),
                         _c("p", [
                           _vm._v(
-                            "\n                                Starting A.Y. 2021 - 2022. Governor Alfonso D. Tan College will adopt the Flexible Learning (FL) \n                                (i.e modular and digital learning) for incoming freshmen.\n                            "
+                            "\n                                Starting A.Y. 2022 - 2023. Governor Alfonso D. Tan College will adopt the Flexible Learning (FL) \n                                 for incoming freshmen.\n                            "
                           )
                         ]),
                         _c("br"),
