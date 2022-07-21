@@ -21,6 +21,7 @@ class StudentsResultController extends Controller
 
     public function index(){
         $programs = Program::where('programStat', 1)->get();
+        
         return view('panel.admission.students-result')
             ->with('programs', $programs);
     }

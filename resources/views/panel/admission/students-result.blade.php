@@ -2,6 +2,6 @@
 
 @section('content')
 
-    <students-result prop-programs='@json($programs)'></students-result>
+    <admission-students-result prop-programs='@json($programs)'></admission-students-result>
 
 @endsection

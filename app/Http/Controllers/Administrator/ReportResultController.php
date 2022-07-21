@@ -39,6 +39,7 @@ class ReportResultController extends Controller
 
     public function index_data(Request $req){
         $sortkey = explode(".",$req->sort_by);
+
         $acad = AcadYear::where('active', 1)->first();
          $data = DB::table('users as a')
             ->select('a.user_id', 'a.lname', 'a.fname', 'a.mname', 'a.sex', 'a.status', 'a.first_program_choice', 'a.second_program_choice',

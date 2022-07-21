@@ -26,21 +26,6 @@
                 </div>
             </div>
 
-
-            <div class="level">
-                <div class="level-left">
-                    <div class="level-item">
-                        
-                    </div>
-                </div>
-                <div class="level-right">
-                    <div class="level-item">
-                        
-                    </div>
-                </div>
-            </div>
-
-
         </div>
 
         <div class="section">
