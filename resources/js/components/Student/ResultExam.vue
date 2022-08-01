@@ -43,7 +43,7 @@
                                 <br>
                                 <p>
                                     To be part of the dynamic community of GADTC,  enroll via our student portal and use the admission code 
-                                    <strong>{{this.results.admission_code}}</strong> starting August 15, 2022 until August 19, 2022. 
+                                    <strong>{{this.results.admission_code}}</strong> starting August 1, 2022 until August 5, 2022. 
                                     Please click the BUTTON below to accept this offer.
                                 </p>
                                 <div class="buttons is-centered" style="margin: 15px 0;">
@@ -51,7 +51,7 @@
                                 </div>
                                 <br>
                                 <p>Please Note:</p><br>
-                                <p>Enrollment period for Freshmen is on August 15-19, 2022 only. 
+                                <p>Enrollment period for Freshmen is on August 1 - 5, 2022 only. 
                                     Failure to reply within those dates will mean forfeiture of your slot.
                                 </p><br>
                                 <p>
