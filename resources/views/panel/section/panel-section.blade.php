@@ -2,6 +2,6 @@
 
 @section('content')
 
- <panel-section></panel-section>
+ <section-panel></section-panel>
 
 @endsection

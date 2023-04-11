@@ -2,7 +2,7 @@
 
 <?php $__env->startSection('content'); ?>
 
- <panel-section></panel-section>
+ <section-panel></section-panel>
 
 <?php $__env->stopSection(); ?>
 
