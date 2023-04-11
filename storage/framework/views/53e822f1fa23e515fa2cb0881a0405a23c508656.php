@@ -2,7 +2,7 @@
 
 <?php $__env->startSection('content'); ?>
 
-    <students-result prop-programs='<?php echo json_encode($programs, 15, 512) ?>'></students-result>
+    <admission-students-result prop-programs='<?php echo json_encode($programs, 15, 512) ?>'></admission-students-result>
 
 <?php $__env->stopSection(); ?>
 

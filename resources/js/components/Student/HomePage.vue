@@ -188,9 +188,9 @@ export default {
                 if(res.data.status === 'no_schedule'){
                     this.$buefy.dialog.alert({
                         title: 'NO SCHEDULE!',
-                        message: 'No new schedule found. Maybe admission test is closed.',
+                        message: 'No new schedule found.',
                         type: 'is-danger',
-                        onConfirm: ()=> this.getSchedule()
+                        //onConfirm: ()=> this.getSchedule()
                     });
                     this.btnClass['is-loading'] = false;
                 }
@@ -273,7 +273,7 @@ export default {
         },
 
         userAddress(){
-            return this.user.province + ', ' + this.user.city + ' ' + this.user.barangay + ' ' + this.user.street;
+            return this.user.province + ', ' + this.user.city + ' ' + this.user.barangay + ' ' + (!!this.user.street ? this.user.street : '');
         }
     }
 

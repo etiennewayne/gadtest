@@ -138,7 +138,7 @@
 
                                     <div class="columns">
                                         <div class="column">
-                                            <b-field label="Mode of Learning" label-position="on-border" expanded
+                                            <b-field label="Preferred mode of learning" label-position="on-border" expanded
                                                 :type="this.errors.learning_mode ? 'is-danger' : ''"
                                                 :message="this.errors.learning_mode ? this.errors.learning_mode : ''">
                                                 <b-select placeholder="Mode of Learning" v-model="fields.learning_mode" required expanded>
@@ -169,9 +169,9 @@
 
                                     <div class="columns">
                                         <div class="column">
-                                            <b-field label="Last School Attended" label-position="on-border"
-                                                     :type="this.errors.last_school_attended ? 'is-danger' : ''"
-                                                     :message="this.errors.last_school_attended ? this.errors.last_school_attended : ''">
+                                            <b-field label="Last School Attended (Indicate the full name of school)" label-position="on-border"
+                                                :type="this.errors.last_school_attended ? 'is-danger' : ''"
+                                                :message="this.errors.last_school_attended ? this.errors.last_school_attended : ''">
                                                 <b-input type="text" placeholder="Last School Attended" v-model="fields.last_school_attended" required />
                                             </b-field>
                                         </div>
