@@ -3,8 +3,6 @@
 @section('content')
 
    
-    
-
     @if(session('error') == 'reg_not_allowed')
         <welcome-page :is-reg="false"></welcome-page>
     @else

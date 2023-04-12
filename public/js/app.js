@@ -32952,6 +32952,43 @@ component.options.__file = "resources/js/components/VerifyEmail.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/WelcomeNavbar.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/WelcomeNavbar.vue ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _WelcomeNavbar_vue_vue_type_template_id_ed3e5692___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WelcomeNavbar.vue?vue&type=template&id=ed3e5692& */ "./resources/js/components/WelcomeNavbar.vue?vue&type=template&id=ed3e5692&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__.default)(
+  script,
+  _WelcomeNavbar_vue_vue_type_template_id_ed3e5692___WEBPACK_IMPORTED_MODULE_0__.render,
+  _WelcomeNavbar_vue_vue_type_template_id_ed3e5692___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/WelcomeNavbar.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/WelcomePage.vue":
 /*!*************************************************!*\
   !*** ./resources/js/components/WelcomePage.vue ***!
@@ -34448,6 +34485,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VerifyEmail_vue_vue_type_template_id_dfc1aff0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VerifyEmail_vue_vue_type_template_id_dfc1aff0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VerifyEmail.vue?vue&type=template&id=dfc1aff0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/VerifyEmail.vue?vue&type=template&id=dfc1aff0&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/WelcomeNavbar.vue?vue&type=template&id=ed3e5692&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/WelcomeNavbar.vue?vue&type=template&id=ed3e5692& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WelcomeNavbar_vue_vue_type_template_id_ed3e5692___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WelcomeNavbar_vue_vue_type_template_id_ed3e5692___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WelcomeNavbar_vue_vue_type_template_id_ed3e5692___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./WelcomeNavbar.vue?vue&type=template&id=ed3e5692& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/WelcomeNavbar.vue?vue&type=template&id=ed3e5692&");
 
 
 /***/ }),
@@ -50643,6 +50697,78 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/WelcomeNavbar.vue?vue&type=template&id=ed3e5692&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/WelcomeNavbar.vue?vue&type=template&id=ed3e5692& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("b-navbar", {
+        scopedSlots: _vm._u([
+          {
+            key: "brand",
+            fn: function() {
+              return [
+                _c("b-navbar-item", {
+                  attrs: { tag: "router-link", to: { path: "/" } }
+                })
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "start",
+            fn: function() {
+              return undefined
+            },
+            proxy: true
+          },
+          {
+            key: "end",
+            fn: function() {
+              return [
+                _c("b-navbar-item", { attrs: { tag: "div" } }, [
+                  _c("div", { staticClass: "buttons" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "button is-primary",
+                        attrs: { href: "/login" }
+                      },
+                      [_c("strong", [_vm._v("Log in")])]
+                    )
+                  ])
+                ])
+              ]
+            },
+            proxy: true
+          }
+        ])
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/WelcomePage.vue?vue&type=template&id=a4d20914&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/WelcomePage.vue?vue&type=template&id=a4d20914& ***!
@@ -63847,6 +63973,7 @@ var map = {
 	"./components/Student/TakingExam.vue": "./resources/js/components/Student/TakingExam.vue",
 	"./components/Student/TakingExamxxxx.vue": "./resources/js/components/Student/TakingExamxxxx.vue",
 	"./components/VerifyEmail.vue": "./resources/js/components/VerifyEmail.vue",
+	"./components/WelcomeNavbar.vue": "./resources/js/components/WelcomeNavbar.vue",
 	"./components/WelcomePage.vue": "./resources/js/components/WelcomePage.vue",
 	"./components/WelcomePagePrev.vue": "./resources/js/components/WelcomePagePrev.vue"
 };

@@ -30,7 +30,9 @@
 {{--    @else--}}
 {{--        <student-navbar is-auth="1" firstname="{{ auth()->user()->StudFName }}"></student-navbar>--}}
 {{--    @endguest--}}
-
+    
+    <welcome-navbar></welcome-navbar>
+    
     @yield('content')
 
 </div>
