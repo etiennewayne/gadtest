@@ -8,7 +8,7 @@
                 <div class="w-subtitle">
                     The GADTC Admission Test for 1st Semestee AY 2022-2023 will  
                     officially start on June 5, 2023. The exam will be administered at the 2nd Floor, GADTC Computer Laboratory. 
-                    You may begin reserving your slots from April 12 - May 31, 2023 clicking 
+                    You may begin reserving your slots from April 12 - May 31, 2023 by clicking 
                     <b>PRE-REGISTER</b> button.
                 </div>
 
