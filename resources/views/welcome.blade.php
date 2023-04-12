@@ -8,7 +8,7 @@
     @if(session('error') == 'reg_not_allowed')
         <welcome-page :is-reg="false"></welcome-page>
     @else
-    <welcome-page :is-reg="true"></welcome-page>
+        <welcome-page :is-reg="true"></welcome-page>
     @endif
 
     <footer-page></footer-page>

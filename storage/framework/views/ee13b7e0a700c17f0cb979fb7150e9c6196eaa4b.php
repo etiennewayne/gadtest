@@ -8,7 +8,7 @@
     <?php if(session('error') == 'reg_not_allowed'): ?>
         <welcome-page :is-reg="false"></welcome-page>
     <?php else: ?>
-    <welcome-page :is-reg="true"></welcome-page>
+        <welcome-page :is-reg="true"></welcome-page>
     <?php endif; ?>
 
     <footer-page></footer-page>

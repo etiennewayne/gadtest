@@ -1,36 +1,43 @@
 <template>
     <div>
-        <div class="hero is-fullheight-with-navbar">
-            <div class="hero-body">
-                <div class="container">
 
-                    <div style="display: flex; justify-content: center;">
-                        <img src="/img/logo_small.png" alt="..." style="height: 150px;"/>
-                    </div>
-                    <div class="title is-4 text-center">
-                        WELCOME TO GADTest <br>(Online Test for Gov Alfonso D. Tan College Students)
-                    </div>
+        <div class="welcome-container">
+            <div class="left-box">
+                <div class="welcome-title">Hello Future Alfonsos!</div> 
 
-                    <div class="buttons is-centered">
-                        <a class="button is-rounded is-outlined is-primary" href="/login">
-                            <b-icon pack="fa" icon="arrow-right"></b-icon>
-                            &nbsp; &nbsp;LOGIN NOW
-                        </a>&nbsp; OR &nbsp;
-                        <a class="button is-rounded is-outlined is-primary" href="/register">
-                            <b-icon pack="fa" icon="user"></b-icon>
-                            &nbsp; &nbsp;REGISTER NOW
-                        </a>
-                    </div>
+                <div class="w-subtitle">
+                    The GADTC Admission Test for 1st Semestee AY 2022-2023 will  
+                    officially start on June 5, 2023. The exam will be administered at the 2nd Floor, GADTC Computer Laboratory. 
+                    You may begin reserving your slots from April 12 - May 31, 2023 clicking 
+                    <b>PRE-REGISTER</b> button.
+                </div>
 
-                    <b-notification class="is-danger" v-if="isReg === false">
-                        REGISTRATION IS CLOSED!
-                    </b-notification>
+
+                <div>
+                    <button class="continue-application" onclick="window.location = '/register'">
+                        <div>
+                            <div class="pencil"></div>
+                            <div class="folder">
+                                <div class="top">
+                                    <svg viewBox="0 0 24 27">
+                                        <path d="M1,0 L23,0 C23.5522847,-1.01453063e-16 24,0.44771525 24,1 L24,8.17157288 C24,8.70200585 23.7892863,9.21071368 23.4142136,9.58578644 L20.5857864,12.4142136 C20.2107137,12.7892863 20,13.2979941 20,13.8284271 L20,26 C20,26.5522847 19.5522847,27 19,27 L1,27 C0.44771525,27 6.76353751e-17,26.5522847 0,26 L0,1 C-6.76353751e-17,0.44771525 0.44771525,1.01453063e-16 1,0 Z"></path>
+                                    </svg>
+                                </div>
+                                <div class="paper"></div>
+                            </div>
+                        </div>
+                        Pre-register Now
+                    </button>
                 </div>
             </div>
-        </div>
 
+            <div class="right-box">
+                 <div>
+                    <img src="/img/logo_small.png" alt="..." class="alfonso-img"/>
+                </div>
+            </div>
 
-
+        </div><!--welcome-container -->
     </div><!--root navbar-->
 
 </template>
@@ -39,7 +46,7 @@
 export default {
     props: {
         isReg: {
-            type: Boolean,
+            type: Boolean,  
             default: 1,
         }
     }
@@ -48,9 +55,7 @@ export default {
 
 </script>
 
-<style scoped>
-    .text-center{
-        text-align: center;
-    }
+<style lang="scss">
+    @import '../../sass/welcome.scss'
 </style>
 
