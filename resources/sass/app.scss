@@ -30,19 +30,18 @@ html body{
 }
 
 
-
-
+.page-footer{
+    margin-bottom: 2em;
+}
 
 
 .debug{
     border: 1px solid red;
 }
 
-
 .button.btn-green{
     background-color: #046004;
     color: #ffffff;
-
     transition: background-color 0.5s ease;
 }
 
@@ -99,6 +98,7 @@ html body{
     font-weight: bold;
     margin-bottom: 20px;
 }
+
 
 
 
@@ -199,9 +199,6 @@ $link-focus-border: $primary;
 //navbar
 $navbar-height: 5rem;
 $navbar-item-img-max-height: 4rem;
-
-
-
 
 
 

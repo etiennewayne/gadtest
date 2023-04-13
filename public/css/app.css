@@ -30168,6 +30168,10 @@ html body {
   background: white;
 }
 
+.page-footer {
+  margin-bottom: 2em;
+}
+
 .debug {
   border: 1px solid red;
 }

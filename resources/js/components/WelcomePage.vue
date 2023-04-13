@@ -1,8 +1,7 @@
 <template>
     <div>
-
-        <div class="welcome-container">
-            <div class="left-box">
+       <div class="welcome-container mt-6">
+            <div class="left-box animate__animated animate__fadeInLeft">
                 <div class="welcome-title">Hello Future Alfonsos!</div> 
 
                 <div class="w-subtitle">
@@ -32,12 +31,13 @@
             </div>
 
             <div class="right-box">
-                 <div>
+                <div class="animate__animated animate__fadeInRight">
                     <img src="/img/logo_small.png" alt="..." class="alfonso-img"/>
                 </div>
             </div>
 
         </div><!--welcome-container -->
+     
     </div><!--root navbar-->
 
 </template>

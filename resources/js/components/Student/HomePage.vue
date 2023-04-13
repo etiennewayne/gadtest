@@ -212,13 +212,16 @@ export default {
             try {
                 //non iOS
                 let d = new Date(from);
+                //console.log(this.from);
                 let hours = d.getHours();
                 hours = hours % 12;
                 hours = hours ? hours : 12; // the hour '0' should be '12'
                 let minute = ('0' + d.getMinutes()).slice(-2);
                 let ampm = d.getHours() < 12 ? 'AM' : 'PM';
                 let monthname = d.getMonth();
-                return monthNames[monthname] + ' ' + d.getDate() + ' ' + d.getFullYear() + ' at exactly ' + hours+':'+minute+' '+ampm;
+                let schedule = monthNames[monthname] + ' ' + d.getDate() + ',' + d.getFullYear() + ' at exactly ' + hours+':'+minute+' '+ampm;
+                //console.log(schedule);
+                return schedule;
             }
             catch(err) {
                 return from;
@@ -262,7 +265,7 @@ export default {
         scheduleNiya: function(){
             if(this.schedules.from){
                  //console.log(this.schedules.from);
-                return new Date(this.schedules.from).toLocaleString();
+                return this.formatSchedFromDate(this.schedules.from);
             }else{
                 return '';
             }

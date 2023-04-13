@@ -3,8 +3,6 @@
 <?php $__env->startSection('content'); ?>
 
    
-    
-
     <?php if(session('error') == 'reg_not_allowed'): ?>
         <welcome-page :is-reg="false"></welcome-page>
     <?php else: ?>

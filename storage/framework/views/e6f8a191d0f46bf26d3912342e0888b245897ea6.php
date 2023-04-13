@@ -30,7 +30,9 @@
 
 
 
-
+    
+    <welcome-navbar></welcome-navbar>
+    
     <?php echo $__env->yieldContent('content'); ?>
 
 </div>

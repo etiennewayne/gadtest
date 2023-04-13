@@ -9319,8 +9319,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -9981,7 +9979,8 @@ __webpack_require__.r(__webpack_exports__);
 
       try {
         //non iOS
-        var d = new Date(from);
+        var d = new Date(from); //console.log(this.from);
+
         var hours = d.getHours();
         hours = hours % 12;
         hours = hours ? hours : 12; // the hour '0' should be '12'
@@ -9989,7 +9988,9 @@ __webpack_require__.r(__webpack_exports__);
         var minute = ('0' + d.getMinutes()).slice(-2);
         var ampm = d.getHours() < 12 ? 'AM' : 'PM';
         var monthname = d.getMonth();
-        return monthNames[monthname] + ' ' + d.getDate() + ' ' + d.getFullYear() + ' at exactly ' + hours + ':' + minute + ' ' + ampm;
+        var schedule = monthNames[monthname] + ' ' + d.getDate() + ',' + d.getFullYear() + ' at exactly ' + hours + ':' + minute + ' ' + ampm; //console.log(schedule);
+
+        return schedule;
       } catch (err) {
         return from;
       }
@@ -10022,7 +10023,7 @@ __webpack_require__.r(__webpack_exports__);
     scheduleNiya: function scheduleNiya() {
       if (this.schedules.from) {
         //console.log(this.schedules.from);
-        return new Date(this.schedules.from).toLocaleString();
+        return this.formatSchedFromDate(this.schedules.from);
       } else {
         return '';
       }
@@ -28899,7 +28900,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".welcome-container {\n  display: flex;\n  gap: 20px;\n  justify-content: center;\n  margin: 10% 15%;\n  flex-direction: row;\n}\n.welcome-title {\n  font-weight: bold;\n  font-size: 4em;\n  line-height: 65px;\n}\n.left-box {\n  height: 100vh;\n  padding: 20px;\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  font-family: \"Segoe UI\", Tahoma, Geneva, Verdana, sans-serif;\n  align-items: center;\n  padding: 0 40px;\n}\n.right-box {\n  flex: 1;\n  display: flex;\n  justify-content: center;\n}\n.w-subtitle {\n  text-align: justify;\n  color: #000000;\n  font-size: 1.3em;\n  margin-bottom: 20px;\n  margin-top: 20px;\n}\n.alfonso-img {\n  width: 450px;\n}\n@media only screen and (max-width: 768px) {\n.welcome-container {\n    flex-direction: column-reverse;\n}\n.left-box {\n    padding: 5px;\n}\n.w-subtitle {\n    font-size: 1em;\n}\n.alfonso-img {\n    width: 200px;\n}\n}\n.continue-application {\n  --color: #fff;\n  --background: #079e46;\n  --background-hover: #11af40;\n  --background-left: #2B3044;\n  --folder: #F3E9CB;\n  --folder-inner: #BEB393;\n  --paper: #FFFFFF;\n  --paper-lines: #BBC1E1;\n  --paper-behind: #E1E6F9;\n  --pencil-cap: #fff;\n  --pencil-top: #275EFE;\n  --pencil-middle: #fff;\n  --pencil-bottom: #ff985c;\n  --shadow: rgba(13, 15, 25, .2);\n  border: none;\n  outline: none;\n  cursor: pointer;\n  position: relative;\n  border-radius: 5px;\n  font-size: 14px;\n  font-weight: 500;\n  line-height: 19px;\n  -webkit-appearance: none;\n  -webkit-tap-highlight-color: transparent;\n  padding: 17px 29px 17px 69px;\n  transition: background 0.3s;\n  color: var(--color);\n  background: var(--bg, var(--background));\n  margin-top: 20px;\n}\n.continue-application > div {\n  top: 0;\n  left: 0;\n  bottom: 0;\n  width: 53px;\n  position: absolute;\n  overflow: hidden;\n  border-radius: 5px 0 0 5px;\n  background: var(--background-left);\n}\n.continue-application > div .folder {\n  width: 23px;\n  height: 27px;\n  position: absolute;\n  left: 15px;\n  top: 13px;\n}\n.continue-application > div .folder .top {\n  left: 0;\n  top: 0;\n  z-index: 2;\n  position: absolute;\n  transform: translateX(var(--fx, 0));\n  transition: transform 0.4s ease var(--fd, 0.3s);\n}\n.continue-application > div .folder .top svg {\n  width: 24px;\n  height: 27px;\n  display: block;\n  fill: var(--folder);\n  transform-origin: 0 50%;\n  transition: transform 0.3s ease var(--fds, 0.45s);\n  transform: perspective(120px) rotateY(var(--fr, 0deg));\n}\n.continue-application > div .folder:before, .continue-application > div .folder:after,\n.continue-application > div .folder .paper {\n  content: \"\";\n  position: absolute;\n  left: var(--l, 0);\n  top: var(--t, 0);\n  width: var(--w, 100%);\n  height: var(--h, 100%);\n  border-radius: 1px;\n  background: var(--b, var(--folder-inner));\n}\n.continue-application > div .folder:before {\n  box-shadow: 0 1.5px 3px var(--shadow), 0 2.5px 5px var(--shadow), 0 3.5px 7px var(--shadow);\n  transform: translateX(var(--fx, 0));\n  transition: transform 0.4s ease var(--fd, 0.3s);\n}\n.continue-application > div .folder:after,\n.continue-application > div .folder .paper {\n  --l: 1px;\n  --t: 1px;\n  --w: 21px;\n  --h: 25px;\n  --b: var(--paper-behind);\n}\n.continue-application > div .folder:after {\n  transform: translate(var(--pbx, 0), var(--pby, 0));\n  transition: transform 0.4s ease var(--pbd, 0s);\n}\n.continue-application > div .folder .paper {\n  z-index: 1;\n  --b: var(--paper);\n}\n.continue-application > div .folder .paper:before, .continue-application > div .folder .paper:after {\n  content: \"\";\n  width: var(--wp, 14px);\n  height: 2px;\n  border-radius: 1px;\n  transform: scaleY(0.5);\n  left: 3px;\n  top: var(--tp, 3px);\n  position: absolute;\n  background: var(--paper-lines);\n  box-shadow: 0 12px 0 0 var(--paper-lines), 0 24px 0 0 var(--paper-lines);\n}\n.continue-application > div .folder .paper:after {\n  --tp: 6px;\n  --wp: 10px;\n}\n.continue-application > div .pencil {\n  height: 2px;\n  width: 3px;\n  border-radius: 1px 1px 0 0;\n  top: 8px;\n  left: 105%;\n  position: absolute;\n  z-index: 3;\n  transform-origin: 50% 19px;\n  background: var(--pencil-cap);\n  transform: translateX(var(--pex, 0)) rotate(35deg);\n  transition: transform 0.4s ease var(--pbd, 0s);\n}\n.continue-application > div .pencil:before, .continue-application > div .pencil:after {\n  content: \"\";\n  position: absolute;\n  display: block;\n  background: var(--b, linear-gradient(var(--pencil-top) 55%, var(--pencil-middle) 55.1%, var(--pencil-middle) 60%, var(--pencil-bottom) 60.1%));\n  width: var(--w, 5px);\n  height: var(--h, 20px);\n  border-radius: var(--br, 2px 2px 0 0);\n  top: var(--t, 2px);\n  left: var(--l, -1px);\n}\n.continue-application > div .pencil:before {\n  -webkit-clip-path: polygon(0 5%, 5px 5%, 5px 17px, 50% 20px, 0 17px);\n  clip-path: polygon(0 5%, 5px 5%, 5px 17px, 50% 20px, 0 17px);\n}\n.continue-application > div .pencil:after {\n  --b: none;\n  --w: 3px;\n  --h: 6px;\n  --br: 0 2px 1px 0;\n  --t: 3px;\n  --l: 3px;\n  border-top: 1px solid var(--pencil-top);\n  border-right: 1px solid var(--pencil-top);\n}\n.continue-application:before, .continue-application:after {\n  content: \"\";\n  position: absolute;\n  width: 10px;\n  height: 2px;\n  border-radius: 1px;\n  background: var(--color);\n  transform-origin: 9px 1px;\n  transform: translateX(var(--cx, 0)) scale(0.5) rotate(var(--r, -45deg));\n  top: 26px;\n  right: 16px;\n  transition: transform 0.3s;\n}\n.continue-application:after {\n  --r: 45deg;\n}\n.continue-application:hover {\n  --cx: 2px;\n  --bg: var(--background-hover);\n  --fx: -40px;\n  --fr: -60deg;\n  --fd: .15s;\n  --fds: 0s;\n  --pbx: 3px;\n  --pby: -3px;\n  --pbd: .15s;\n  --pex: -24px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".welcome-container {\n  display: flex;\n  height: calc(100vh - 100px);\n  gap: 20px;\n  max-width: 1340px;\n  justify-content: center;\n  margin: auto;\n  flex-direction: row;\n}\n.welcome-title {\n  font-weight: bold;\n  font-size: 4em;\n  line-height: 65px;\n}\n.left-box {\n  padding: 20px;\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  font-family: \"Segoe UI\", Tahoma, Geneva, Verdana, sans-serif;\n  align-items: center;\n  padding: 0 40px;\n}\n.right-box {\n  flex: 1;\n  display: flex;\n  justify-content: center;\n}\n.w-subtitle {\n  text-align: justify;\n  color: #000000;\n  font-size: 1.3em;\n  margin-bottom: 20px;\n  margin-top: 20px;\n}\n.alfonso-img {\n  width: 450px;\n}\n@media only screen and (max-width: 768px) {\n.welcome-container {\n    flex-direction: column-reverse;\n    margin: 25px;\n}\n.left-box {\n    padding: 5px;\n}\n.w-subtitle {\n    font-size: 1em;\n}\n.alfonso-img {\n    width: 200px;\n}\n.welcome-title {\n    font-size: 2.8em;\n    line-height: 40px;\n}\n.right-box {\n    flex: 0;\n}\n}\n.continue-application {\n  --color: #fff;\n  --background: #079e46;\n  --background-hover: #11af40;\n  --background-left: #2B3044;\n  --folder: #F3E9CB;\n  --folder-inner: #BEB393;\n  --paper: #FFFFFF;\n  --paper-lines: #BBC1E1;\n  --paper-behind: #E1E6F9;\n  --pencil-cap: #fff;\n  --pencil-top: #275EFE;\n  --pencil-middle: #fff;\n  --pencil-bottom: #ff985c;\n  --shadow: rgba(13, 15, 25, .2);\n  border: none;\n  outline: none;\n  cursor: pointer;\n  position: relative;\n  border-radius: 5px;\n  font-size: 14px;\n  font-weight: 500;\n  line-height: 19px;\n  -webkit-appearance: none;\n  -webkit-tap-highlight-color: transparent;\n  padding: 17px 29px 17px 69px;\n  transition: background 0.3s;\n  color: var(--color);\n  background: var(--bg, var(--background));\n  margin-top: 20px;\n}\n.continue-application > div {\n  top: 0;\n  left: 0;\n  bottom: 0;\n  width: 53px;\n  position: absolute;\n  overflow: hidden;\n  border-radius: 5px 0 0 5px;\n  background: var(--background-left);\n}\n.continue-application > div .folder {\n  width: 23px;\n  height: 27px;\n  position: absolute;\n  left: 15px;\n  top: 13px;\n}\n.continue-application > div .folder .top {\n  left: 0;\n  top: 0;\n  z-index: 2;\n  position: absolute;\n  transform: translateX(var(--fx, 0));\n  transition: transform 0.4s ease var(--fd, 0.3s);\n}\n.continue-application > div .folder .top svg {\n  width: 24px;\n  height: 27px;\n  display: block;\n  fill: var(--folder);\n  transform-origin: 0 50%;\n  transition: transform 0.3s ease var(--fds, 0.45s);\n  transform: perspective(120px) rotateY(var(--fr, 0deg));\n}\n.continue-application > div .folder:before,\n.continue-application > div .folder:after,\n.continue-application > div .folder .paper {\n  content: \"\";\n  position: absolute;\n  left: var(--l, 0);\n  top: var(--t, 0);\n  width: var(--w, 100%);\n  height: var(--h, 100%);\n  border-radius: 1px;\n  background: var(--b, var(--folder-inner));\n}\n.continue-application > div .folder:before {\n  box-shadow: 0 1.5px 3px var(--shadow), 0 2.5px 5px var(--shadow), 0 3.5px 7px var(--shadow);\n  transform: translateX(var(--fx, 0));\n  transition: transform 0.4s ease var(--fd, 0.3s);\n}\n.continue-application > div .folder:after,\n.continue-application > div .folder .paper {\n  --l: 1px;\n  --t: 1px;\n  --w: 21px;\n  --h: 25px;\n  --b: var(--paper-behind);\n}\n.continue-application > div .folder:after {\n  transform: translate(var(--pbx, 0), var(--pby, 0));\n  transition: transform 0.4s ease var(--pbd, 0s);\n}\n.continue-application > div .folder .paper {\n  z-index: 1;\n  --b: var(--paper);\n}\n.continue-application > div .folder .paper:before,\n.continue-application > div .folder .paper:after {\n  content: \"\";\n  width: var(--wp, 14px);\n  height: 2px;\n  border-radius: 1px;\n  transform: scaleY(0.5);\n  left: 3px;\n  top: var(--tp, 3px);\n  position: absolute;\n  background: var(--paper-lines);\n  box-shadow: 0 12px 0 0 var(--paper-lines), 0 24px 0 0 var(--paper-lines);\n}\n.continue-application > div .folder .paper:after {\n  --tp: 6px;\n  --wp: 10px;\n}\n.continue-application > div .pencil {\n  height: 2px;\n  width: 3px;\n  border-radius: 1px 1px 0 0;\n  top: 8px;\n  left: 105%;\n  position: absolute;\n  z-index: 3;\n  transform-origin: 50% 19px;\n  background: var(--pencil-cap);\n  transform: translateX(var(--pex, 0)) rotate(35deg);\n  transition: transform 0.4s ease var(--pbd, 0s);\n}\n.continue-application > div .pencil:before,\n.continue-application > div .pencil:after {\n  content: \"\";\n  position: absolute;\n  display: block;\n  background: var(--b, linear-gradient(var(--pencil-top) 55%, var(--pencil-middle) 55.1%, var(--pencil-middle) 60%, var(--pencil-bottom) 60.1%));\n  width: var(--w, 5px);\n  height: var(--h, 20px);\n  border-radius: var(--br, 2px 2px 0 0);\n  top: var(--t, 2px);\n  left: var(--l, -1px);\n}\n.continue-application > div .pencil:before {\n  -webkit-clip-path: polygon(0 5%, 5px 5%, 5px 17px, 50% 20px, 0 17px);\n  clip-path: polygon(0 5%, 5px 5%, 5px 17px, 50% 20px, 0 17px);\n}\n.continue-application > div .pencil:after {\n  --b: none;\n  --w: 3px;\n  --h: 6px;\n  --br: 0 2px 1px 0;\n  --t: 3px;\n  --l: 3px;\n  border-top: 1px solid var(--pencil-top);\n  border-right: 1px solid var(--pencil-top);\n}\n.continue-application:before,\n.continue-application:after {\n  content: \"\";\n  position: absolute;\n  width: 10px;\n  height: 2px;\n  border-radius: 1px;\n  background: var(--color);\n  transform-origin: 9px 1px;\n  transform: translateX(var(--cx, 0)) scale(0.5) rotate(var(--r, -45deg));\n  top: 26px;\n  right: 16px;\n  transition: transform 0.3s;\n}\n.continue-application:after {\n  --r: 45deg;\n}\n.continue-application:hover {\n  --cx: 2px;\n  --bg: var(--background-hover);\n  --fx: -40px;\n  --fr: -60deg;\n  --fd: .15s;\n  --fds: 0s;\n  --pbx: 3px;\n  --pby: -3px;\n  --pbd: .15s;\n  --pex: -24px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -29403,7 +29404,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.instruction{*/\n/*    display: flex;*/\n/*    justify-content: center;*/\n/*    text-align: justify;*/\n/*    font-size: 20px;*/\n/*    font-weight: bold;*/\n/*    margin: 15px;*/\n/*    border-bottom: 1px solid darkgreen;*/\n/*    padding: 15px;*/\n/*}*/\n.horizontal-word[data-v-08dedaed] {\n    width: 100%;\n    text-align: center;\n    border-bottom: 1px solid darkgreen;\n    line-height: 0.1em;\n    margin: 10px 0 20px;\n    font-weight: bold;\n}\n.horizontal-word > span[data-v-08dedaed] {\n    background: #fff;\n    padding: 0 10px;\n    color: darkgreen;\n}\n.box[data-v-08dedaed]{\n    border-top: 3px solid green;\n}\n.instruction[data-v-08dedaed]{\n    margin-top: 30px;\n}\n.instruction > ul > li[data-v-08dedaed]{\n    font-style: italic;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.instruction{*/\n/*    display: flex;*/\n/*    justify-content: center;*/\n/*    text-align: justify;*/\n/*    font-size: 20px;*/\n/*    font-weight: bold;*/\n/*    margin: 15px;*/\n/*    border-bottom: 1px solid darkgreen;*/\n/*    padding: 15px;*/\n/*}*/\n.horizontal-word[data-v-08dedaed] {\n    width: 100%;\n    text-align: center;\n    border-bottom: 1px solid darkgreen;\n    line-height: 0.1em;\n    margin: 10px 0 20px;\n    font-weight: bold;\n}\n.horizontal-word > span[data-v-08dedaed] {\n    background: #fff;\n    padding: 0 10px;\n    color: darkgreen;\n}\n.box[data-v-08dedaed]{\n    border-top: 3px solid green;\n}\n.instruction[data-v-08dedaed]{\n    margin-top: 30px;\n}\n.instruction > ul > li[data-v-08dedaed]{\n    font-style: italic;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48101,7 +48102,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "footer" }, [
+    return _c("footer", { staticClass: "page-footer" }, [
       _c("div", { staticClass: "content has-text-centered" }, [
         _c("p", [
           _c("strong", [_vm._v("GADTEST")]),
@@ -50721,11 +50722,7 @@ var render = function() {
           {
             key: "brand",
             fn: function() {
-              return [
-                _c("b-navbar-item", {
-                  attrs: { tag: "router-link", to: { path: "/" } }
-                })
-              ]
+              return [_c("b-navbar-item")]
             },
             proxy: true
           },
@@ -50745,10 +50742,15 @@ var render = function() {
                     _c(
                       "a",
                       {
-                        staticClass: "button is-primary",
+                        staticClass: "button is-primary is-outlined",
                         attrs: { href: "/login" }
                       },
-                      [_c("strong", [_vm._v("Log in")])]
+                      [
+                        _c("b-icon", { attrs: { icon: "login" } }),
+                        _vm._v(" "),
+                        _c("strong", [_vm._v("Log in")])
+                      ],
+                      1
                     )
                   ])
                 ])
@@ -50786,45 +50788,51 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "welcome-container" }, [
-      _c("div", { staticClass: "left-box" }, [
-        _c("div", { staticClass: "welcome-title" }, [
-          _vm._v("Hello Future Alfonsos!")
-        ]),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", [
-          _c(
-            "button",
-            {
-              staticClass: "continue-application",
-              attrs: { onclick: "window.location = '/register'" }
-            },
-            [
-              _c("div", [
-                _c("div", { staticClass: "pencil" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "folder" }, [
-                  _c("div", { staticClass: "top" }, [
-                    _c("svg", { attrs: { viewBox: "0 0 24 27" } }, [
-                      _c("path", {
-                        attrs: {
-                          d:
-                            "M1,0 L23,0 C23.5522847,-1.01453063e-16 24,0.44771525 24,1 L24,8.17157288 C24,8.70200585 23.7892863,9.21071368 23.4142136,9.58578644 L20.5857864,12.4142136 C20.2107137,12.7892863 20,13.2979941 20,13.8284271 L20,26 C20,26.5522847 19.5522847,27 19,27 L1,27 C0.44771525,27 6.76353751e-17,26.5522847 0,26 L0,1 C-6.76353751e-17,0.44771525 0.44771525,1.01453063e-16 1,0 Z"
-                        }
-                      })
-                    ])
-                  ]),
+    _c("div", { staticClass: "welcome-container mt-6" }, [
+      _c(
+        "div",
+        { staticClass: "left-box animate__animated animate__fadeInLeft" },
+        [
+          _c("div", { staticClass: "welcome-title" }, [
+            _vm._v("Hello Future Alfonsos!")
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "button",
+              {
+                staticClass: "continue-application",
+                attrs: { onclick: "window.location = '/register'" }
+              },
+              [
+                _c("div", [
+                  _c("div", { staticClass: "pencil" }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "paper" })
-                ])
-              ]),
-              _vm._v("\n                    Pre-register Now\n                ")
-            ]
-          )
-        ])
-      ]),
+                  _c("div", { staticClass: "folder" }, [
+                    _c("div", { staticClass: "top" }, [
+                      _c("svg", { attrs: { viewBox: "0 0 24 27" } }, [
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M1,0 L23,0 C23.5522847,-1.01453063e-16 24,0.44771525 24,1 L24,8.17157288 C24,8.70200585 23.7892863,9.21071368 23.4142136,9.58578644 L20.5857864,12.4142136 C20.2107137,12.7892863 20,13.2979941 20,13.8284271 L20,26 C20,26.5522847 19.5522847,27 19,27 L1,27 C0.44771525,27 6.76353751e-17,26.5522847 0,26 L0,1 C-6.76353751e-17,0.44771525 0.44771525,1.01453063e-16 1,0 Z"
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "paper" })
+                  ])
+                ]),
+                _vm._v(
+                  "\n                    Pre-register Now\n                "
+                )
+              ]
+            )
+          ])
+        ]
+      ),
       _vm._v(" "),
       _vm._m(1)
     ])
@@ -50848,7 +50856,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "right-box" }, [
-      _c("div", [
+      _c("div", { staticClass: "animate__animated animate__fadeInRight" }, [
         _c("img", {
           staticClass: "alfonso-img",
           attrs: { src: "/img/logo_small.png", alt: "..." }
