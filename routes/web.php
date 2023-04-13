@@ -100,7 +100,7 @@ Route::get('/fetch-test-schedules', [App\Http\Controllers\Administrator\TestSche
 
 //STUDENT SCHEDULE
 Route::resource('/panel/student-schedule', App\Http\Controllers\Administrator\StudentTestScheduleController::class);
-Route::get('/fetch-student-schedules', [App\Http\Controllers\Administrator\StudentTestScheduleController::class, 'index_data']);
+Route::get('/fetch-student-schedules', [App\Http\Controllers\Administrator\StudentTestScheduleController::class, 'getAll']);
 Route::get('/fetch-schedules', [App\Http\Controllers\Administrator\StudentTestScheduleController::class, 'getSchedules']);
 
 

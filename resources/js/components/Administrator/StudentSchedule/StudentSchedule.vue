@@ -1,136 +1,140 @@
 <template>
     <div>
-        <section class="section">
-            <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF STUDENT'S SCHEDULES</div>
-            <div class="columns">
-                <div class="column is-10 is-offset-1">
-                    <div class="level">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <b-field label="Page">
-                                    <b-select v-model="perPage" @input="setPerPage">
-                                        <option value="5">5 per page</option>
-                                        <option value="10">10 per page</option>
-                                        <option value="15">15 per page</option>
-                                        <option value="20">20 per page</option>
-                                    </b-select>
-                                </b-field>
-                            </div>
+        
+        <div class="columns is-centered">
+                <div class="column is-8">
+
+                    <div class="panel m-5">
+
+                        <div class="panel-heading">
+                            <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF STUDENT'S SCHEDULES</div>
                         </div>
-                        <div class="level-right">
-                            <div class="level-item">
-                                <b-field label="Search">
-                                    <b-input type="text" v-model="search.lname" placeholder="Search Lastname..." @keyup.native.enter="loadAsyncData" />
-                                </b-field>
+
+                        <div class="panel-body">
+
+                            <div class="columns">
+                                <div class="column">
+                                    <b-field label="Page" label-position="on-border">
+                                        <b-select v-model="perPage" @input="setPerPage">
+                                            <option value="5">5 per page</option>
+                                            <option value="10">10 per page</option>
+                                            <option value="15">15 per page</option>
+                                            <option value="20">20 per page</option>
+                                        </b-select>
+                                    </b-field>
+                                </div>
+
+                                <div class="column">
+                                    <b-field label="Search" label-position="on-border">
+                                        <b-input type="text" v-model="search.lname" placeholder="Search Lastname..." @keyup.native.enter="loadAsyncData" />
+                                        <b-input type="text" v-model="search.id" placeholder="Search Student ID..." @keyup.native.enter="loadAsyncData" />
+                                    </b-field>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="level">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <b-field label="Search Student Id">
-                                    <b-input type="text" v-model="search.id" placeholder="Search Student ID..." @keyup.native.enter="loadAsyncData" />
-                                </b-field>
+                            
+                            <div class="columns">
+                                <div class="column">
+                                    <b-field label="Schedule" label-position="on-border">
+                                        <b-datepicker v-model="search.date_sched" editable></b-datepicker>
+                                        <b-timepicker v-model="search.time_sched_from" editable></b-timepicker>
+                                        <b-timepicker v-model="search.time_sched_to" editable></b-timepicker>
+                                        <p class="control">
+                                            <b-button type="is-success" label="..." @click="loadAsyncData"></b-button>
+                                        </p>
+                                    </b-field>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                            
 
-                    <div class="level">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <b-field label="Schedule">
-                                    <b-datepicker v-model="search.date_sched" editable></b-datepicker>
-                                    <b-timepicker v-model="search.time_sched_from" editable></b-timepicker>
-                                    <b-timepicker v-model="search.time_sched_to" editable></b-timepicker>
-                                    <p class="control">
-                                        <b-button type="is-success" label="..." @click="loadAsyncData"></b-button>
-                                    </p>
-                                </b-field>
+
+                            <div class="columns is-centered">
+                                <div class="column">
+                                    
+                                    <div style="display:flex; justify-content: flex-end;">
+                                        <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
+                                    </div>
+
+                                    <div class="buttons mt-3">
+                                        <b-button icon-pack="fa" icon-left="plus" tag="a"
+                                                href="/panel/student-schedule/create" class="is-primary">New Student Schedule</b-button>
+                                    </div>
+
+                                    <b-table
+                                        :data="data"
+                                        :loading="loading"
+                                        paginated
+                                        detailed
+                                        backend-pagination
+                                        :total="total"
+                                        :per-page="perPage"
+                                        @page-change="onPageChange"
+                                        aria-next-label="Next page"
+                                        aria-previous-label="Previous page"
+                                        aria-page-label="Page"
+                                        aria-current-label="Current page"
+                                        backend-sorting
+                                        :default-sort-direction="defaultSortDirection"
+                                        @sort="onSort">
+
+                                        <b-table-column field="student_schedule_id" label="ID" v-slot="props">
+                                            {{ props.row.student_schedule_id }}
+                                        </b-table-column>
+
+                                        <b-table-column field="fullname" label="Name" v-slot="props">
+                                            {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
+                                        </b-table-column>
+
+                                        <b-table-column field="description" label="Description" v-slot="props">
+                                            {{ props.row.description }}
+                                        </b-table-column>
+
+                                        <b-table-column field="from" label="From" v-slot="props">
+                                            {{ new Date(props.row.from).toLocaleString() }}
+                                        </b-table-column>
+
+                                        <b-table-column field="to" label="To" v-slot="props">
+                                            {{ new Date(props.row.to).toLocaleString() }}
+                                        </b-table-column>
+
+                                        <b-table-column field="max_user" label="Max Examinee" v-slot="props">
+                                            {{ props.row.max_user }}
+                                        </b-table-column>
+
+                                        <b-table-column field="ay_id" label="Action" v-slot="props">
+                                            <div class="is-flex">
+                                                <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" :href="'/panel/student-schedule/'+ props.row.student_schedule_id + '/edit'"></b-button>
+                                                <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.student_schedule_id)"></b-button>
+                                            </div>
+                                        </b-table-column>
+
+                                        <template #detail="props">
+                                            <div>
+                                                <strong>USER ID:</strong> {{ props.row.user_id }}
+                                            </div>
+                                            <div>
+                                                <strong>EMAIL:</strong> {{ props.row.email }}
+                                            </div>
+                                            <div>
+                                                <strong>USERNAME:</strong> {{ props.row.username }}
+                                            </div>
+
+                                        </template>
+
+                                    </b-table>
+
+                                    <div class="buttons mt-3">
+                                        <b-button icon-pack="fa" icon-left="plus" tag="a"
+                                            href="/panel/student-schedule/create" class="is-primary">New Student Schedule</b-button>
+                                    </div>
+                                </div><!--close column-->
                             </div>
-                        </div>
-                    </div>
+                        </div> <!-- panel body -->
+                    </div> <!-- panel -->
+                    
+                </div> <!-- col -->
+            </div> <!-- cols --> 
 
-                    <div style="display:flex; justify-content: flex-end;">
-                        <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
-                    </div>
-
-                    <div class="buttons mt-3">
-                        <b-button icon-pack="fa" icon-left="plus" tag="a"
-                                  href="/panel/student-schedule/create" class="is-primary">New Student Schedule</b-button>
-                    </div>
-                    <b-table
-                        :data="data"
-                        :loading="loading"
-                        paginated
-                        detailed
-                        backend-pagination
-                        :total="total"
-                        :per-page="perPage"
-                        @page-change="onPageChange"
-                        aria-next-label="Next page"
-                        aria-previous-label="Previous page"
-                        aria-page-label="Page"
-                        aria-current-label="Current page"
-                        backend-sorting
-                        :default-sort-direction="defaultSortDirection"
-                        @sort="onSort">
-
-                        <b-table-column field="student_schedule_id" label="ID" v-slot="props">
-                            {{ props.row.student_schedule_id }}
-                        </b-table-column>
-
-                        <b-table-column field="fullname" label="Name" v-slot="props">
-                            {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
-                        </b-table-column>
-
-                        <b-table-column field="description" label="Description" v-slot="props">
-                            {{ props.row.description }}
-                        </b-table-column>
-
-                        <b-table-column field="from" label="From" v-slot="props">
-                            {{ new Date(props.row.from).toLocaleString() }}
-                        </b-table-column>
-
-                        <b-table-column field="to" label="To" v-slot="props">
-                            {{ new Date(props.row.to).toLocaleString() }}
-                        </b-table-column>
-
-                        <b-table-column field="max_user" label="Max Examinee" v-slot="props">
-                            {{ props.row.max_user }}
-                        </b-table-column>
-
-                        <b-table-column field="ay_id" label="Action" v-slot="props">
-                            <div class="is-flex">
-                                <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" :href="'/panel/student-schedule/'+ props.row.student_schedule_id + '/edit'"></b-button>
-                                <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.student_schedule_id)"></b-button>
-                            </div>
-                        </b-table-column>
-
-                        <template #detail="props">
-                            <div>
-                                <strong>USER ID:</strong> {{ props.row.user_id }}
-                            </div>
-                            <div>
-                                <strong>EMAIL:</strong> {{ props.row.email }}
-                            </div>
-                            <div>
-                                <strong>USERNAME:</strong> {{ props.row.username }}
-                            </div>
-
-                        </template>
-
-                    </b-table>
-
-                    <div class="buttons mt-3">
-                        <b-button icon-pack="fa" icon-left="plus" tag="a"
-                            href="/panel/student-schedule/create" class="is-primary">New Student Schedule</b-button>
-                    </div>
-                </div><!--close column-->
-            </div>
-        </section>
-
-    </div>
+    </div> <!-- root div -->
 </template>
 
 <script>

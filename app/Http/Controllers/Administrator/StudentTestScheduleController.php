@@ -27,8 +27,8 @@ class StudentTestScheduleController extends Controller
     }
 
 
-    public function index_data(Request $req){
-
+    public function getAll(Request $req){
+        //return $req;
 
         $date =  $req->ndate;
         $ndate = date("Y-m-d", strtotime($date)); //convert to date format UNIX
@@ -44,36 +44,56 @@ class StudentTestScheduleController extends Controller
         $sort = explode('.', $req->sort_by);
 
 
-        if($req->id != null || $req->lname != null){
 
-            $data = DB::table('student_schedules as a')
-                ->join('test_schedules as b', 'a.test_schedule_id', 'b.test_schedule_id')
-                ->join('users as c',  'a.user_id', 'c.user_id')
-                ->select('a.*', 'b.acad_year_id', 'b.description', 'b.from', 'b.to', 'b.max_user', 'b.active', 'b.nt_user',
-                    'c.lname', 'c.fname', 'c.mname', 'c.sex', 'c.status', 'c.email', 'c.username', 'c.user_id')
-                ->where('b.acad_year_id', $acad->acad_year_id)
-                ->where('c.lname', 'like', $req->lname . '%')
-                ->where('c.user_id', 'like', $req->id . '%')
-                ->orderBy($sort[0], $sort[1])
-                ->paginate($req->perpage);
-            return $data;
-        }
+        $data = DB::table('student_schedules as a')
+            ->join('test_schedules as b', 'a.test_schedule_id', 'b.test_schedule_id')
+            ->join('users as c',  'a.user_id', 'c.user_id')
+            ->select('a.*', 'b.acad_year_id', 'b.description', 'b.from', 'b.to', 'b.max_user', 'b.active', 'b.nt_user',
+                'c.lname', 'c.fname', 'c.mname', 'c.sex', 'c.status', 'c.email', 'c.username', 'c.user_id')
+            ->where('b.acad_year_id', $acad->acad_year_id)
+            ->where('c.lname', 'like', $req->lname . '%')
+            ->where('c.user_id', 'like', $req->id . '%')
+            ->orderBy($sort[0], $sort[1])
+            ->paginate($req->perpage);
 
-        if($req->timefrom != null && $req->timeto != null){
+        return $data;
 
-            $data = DB::table('student_schedules as a')
-                ->join('test_schedules as b', 'a.test_schedule_id', 'b.test_schedule_id')
-                ->join('users as c',  'a.user_id', 'c.user_id')
-                ->select('a.*', 'b.acad_year_id', 'b.description', 'b.from', 'b.to', 'b.max_user', 'b.active', 'b.nt_user',
-                    'c.lname', 'c.fname', 'c.mname', 'c.sex', 'c.status', 'c.email', 'c.username', 'c.user_id')
-                ->where('b.acad_year_id', $acad->acad_year_id)
-                ->where('c.lname', 'like', $req->lname . '%')
-                ->where('b.from', $ndate . ' ' . $ntimeFrom)
-                ->where('b.to', $ndate . ' ' . $ntimeTo)
-                ->orderBy($sort[0], $sort[1])
-                ->paginate($req->perpage);
-            return $data;
-        }
+
+        //return $req;
+
+
+        // if($req->id != null || $req->lname != null){
+
+        //     $data = DB::table('student_schedules as a')
+        //         ->join('test_schedules as b', 'a.test_schedule_id', 'b.test_schedule_id')
+        //         ->join('users as c',  'a.user_id', 'c.user_id')
+        //         ->select('a.*', 'b.acad_year_id', 'b.description', 'b.from', 'b.to', 'b.max_user', 'b.active', 'b.nt_user',
+        //             'c.lname', 'c.fname', 'c.mname', 'c.sex', 'c.status', 'c.email', 'c.username', 'c.user_id')
+        //         ->where('b.acad_year_id', $acad->acad_year_id)
+        //         ->where('c.lname', 'like', $req->lname . '%')
+        //         ->where('c.user_id', 'like', $req->id . '%')
+        //         ->orderBy($sort[0], $sort[1])
+        //         ->paginate($req->perpage);
+        //     return $data;
+        // }
+
+        // if($req->timefrom != null && $req->timeto != null){
+
+        //     $data = DB::table('student_schedules as a')
+        //         ->join('test_schedules as b', 'a.test_schedule_id', 'b.test_schedule_id')
+        //         ->join('users as c',  'a.user_id', 'c.user_id')
+        //         ->select('a.*', 'b.acad_year_id', 'b.description', 'b.from', 'b.to', 'b.max_user', 'b.active', 'b.nt_user',
+        //             'c.lname', 'c.fname', 'c.mname', 'c.sex', 'c.status', 'c.email', 'c.username', 'c.user_id')
+        //         ->where('b.acad_year_id', $acad->acad_year_id)
+        //         ->where('c.lname', 'like', $req->lname . '%')
+        //         ->where('b.from', $ndate . ' ' . $ntimeFrom)
+        //         ->where('b.to', $ndate . ' ' . $ntimeTo)
+        //         ->orderBy($sort[0], $sort[1])
+        //         ->paginate($req->perpage);
+        //     return $data;
+        //}
+        
+    
 
 
     }

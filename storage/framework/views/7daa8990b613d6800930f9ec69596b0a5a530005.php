@@ -19,11 +19,6 @@
 <!-- Styles -->
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
 
-    <style>
-        html, body{
-            background: #F3F3FB;
-        }
-    </style>
 
 </head>
 <body>
