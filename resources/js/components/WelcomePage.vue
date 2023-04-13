@@ -11,7 +11,6 @@
                     <b>PRE-REGISTER</b> button.
                 </div>
 
-
                 <div>
                     <button class="continue-application" onclick="window.location = '/register'">
                         <div>
