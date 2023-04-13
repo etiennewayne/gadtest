@@ -50845,7 +50845,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "w-subtitle" }, [
       _vm._v(
-        "\n                The GADTC Admission Test for 1st Semestee AY 2022-2023 will  \n                officially start on June 5, 2023. The exam will be administered at the 2nd Floor, GADTC Computer Laboratory. \n                You may begin reserving your slots from April 12 - May 31, 2023 by clicking \n                "
+        "\n                The GADTC Admission Test for 1st Semester AY 2022-2023 will  \n                officially start on June 5, 2023. The exam will be administered at the 2nd Floor, GADTC Computer Laboratory. \n                You may begin reserving your slots from April 12 - May 31, 2023 by clicking \n                "
       ),
       _c("b", [_vm._v("PRE-REGISTER")]),
       _vm._v(" button.\n            ")
