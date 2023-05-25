@@ -48019,7 +48019,7 @@ var render = function() {
               {
                 attrs: {
                   href:
-                    "https://www.facebook.com/gadtcluxmundi/photos/pcb.1803528779979122/1803528299979170/"
+                    "https://www.facebook.com/gadtcluxmundi/posts/pfbid02JzSVGT5CmsCYouQPezitMPGhoEuuoWSbtLS1zL8hWjbFMuBdmfWMAawjizv2Yx7ml"
                 }
               },
               [_vm._v("here")]
@@ -48258,19 +48258,10 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
-                          _c("div", { staticClass: "buttons" }, [
+                          _c("div", { staticClass: "buttons py-2 is-right" }, [
                             _c("button", { class: _vm.btnClass }, [
                               _vm._v("LOGIN")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "button is-primary is-light",
-                                attrs: { href: "/password/reset" }
-                              },
-                              [_vm._v("RESET PASSWORD")]
-                            )
+                            ])
                           ])
                         ],
                         1

@@ -27,3 +27,6 @@ Homestead.json
 .phpunit.result.cache
 
 storage/*
+
+/config/session.php
+/config/cache.php

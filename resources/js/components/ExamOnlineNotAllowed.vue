@@ -9,7 +9,7 @@
                 role="alert">
                 No online exam is allowed at this moment. Please take the exam on-site.
                 For more intormation about the GADTEST Exam,
-                click <a href="https://www.facebook.com/gadtcluxmundi/photos/pcb.1803528779979122/1803528299979170/">here</a>.
+                click <a href="https://www.facebook.com/gadtcluxmundi/posts/pfbid02JzSVGT5CmsCYouQPezitMPGhoEuuoWSbtLS1zL8hWjbFMuBdmfWMAawjizv2Yx7ml">here</a>.
             </b-notification>
 
         </div>

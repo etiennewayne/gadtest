@@ -23,9 +23,9 @@
                                             <span style="color:red; font-weight: bold;">{{ this.errors.username[0] }}</span>
                                         </div>
 
-                                        <div class="buttons">
+                                        <div class="buttons py-2 is-right">
                                             <button :class="btnClass">LOGIN</button>
-                                            <a class="button is-primary is-light" href="/password/reset">RESET PASSWORD</a>
+                                            <!-- <a class="button is-primary is-light" href="/password/reset">RESET PASSWORD</a> -->
                                         </div>
                                     </div>
                                 </form>
