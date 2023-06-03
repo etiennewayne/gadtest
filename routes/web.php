@@ -96,7 +96,8 @@ Route::get('/fetch-sections', [App\Http\Controllers\Administrator\SectionControl
 
 //SCHEDULES
 Route::resource('/panel/test-schedule', App\Http\Controllers\Administrator\TestScheduleController::class);
-Route::get('/fetch-test-schedules', [App\Http\Controllers\Administrator\TestScheduleController::class, 'index_data']);
+Route::get('/get-test-schedules', [App\Http\Controllers\Administrator\TestScheduleController::class, 'getData']);
+Route::get('/panel/print-preview-test-schedule/{id}', [App\Http\Controllers\Administrator\TestScheduleController::class, 'printPreviewTestSchedule']);
 
 //STUDENT SCHEDULE
 Route::resource('/panel/student-schedule', App\Http\Controllers\Administrator\StudentTestScheduleController::class);

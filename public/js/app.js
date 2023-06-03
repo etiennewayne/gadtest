@@ -7749,6 +7749,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -7781,7 +7806,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "description=".concat(this.search.description)].join('&');
       this.loading = true;
-      axios.get("/fetch-test-schedules?".concat(params)).then(function (_ref) {
+      axios.get("/get-test-schedules?".concat(params)).then(function (_ref) {
         var data = _ref.data;
         _this.data = [];
         var currentTotal = data.total;
@@ -7818,6 +7843,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     setPerPage: function setPerPage() {
       this.loadAsyncData();
+    },
+    printPreview: function printPreview(id) {
+      window.location = '/panel/print-preview-test-schedule/' + id;
     },
     //actions here below
     deleteSubmit: function deleteSubmit(delete_id) {
@@ -45196,9 +45224,68 @@ var render = function() {
                   "aria-page-label": "Page",
                   "aria-current-label": "Current page",
                   "backend-sorting": "",
+                  detailed: "",
                   "default-sort-direction": _vm.defaultSortDirection
                 },
-                on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
+                on: { "page-change": _vm.onPageChange, sort: _vm.onSort },
+                scopedSlots: _vm._u([
+                  {
+                    key: "detail",
+                    fn: function(props) {
+                      return [
+                        props.row.students
+                          ? _c(
+                              "div",
+                              [
+                                _c("tr", [
+                                  _c("th", [_vm._v("#")]),
+                                  _vm._v(" "),
+                                  _c("th", [_vm._v("Name")]),
+                                  _vm._v(" "),
+                                  _c("th", [_vm._v("Sex")]),
+                                  _vm._v(" "),
+                                  _c("th", [_vm._v("Status")]),
+                                  _vm._v(" "),
+                                  _c("th", [_vm._v("1st Program")]),
+                                  _vm._v(" "),
+                                  _c("th", [_vm._v("2nd Program")])
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(props.row.students, function(i, ix) {
+                                  return _c("tr", { key: ix }, [
+                                    _c("td", [_vm._v(_vm._s(ix + 1))]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(
+                                        _vm._s(i.lname) +
+                                          ", " +
+                                          _vm._s(i.fname) +
+                                          " " +
+                                          _vm._s(i.mname)
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(i.sex))]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(i.status))]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(i.first_program_choice))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(i.second_program_choice))
+                                    ])
+                                  ])
+                                })
+                              ],
+                              2
+                            )
+                          : _vm._e()
+                      ]
+                    }
+                  }
+                ])
               },
               [
                 _c("b-table-column", {
@@ -45309,7 +45396,6 @@ var render = function() {
                                 attrs: {
                                   tag: "a",
                                   "icon-right": "pencil",
-                                  "icon-pack": "fa",
                                   href:
                                     "/panel/test-schedule/" +
                                     props.row.test_schedule_id +
@@ -45319,13 +45405,22 @@ var render = function() {
                               _vm._v(" "),
                               _c("b-button", {
                                 staticClass: "button is-small is-danger mr-1",
-                                attrs: {
-                                  "icon-pack": "fa",
-                                  "icon-right": "trash"
-                                },
+                                attrs: { "icon-right": "delete" },
                                 on: {
                                   click: function($event) {
                                     return _vm.confirmDelete(
+                                      props.row.test_schedule_id
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("b-button", {
+                                staticClass: "button is-small is-info mr-1",
+                                attrs: { "icon-right": "printer" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.printPreview(
                                       props.row.test_schedule_id
                                     )
                                   }

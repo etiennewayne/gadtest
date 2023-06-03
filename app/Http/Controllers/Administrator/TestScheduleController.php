@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\TestSchedule;
 use App\Models\AcadYear;
+use App\Models\StudentSchedule;
 
 
 class TestScheduleController extends Controller
@@ -22,9 +23,9 @@ class TestScheduleController extends Controller
         return view('panel.test_schedule.test-schedule');
     }
 
-    public function index_data(Request $req){
+    public function getData(Request $req){
         $sort = explode('.', $req->sort_by);
-        return TestSchedule::orderBy($sort[0], $sort[1])
+        return TestSchedule::with(['students'])->orderBy($sort[0], $sort[1])
             ->where('description', 'like', '%' .$req->description . '%')
             ->paginate($req->perpage);
     }
@@ -88,6 +89,27 @@ class TestScheduleController extends Controller
 
     public function destroy($id){
         TestSchedule::destroy($id);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function printPreviewTestSchedule($id){
+        $schedule = TestSchedule::with('students')
+            ->where('test_schedule_id', $id)
+            ->first();
+
+        return view('panel.test_schedule.print-preview-student-schedule')
+            ->with('schedule', $schedule);
     }
 
 }

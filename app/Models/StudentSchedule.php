@@ -19,4 +19,10 @@ class StudentSchedule extends Model
     ];
 
 
+
+    public function students(){
+        return $this->hasMany(User::class, 'user_id', 'user_id');
+    }
+
+
 }

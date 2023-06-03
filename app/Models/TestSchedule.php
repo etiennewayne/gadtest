@@ -21,4 +21,10 @@ class TestSchedule extends Model
         'from', 'to', 'max_user', 'nt_user'
     ];
 
+    public function students(){
+        return $this->hasMany(StudentSchedule::class, 'test_schedule_id', 'test_schedule_id')
+            ->leftJoin('users', 'student_schedules.user_id', 'users.user_id');
+    }
+
+
 }

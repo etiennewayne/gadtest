@@ -51,6 +51,7 @@
                         aria-page-label="Page"
                         aria-current-label="Current page"
                         backend-sorting
+                        detailed
                         :default-sort-direction="defaultSortDirection"
                         @sort="onSort">
 
@@ -76,10 +77,34 @@
 
                         <b-table-column field="ay_id" label="Action" v-slot="props">
                             <div class="is-flex">
-                                <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" :href="'/panel/test-schedule/'+ props.row.test_schedule_id + '/edit'"></b-button>
-                                <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.test_schedule_id)"></b-button>
+                                <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" :href="'/panel/test-schedule/'+ props.row.test_schedule_id + '/edit'"></b-button>
+                                <b-button class="button is-small is-danger mr-1" icon-right="delete" @click="confirmDelete(props.row.test_schedule_id)"></b-button>
+                                <b-button class="button is-small is-info mr-1" icon-right="printer" @click="printPreview(props.row.test_schedule_id)"></b-button>
+                            
                             </div>
                         </b-table-column>
+
+                        <template #detail="props">
+                            <div v-if="props.row.students">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Sex</th>
+                                    <th>Status</th>
+                                    <th>1st Program</th>
+                                    <th>2nd Program</th>
+                                </tr>
+
+                                <tr v-for="(i, ix) in props.row.students" :key="ix">
+                                    <td>{{ (ix + 1) }}</td>
+                                    <td>{{ i.lname }}, {{ i.fname }} {{ i.mname }}</td>
+                                    <td>{{ i.sex }}</td>
+                                    <td>{{ i.status }}</td>
+                                    <td>{{ i.first_program_choice }}</td>
+                                    <td>{{ i.second_program_choice }}</td>
+                                </tr>
+                            </div>
+                        </template>
 
                     </b-table>
 
@@ -143,7 +168,7 @@ export default {
             ].join('&')
 
             this.loading = true
-            axios.get(`/fetch-test-schedules?${params}`)
+            axios.get(`/get-test-schedules?${params}`)
                 .then(({ data }) => {
                     this.data = []
                     let currentTotal = data.total
@@ -182,6 +207,10 @@ export default {
 
         setPerPage(){
             this.loadAsyncData()
+        },
+
+        printPreview(id){
+            window.location = '/panel/print-preview-test-schedule/' + id
         },
 
 
