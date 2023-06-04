@@ -1,8 +1,11 @@
 
 
 <?php $__env->startSection('content'); ?>
-
- <test-schedule></test-schedule>
+    <?php if(Auth::user()->role == 'STAFF'): ?>
+        <test-schedule-staff></test-schedule-staff>
+    <?php else: ?>
+        <test-schedule></test-schedule>   
+    <?php endif; ?>
 
 <?php $__env->stopSection(); ?>
 

@@ -8221,6 +8221,260 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      data: [],
+      total: 0,
+      loading: false,
+      sortField: 'test_schedule_id',
+      sortOrder: 'desc',
+      page: 1,
+      perPage: 20,
+      defaultSortDirection: 'asc',
+      isModalActive: false,
+      dataId: 0,
+      fields: {},
+      errors: {},
+      globalId: 0,
+      btnClass: {
+        'is-success': true,
+        'button': true,
+        'is-loading': false
+      },
+      search: {
+        description: ''
+      }
+    };
+  },
+  methods: {
+    loadAsyncData: function loadAsyncData() {
+      var _this = this;
+
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "description=".concat(this.search.description)].join('&');
+      this.loading = true;
+      axios.get("/get-test-schedules?".concat(params)).then(function (_ref) {
+        var data = _ref.data;
+        _this.data = [];
+        var currentTotal = data.total;
+
+        if (data.total / _this.perPage > 1000) {
+          currentTotal = _this.perPage * 1000;
+        }
+
+        _this.total = currentTotal;
+        data.data.forEach(function (item) {
+          //item.release_date = item.release_date ? item.release_date.replace(/-/g, '/') : null
+          _this.data.push(item);
+        });
+        _this.loading = false;
+      })["catch"](function (error) {
+        _this.data = [];
+        _this.total = 0;
+        _this.loading = false;
+        throw error;
+      });
+    },
+
+    /*
+    * Handle page-change event
+    */
+    onPageChange: function onPageChange(page) {
+      this.page = page;
+      this.loadAsyncData();
+    },
+    onSort: function onSort(field, order) {
+      this.sortField = field;
+      this.sortOrder = order;
+      this.loadAsyncData();
+    },
+    setPerPage: function setPerPage() {
+      this.loadAsyncData();
+    },
+    printPreview: function printPreview(id) {
+      window.location = '/panel/print-preview-test-schedule/' + id;
+    },
+    //actions here below
+    deleteSubmit: function deleteSubmit(delete_id) {
+      var _this2 = this;
+
+      axios["delete"]('/panel/test-schedule/' + delete_id).then(function (res) {
+        _this2.loadAsyncData();
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    //alert
+    confirmDelete: function confirmDelete(delete_id) {
+      var _this3 = this;
+
+      this.$buefy.dialog.confirm({
+        title: 'DELETE!',
+        type: 'is-danger',
+        message: 'Are you sure you want to delete this data?',
+        cancelText: 'Cancel',
+        confirmText: 'Delete',
+        onConfirm: function onConfirm() {
+          return _this3.deleteSubmit(delete_id);
+        }
+      });
+    },
+    openModal: function openModal(id) {
+      this.fields = {};
+      this.errors = {};
+      this.globalId = 0;
+
+      if (id > 0) {
+        this.globalId = id;
+        this.getData();
+      }
+
+      this.isModalActive = true;
+    },
+    getData: function getData() {}
+  },
+  mounted: function mounted() {
+    this.loadAsyncData();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPage.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPage.vue?vue&type=script&lang=js& ***!
@@ -32264,6 +32518,45 @@ component.options.__file = "resources/js/components/Administrator/TestSchedule/T
 
 /***/ }),
 
+/***/ "./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _TestScheduleStaff_vue_vue_type_template_id_5b80d484_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TestScheduleStaff.vue?vue&type=template&id=5b80d484&scoped=true& */ "./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue?vue&type=template&id=5b80d484&scoped=true&");
+/* harmony import */ var _TestScheduleStaff_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TestScheduleStaff.vue?vue&type=script&lang=js& */ "./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _TestScheduleStaff_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _TestScheduleStaff_vue_vue_type_template_id_5b80d484_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _TestScheduleStaff_vue_vue_type_template_id_5b80d484_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "5b80d484",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Administrator/User/UserPage.vue":
 /*!*****************************************************************!*\
   !*** ./resources/js/components/Administrator/User/UserPage.vue ***!
@@ -33493,6 +33786,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TestScheduleStaff_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TestScheduleStaff.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TestScheduleStaff_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Administrator/User/UserPage.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************!*\
   !*** ./resources/js/components/Administrator/User/UserPage.vue?vue&type=script&lang=js& ***!
@@ -34217,6 +34526,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TestScheduleEdit_vue_vue_type_template_id_32494ac8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TestScheduleEdit_vue_vue_type_template_id_32494ac8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TestScheduleEdit.vue?vue&type=template&id=32494ac8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/TestSchedule/TestScheduleEdit.vue?vue&type=template&id=32494ac8&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue?vue&type=template&id=5b80d484&scoped=true&":
+/*!*****************************************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue?vue&type=template&id=5b80d484&scoped=true& ***!
+  \*****************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TestScheduleStaff_vue_vue_type_template_id_5b80d484_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TestScheduleStaff_vue_vue_type_template_id_5b80d484_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TestScheduleStaff_vue_vue_type_template_id_5b80d484_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TestScheduleStaff.vue?vue&type=template&id=5b80d484&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue?vue&type=template&id=5b80d484&scoped=true&");
 
 
 /***/ }),
@@ -46017,6 +46343,446 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue?vue&type=template&id=5b80d484&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue?vue&type=template&id=5b80d484&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("section", { staticClass: "section" }, [
+      _c(
+        "div",
+        {
+          staticStyle: {
+            "font-size": "20px",
+            "text-align": "center",
+            "font-weight": "bold"
+          }
+        },
+        [_vm._v("LIST OF SCHEDULES")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "columns" }, [
+        _c(
+          "div",
+          { staticClass: "column is-8 is-offset-2" },
+          [
+            _c("div", { staticClass: "level" }, [
+              _c("div", { staticClass: "level-left" }, [
+                _c(
+                  "div",
+                  { staticClass: "level-item" },
+                  [
+                    _c(
+                      "b-field",
+                      {
+                        attrs: { label: "Page", "label-position": "on-border" }
+                      },
+                      [
+                        _c(
+                          "b-select",
+                          {
+                            on: { input: _vm.setPerPage },
+                            model: {
+                              value: _vm.perPage,
+                              callback: function($$v) {
+                                _vm.perPage = $$v
+                              },
+                              expression: "perPage"
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "5" } }, [
+                              _vm._v("5 per page")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "10" } }, [
+                              _vm._v("10 per page")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "15" } }, [
+                              _vm._v("15 per page")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "20" } }, [
+                              _vm._v("20 per page")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-select",
+                          {
+                            on: { input: _vm.loadAsyncData },
+                            model: {
+                              value: _vm.sortOrder,
+                              callback: function($$v) {
+                                _vm.sortOrder = $$v
+                              },
+                              expression: "sortOrder"
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "asc" } }, [
+                              _vm._v("ASC")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "desc" } }, [
+                              _vm._v("DESC")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-right" }, [
+                _c(
+                  "div",
+                  { staticClass: "level-item" },
+                  [
+                    _c(
+                      "b-field",
+                      {
+                        attrs: {
+                          label: "Search",
+                          "label-position": "on-border"
+                        }
+                      },
+                      [
+                        _c("b-input", {
+                          attrs: {
+                            type: "text",
+                            placeholder: "Search Description..."
+                          },
+                          nativeOn: {
+                            keyup: function($event) {
+                              if (
+                                !$event.type.indexOf("key") &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.loadAsyncData($event)
+                            }
+                          },
+                          model: {
+                            value: _vm.search.description,
+                            callback: function($$v) {
+                              _vm.$set(_vm.search, "description", $$v)
+                            },
+                            expression: "search.description"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticStyle: { display: "flex", "justify-content": "flex-end" }
+              },
+              [
+                _c(
+                  "p",
+                  {
+                    staticStyle: {
+                      "font-weight": "bold",
+                      "margin-bottom": "10px"
+                    }
+                  },
+                  [_vm._v("TOTAL ROWS: " + _vm._s(_vm.total) + " ")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "buttons mt-3" },
+              [
+                _c(
+                  "b-button",
+                  {
+                    staticClass: "is-primary",
+                    attrs: {
+                      "icon-pack": "fa",
+                      "icon-left": "plus",
+                      tag: "a",
+                      href: "/panel/test-schedule/create"
+                    }
+                  },
+                  [_vm._v("New Schedule")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-table",
+              {
+                attrs: {
+                  data: _vm.data,
+                  loading: _vm.loading,
+                  paginated: "",
+                  "backend-pagination": "",
+                  total: _vm.total,
+                  "per-page": _vm.perPage,
+                  "aria-next-label": "Next page",
+                  "aria-previous-label": "Previous page",
+                  "aria-page-label": "Page",
+                  "aria-current-label": "Current page",
+                  "backend-sorting": "",
+                  detailed: "",
+                  "default-sort-direction": _vm.defaultSortDirection
+                },
+                on: { "page-change": _vm.onPageChange, sort: _vm.onSort },
+                scopedSlots: _vm._u([
+                  {
+                    key: "detail",
+                    fn: function(props) {
+                      return [
+                        props.row.students
+                          ? _c(
+                              "div",
+                              [
+                                _c("tr", [
+                                  _c("th", [_vm._v("#")]),
+                                  _vm._v(" "),
+                                  _c("th", [_vm._v("Name")]),
+                                  _vm._v(" "),
+                                  _c("th", [_vm._v("Sex")]),
+                                  _vm._v(" "),
+                                  _c("th", [_vm._v("Status")]),
+                                  _vm._v(" "),
+                                  _c("th", [_vm._v("1st Program")]),
+                                  _vm._v(" "),
+                                  _c("th", [_vm._v("2nd Program")])
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(props.row.students, function(i, ix) {
+                                  return _c("tr", { key: ix }, [
+                                    _c("td", [_vm._v(_vm._s(ix + 1))]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(
+                                        _vm._s(i.lname) +
+                                          ", " +
+                                          _vm._s(i.fname) +
+                                          " " +
+                                          _vm._s(i.mname)
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(i.sex))]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(i.status))]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(i.first_program_choice))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(i.second_program_choice))
+                                    ])
+                                  ])
+                                })
+                              ],
+                              2
+                            )
+                          : _vm._e()
+                      ]
+                    }
+                  }
+                ])
+              },
+              [
+                _c("b-table-column", {
+                  attrs: { field: "test_schedule_id", label: "ID" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.row.test_schedule_id) +
+                              "\n                    "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "description", label: "Description" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.row.description) +
+                              "\n                    "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "from", label: "From" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                new Date(props.row.from).toLocaleString()
+                              ) +
+                              "\n                    "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "to", label: "To" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(new Date(props.row.to).toLocaleString()) +
+                              "\n                    "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "max_user", label: "Max Examinee" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.row.max_user) +
+                              "\n                    "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "ay_id", label: "Action" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _c(
+                            "div",
+                            { staticClass: "is-flex" },
+                            [
+                              _c("b-button", {
+                                staticClass: "button is-small is-info mr-1",
+                                attrs: { "icon-right": "printer" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.printPreview(
+                                      props.row.test_schedule_id
+                                    )
+                                  }
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "buttons mt-3" },
+              [
+                _c(
+                  "b-button",
+                  {
+                    staticClass: "is-primary",
+                    attrs: {
+                      "icon-pack": "fa",
+                      "icon-left": "plus",
+                      tag: "a",
+                      href: "/panel/test-schedule/create"
+                    }
+                  },
+                  [_vm._v("New Schedule")]
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -64088,6 +64854,7 @@ var map = {
 	"./components/Administrator/TestSchedule/TestSchedule.vue": "./resources/js/components/Administrator/TestSchedule/TestSchedule.vue",
 	"./components/Administrator/TestSchedule/TestScheduleCreate.vue": "./resources/js/components/Administrator/TestSchedule/TestScheduleCreate.vue",
 	"./components/Administrator/TestSchedule/TestScheduleEdit.vue": "./resources/js/components/Administrator/TestSchedule/TestScheduleEdit.vue",
+	"./components/Administrator/TestSchedule/TestScheduleStaff.vue": "./resources/js/components/Administrator/TestSchedule/TestScheduleStaff.vue",
 	"./components/Administrator/User/UserPage.vue": "./resources/js/components/Administrator/User/UserPage.vue",
 	"./components/Administrator/User/UserPageCreate.vue": "./resources/js/components/Administrator/User/UserPageCreate.vue",
 	"./components/Administrator/User/UserTestInformation.vue": "./resources/js/components/Administrator/User/UserTestInformation.vue",
