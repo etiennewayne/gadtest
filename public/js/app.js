@@ -7774,6 +7774,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -10193,6 +10198,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -10237,6 +10244,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -10507,7 +10515,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 this.student_schedule_id = this.studentschedId;
                 _context.next = 3;
-                return axios.get('/taking-exam-question/' + this.sectionId).then(function (res) {
+                return axios.get('/get-taking-exam-question/' + this.sectionId).then(function (res) {
                   //5pxconsole.log(res.data);
                   _this.questions = res.data;
                 });
@@ -29435,7 +29443,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.instruction{*/\n/*    display: flex;*/\n/*    justify-content: center;*/\n/*    text-align: justify;*/\n/*    font-size: 20px;*/\n/*    font-weight: bold;*/\n/*    margin: 15px;*/\n/*    border-bottom: 1px solid darkgreen;*/\n/*    padding: 15px;*/\n/*}*/\n.horizontal-word[data-v-08dedaed] {\n    width: 100%;\n    text-align: center;\n    border-bottom: 1px solid darkgreen;\n    line-height: 0.1em;\n    margin: 10px 0 20px;\n    font-weight: bold;\n}\n.horizontal-word > span[data-v-08dedaed] {\n    background: #fff;\n    padding: 0 10px;\n    color: darkgreen;\n}\n.box[data-v-08dedaed]{\n    border-top: 3px solid green;\n}\n.instruction[data-v-08dedaed]{\n    margin-top: 30px;\n}\n.instruction > ul > li[data-v-08dedaed]{\n    font-style: italic;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.instruction{*/\n/*    display: flex;*/\n/*    justify-content: center;*/\n/*    text-align: justify;*/\n/*    font-size: 20px;*/\n/*    font-weight: bold;*/\n/*    margin: 15px;*/\n/*    border-bottom: 1px solid darkgreen;*/\n/*    padding: 15px;*/\n/*}*/\n.horizontal-word[data-v-08dedaed] {\n    width: 100%;\n    text-align: center;\n    border-bottom: 1px solid darkgreen;\n    line-height: 0.1em;\n    margin: 10px 0 20px;\n    font-weight: bold;\n}\n.horizontal-word > span[data-v-08dedaed] {\n    background: #fff;\n    padding: 0 10px;\n    color: darkgreen;\n}\n.box[data-v-08dedaed]{\n    border-top: 3px solid green;\n}\n.instruction[data-v-08dedaed]{\n    margin-top: 30px;\n}\n.instruction > ul > li[data-v-08dedaed]{\n    font-style: italic;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45107,6 +45115,29 @@ var render = function() {
                               _vm._v("20 per page")
                             ])
                           ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-select",
+                          {
+                            on: { input: _vm.loadAsyncData },
+                            model: {
+                              value: _vm.sortOrder,
+                              callback: function($$v) {
+                                _vm.sortOrder = $$v
+                              },
+                              expression: "sortOrder"
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "asc" } }, [
+                              _vm._v("ASC")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "desc" } }, [
+                              _vm._v("DESC")
+                            ])
+                          ]
                         )
                       ],
                       1
@@ -49792,23 +49823,7 @@ var render = function() {
           _c("div", { staticClass: "columns" }, [
             this.results.is_submitted === 0
               ? _c("div", { staticClass: "column is-6 is-offset-3" }, [
-                  _c("div", { staticClass: "panel is-primary" }, [
-                    _c("div", { staticClass: "panel-heading" }, [
-                      _vm._v(
-                        "\n                                TEST RESULT\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "panel-body" }, [
-                      _c("p", { staticClass: "title" }, [
-                        _vm._v("TOTAL SCORE")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "score" }, [
-                        _vm._v(_vm._s(this.results.score))
-                      ])
-                    ])
-                  ])
+                  _vm._m(0)
                 ])
               : _vm._e(),
             _vm._v(" "),
@@ -49848,7 +49863,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", [
                           _vm._v(
-                            "\n                                Thank you for your active participation in the GADTC Admission 2022-2023. \n                                We would like to inform you that after carefully examining your scores, \n                                your application has complied all necessary requirements of your chosen program.\n                            "
+                            "\n                                Thank you for your active participation in the GADTC Admission 2023-2024. \n                                We would like to inform you that after carefully examining your scores, \n                                your application has complied all necessary requirements of your chosen program.\n                            "
                           )
                         ]),
                         _vm._v(" "),
@@ -49879,17 +49894,17 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", [
                           _vm._v(
-                            "\n                                To be part of the dynamic community of GADTC,  enroll via our student portal and use the admission code \n                                "
+                            "\n                                To be part of the dynamic community of GADTC,  enroll via our student portal and use the admission code as your temporary password\n                                "
                           ),
                           _c("strong", [
                             _vm._v(_vm._s(this.results.admission_code))
                           ]),
                           _vm._v(
-                            " starting August 1, 2022 until August 5, 2022. \n                                Please click the BUTTON below to accept this offer.\n                            "
+                            " starting August 1, 2023 until August 5, 2023. \n                                Please click the BUTTON below to accept this offer.\n                            "
                           )
                         ]),
                         _vm._v(" "),
-                        _vm._m(0),
+                        _vm._m(1),
                         _vm._v(" "),
                         _c("br"),
                         _vm._v(" "),
@@ -49898,14 +49913,14 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", [
                           _vm._v(
-                            "Enrollment period for Freshmen is on August 1 - 5, 2022 only. \n                                Failure to reply within those dates will mean forfeiture of your slot.\n                            "
+                            "Enrollment period for Freshmen is on August 1 - 5, 2023 only. \n                                Failure to reply within those dates will mean forfeiture of your slot.\n                            "
                           )
                         ]),
                         _c("br"),
                         _vm._v(" "),
                         _c("p", [
                           _vm._v(
-                            "\n                                Starting A.Y. 2022 - 2023. Governor Alfonso D. Tan College will adopt the Flexible Learning (FL) \n                                 for incoming freshmen.\n                            "
+                            "\n                                Starting A.Y. 2023 - 2024. Governor Alfonso D. Tan College will adopt the Flexible Learning (FL) \n                                 for incoming freshmen.\n                            "
                           )
                         ]),
                         _c("br"),
@@ -49978,7 +49993,7 @@ var render = function() {
                         _c("br"),
                         _c("br"),
                         _vm._v(" "),
-                        _vm._m(1)
+                        _vm._m(2)
                       ])
                     : _vm._e()
                 ])
@@ -49990,6 +50005,24 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel is-primary" }, [
+      _c("div", { staticClass: "panel-heading" }, [
+        _vm._v(
+          "\n                                TEST RESULT\n                            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-body" }, [
+        _c("p", { staticClass: "title" }, [_vm._v("TOTAL SCORE")]),
+        _vm._v(" "),
+        _c("p", {}, [_vm._v("Result is not available this time.")])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

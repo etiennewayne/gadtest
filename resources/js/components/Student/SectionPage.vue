@@ -19,6 +19,7 @@
                 <!--student_schedule_id -->
                 <input type="hidden" id="schedule_id" name="schedule_id" />
                 <input type="hidden" id="section_id" name="section_id" />
+                
             </form>
         </div>
     </div><!--root div-->

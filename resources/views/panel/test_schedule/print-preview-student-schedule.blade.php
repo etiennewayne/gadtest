@@ -10,7 +10,7 @@
 
     .print-table{
         margin: auto;
-        font-size: .8em;
+        font-size: .6em;
     }
 
     .print-table tr td{
@@ -28,6 +28,23 @@
         font-weight: bold;
     }
 
+    .print-button{
+        width: 13in;
+        /* border: 1px solid red; */
+        margin: auto;
+    }
+
+    @media print {
+        .print-button{
+            display: none;
+        }
+
+        body{
+            margin: 0;
+            padding: 0;
+        }
+    }
+
 
 </style>
 
@@ -37,7 +54,20 @@
 @section('content')
 
 <div class="print-title">STUDENT LIST</div>
-<div class="print-title">Schedule: {{ date('Y-m-d', $schedule->from) }}, {{ date('h:i A', $schedule->from) }}</div>
+<div class="print-title">Schedule: {{ date('Y-m-d', strtotime($schedule->from)) }}, 
+    {{ date('h:i A', strtotime($schedule->from)) }} - 
+    {{ date('h:i A', strtotime($schedule->to)) }}
+
+</div>
+
+<div class="print-button">
+    <div class="buttons is-centered m-2">
+        <b-button 
+            class="is-info is-outlined"
+            onclick="windowPrint()">Print</b-button>
+    </div>
+</div>
+
 
 <table class="print-table">
     <tr>
@@ -60,6 +90,12 @@
     @endforeach
 </table>
 
+
+<script>
+    function windowPrint(){
+        window.print();
+    }
+</script>
 
 
 @endsection

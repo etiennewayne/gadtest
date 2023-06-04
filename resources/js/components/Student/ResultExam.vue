@@ -11,7 +11,9 @@
                                 </div>
                                 <div class="panel-body">
                                     <p class="title">TOTAL SCORE</p>
-                                   <p class="score">{{ this.results.score }}</p>
+                                   <!-- <p class="score">{{ this.results.score }}</p> -->
+                                   <p class="">Result is not available this time.</p>
+
                                 </div>
                             </div>
                         </div><!--col-->
@@ -31,7 +33,7 @@
                                 <h2 style="font-weight: bold;">CONGRATULATIONS</h2>
                                 <br>
                                 <p>
-                                    Thank you for your active participation in the GADTC Admission 2022-2023. 
+                                    Thank you for your active participation in the GADTC Admission 2023-2024. 
                                     We would like to inform you that after carefully examining your scores, 
                                     your application has complied all necessary requirements of your chosen program.
                                 </p>
@@ -42,8 +44,8 @@
                                 </ul>
                                 <br>
                                 <p>
-                                    To be part of the dynamic community of GADTC,  enroll via our student portal and use the admission code 
-                                    <strong>{{this.results.admission_code}}</strong> starting August 1, 2022 until August 5, 2022. 
+                                    To be part of the dynamic community of GADTC,  enroll via our student portal and use the admission code as your temporary password
+                                    <strong>{{this.results.admission_code}}</strong> starting August 1, 2023 until August 5, 2023. 
                                     Please click the BUTTON below to accept this offer.
                                 </p>
                                 <div class="buttons is-centered" style="margin: 15px 0;">
@@ -51,11 +53,11 @@
                                 </div>
                                 <br>
                                 <p>Please Note:</p><br>
-                                <p>Enrollment period for Freshmen is on August 1 - 5, 2022 only. 
+                                <p>Enrollment period for Freshmen is on August 1 - 5, 2023 only. 
                                     Failure to reply within those dates will mean forfeiture of your slot.
                                 </p><br>
                                 <p>
-                                    Starting A.Y. 2022 - 2023. Governor Alfonso D. Tan College will adopt the Flexible Learning (FL) 
+                                    Starting A.Y. 2023 - 2024. Governor Alfonso D. Tan College will adopt the Flexible Learning (FL) 
                                      for incoming freshmen.
                                 </p><br>
                                 <p>

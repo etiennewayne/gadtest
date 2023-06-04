@@ -99,14 +99,11 @@ class TestScheduleController extends Controller
 
 
 
-
-
-
-
     public function printPreviewTestSchedule($id){
         $schedule = TestSchedule::with('students')
             ->where('test_schedule_id', $id)
             ->first();
+        //return date('Y-m-d', strtotime($schedule->from));
 
         return view('panel.test_schedule.print-preview-student-schedule')
             ->with('schedule', $schedule);

@@ -14,8 +14,13 @@
                                         <option value="15">15 per page</option>
                                         <option value="20">20 per page</option>
                                     </b-select>
+                                    <b-select v-model="sortOrder" @input="loadAsyncData">
+                                        <option value="asc">ASC</option>
+                                        <option value="desc">DESC</option>
+                                    </b-select>
                                 </b-field>
                             </div>
+                            
                         </div>
 
                         <div class="level-right">

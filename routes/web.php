@@ -61,7 +61,7 @@ Route::resource('/section-question', App\Http\Controllers\Student\SectionQuestio
 
 Route::post('/taking-exam', [App\Http\Controllers\Student\TakingExamController::class, 'index']);
 
-Route::get('/taking-exam-question/{sectionid}', [App\Http\Controllers\Student\TakingExamController::class, 'examineeQuestion']);
+Route::get('/get-taking-exam-question/{sectionid}', [App\Http\Controllers\Student\TakingExamController::class, 'examineeQuestion']);
 Route::get('/result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'index']);
 Route::get('/fetch-result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'resultExam']);
 

@@ -212,6 +212,7 @@ export default {
             try {
                 //non iOS
                 let d = new Date(from);
+
                 //console.log(this.from);
                 let hours = d.getHours();
                 hours = hours % 12;
@@ -226,9 +227,6 @@ export default {
             catch(err) {
                 return from;
             }
-
-
-
         },
 
         getSchedule: function(){
@@ -249,7 +247,6 @@ export default {
                 alert('Please acquire schedule first. Rest assured you have enough internet connectivity in your area and ' +
                     'kindly reload the page. If still the problem exist, please contact CISO Personnel for this matter.');
             }
-
         }
     },
 

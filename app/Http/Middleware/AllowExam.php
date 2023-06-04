@@ -44,6 +44,10 @@ class AllowExam
                 ->where('student_schedule_id', $request->schedule_id)
                 ->exists();
 
+            // if(env('IS_ONLINE') < 1){
+            //     return redirect('/home')
+            //         ->with('error', 'not_allowed');
+            // }
 
             if(!$is_allow){
                 return redirect('/home')

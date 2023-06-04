@@ -109,7 +109,7 @@ export default {
 
             this.student_schedule_id = this.studentschedId;
 
-            await axios.get('/taking-exam-question/'+this.sectionId).then(res=>{
+            await axios.get('/get-taking-exam-question/'+this.sectionId).then(res=>{
                 //5pxconsole.log(res.data);
                 this.questions = res.data;
             });
