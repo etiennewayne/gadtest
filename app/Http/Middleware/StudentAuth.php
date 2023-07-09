@@ -18,8 +18,9 @@ class StudentAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        $role = Auth::user()->role;
-        if(strtolower($role) === 'student'){
+        $user = Auth::user();
+        if(strtolower($user->role) === 'student'){
+
             return $next($request);
         }else{
             abort(403);
