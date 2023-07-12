@@ -34,7 +34,7 @@ class ResultExamController extends Controller
             ->join('answer_sheets as c', 'a.answer_sheet_id', 'c.answer_sheet_id')
             ->join('questions as d', 'b.question_id', 'd.question_id')
             ->join('users as e', 'c.user_id', 'e.user_id')
-            ->select('c.user_id', 'e.lname', 'e.fname', 'e.mname', 'e.is_submitted', 
+            ->select('c.user_id', 'e.lname', 'e.fname', 'e.mname', 'e.is_submitted', 'e.email', 
                 'admission_code',
                 'e.remark', 'accepted_program', DB::raw('sum(b.is_answer) as score'))
             ->where('c.user_id', $userid)

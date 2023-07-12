@@ -10445,13 +10445,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -50658,35 +50651,29 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", [
                           _vm._v(
-                            "\n                                To be part of the dynamic community of GADTC,  enroll via our student portal and use the admission code as your temporary password\n                                "
+                            "\n                                To be part of the dynamic community of GADTC,  enroll via our student portal on July 17, 2023 and use "
                           ),
-                          _c("strong", [
+                          _c("b", [_vm._v(_vm._s(this.results.email))]),
+                          _vm._v(
+                            " as \n                                your username and "
+                          ),
+                          _c("b", [
                             _vm._v(_vm._s(this.results.admission_code))
                           ]),
                           _vm._v(
-                            " starting August 1, 2023 until August 5, 2023. \n                                Please click the BUTTON below to accept this offer.\n                            "
+                            " (admission code) as your temporary password. \n                                \n                            "
+                          )
+                        ]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Please click the BUTTON below to accept this offer."
                           )
                         ]),
                         _vm._v(" "),
                         _vm._m(1),
                         _vm._v(" "),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Please Note:")]),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("p", [
-                          _vm._v(
-                            "Enrollment period for Freshmen is on August 1 - 5, 2023 only. \n                                Failure to reply within those dates will mean forfeiture of your slot.\n                            "
-                          )
-                        ]),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("p", [
-                          _vm._v(
-                            "\n                                Starting A.Y. 2023 - 2024. Governor Alfonso D. Tan College will adopt the Flexible Learning (FL) \n                                 for incoming freshmen.\n                            "
-                          )
-                        ]),
                         _c("br"),
                         _vm._v(" "),
                         _c("p", [

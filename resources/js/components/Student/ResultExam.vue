@@ -44,22 +44,15 @@
                                 </ul>
                                 <br>
                                 <p>
-                                    To be part of the dynamic community of GADTC,  enroll via our student portal and use the admission code as your temporary password
-                                    <strong>{{this.results.admission_code}}</strong> starting August 1, 2023 until August 5, 2023. 
-                                    Please click the BUTTON below to accept this offer.
-                                </p>
+                                    To be part of the dynamic community of GADTC,  enroll via our student portal on July 17, 2023 and use <b>{{ this.results.email }}</b> as 
+                                    your username and <b>{{this.results.admission_code}}</b> (admission code) as your temporary password. 
+                                    
+                                </p><br>
+                                <p>Please click the BUTTON below to accept this offer.</p>
                                 <div class="buttons is-centered" style="margin: 15px 0;">
                                     <a class="button is-link" href="http://admission.gadtc.edu.ph/login">CLICK HERE TO APPLY</a>
                                 </div>
                                 <br>
-                                <p>Please Note:</p><br>
-                                <p>Enrollment period for Freshmen is on August 1 - 5, 2023 only. 
-                                    Failure to reply within those dates will mean forfeiture of your slot.
-                                </p><br>
-                                <p>
-                                    Starting A.Y. 2023 - 2024. Governor Alfonso D. Tan College will adopt the Flexible Learning (FL) 
-                                     for incoming freshmen.
-                                </p><br>
                                 <p>
                                     We look forward to welcoming you to GADTC this coming school year.
                                 </p><br><br><br>
