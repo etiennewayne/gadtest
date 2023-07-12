@@ -44,6 +44,9 @@
                     backend-pagination
                     :total="total"
                     narrowed
+                    hoverable
+                    checkable
+                    :checked-rows.sync="checkedRows"
                     :per-page="perPage"
                     @page-change="onPageChange"
                     detail-transition = ""
@@ -64,10 +67,6 @@
                     <b-table-column field="fullname" label="Fullname" v-slot="props">
                         {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
                     </b-table-column>
-
-                    <!-- <b-table-column field="fromTo" label="Schedule" v-slot="props">
-                        {{ props.row.from }} / {{ props.row.to }}
-                    </b-table-column> -->
 
                     <b-table-column field="contact_no" label="Contact" centered v-slot="props">
                         {{ props.row.contact_no }}
@@ -90,7 +89,6 @@
                     </b-table-column>
 
                     <b-table-column field="abstraction" label="ABSTRACTION" centered numeric v-slot="props">
-
                         <div v-if="props.row.abstraction < 1">
                             <span style="color:red; font-weight: bold;">{{ props.row.abstraction }}</span>
                         </div>
@@ -107,7 +105,6 @@
                         <div v-else style="color: green; font-weight: bold;">
                             {{ props.row.logical}}
                         </div>
-
                     </b-table-column>
 
                     <b-table-column field="english" label="ENGLISH" centered numeric v-slot="props">
@@ -160,7 +157,7 @@
 
                     </b-table-column>
 
-                    <b-table-column field="" label="Action" v-slot="props">
+                    <!-- <b-table-column field="" label="Action" v-slot="props">
                         <div class="buttons">
                             <b-button v-if="props.row.is_submitted == 1" outlined class="button is-small is-link mr-1" 
                                 icon-pack="fa" 
@@ -180,22 +177,42 @@
 
 
                         </div>
+                    </b-table-column> -->
+                    <b-table-column field="numerical" label="Remarks" centered v-slot="props">
+                        <span style="color:red; font-weight: bold; font-size: 12px;" v-if="props.row.remark === 'REJECT'">REJECTED</span>
+                        <span v-if="props.row.remark === 'ACCEPT'" style="color:green; font-weight: bold; font-size: 12px;">ACCEPTED</span>
                     </b-table-column>
+                            
                 </b-table>
             </div> <!--table container-->
 
-            <div class="buttons">
-                <downloadexcel
-                    :fetch="loadDataForReport"
-                    :fields="json_fields"
-                    worksheet="REPORT"
-                    :class="btnClass"
-                    :before-generate="startDownload"
-                    :before-finish="finishDownload"
-                    name="student_result.xls">
-                    Export to Excel
-                </downloadexcel>
-            </div>
+            <div class="columns">
+                <div class="column">
+                    <div class="buttons is-left">
+                        <downloadexcel
+                            :fetch="loadDataForReport"
+                            :fields="json_fields"
+                            worksheet="REPORT"
+                            :class="btnClass"
+                            :before-generate="startDownload"
+                            :before-finish="finishDownload"
+                            name="student_result.xls">
+                            Export to Excel
+                        </downloadexcel>
+                    </div>
+                    <b-field grouped position="is-left">
+                        
+                    </b-field>
+                </div>
+                <div class="columns">
+                    <div class="buttons is-right">
+                        <b-button :disabled="disabledButtons" @click="submiResult('accept')" type="is-success is-right" label="Accept"></b-button>
+                        <b-button :disabled="disabledButtons" @click="submiResult('reject')" type="is-danger" label="Reject"></b-button>
+                        <b-button :disabled="disabledButtons" @click="submiResult('nothing')" type="is-info" label="Set Nothing"></b-button>
+                    </div>
+                    
+                </div>
+            </div><!--cols-->
 
         </div><!--section-->
 
@@ -213,8 +230,8 @@
 
                 <section class="modal-card-body">
                     <div>
-                        <b-field label="Add program">
-                            <b-taginput
+                        <b-field label="Select program">
+                            <!-- <b-taginput
                                 v-model="programTags"
                                 :data="filteredPrograms"
                                 autocomplete
@@ -229,7 +246,14 @@
                                 <template #empty>
                                     There are no items
                                 </template>
-                            </b-taginput>
+                            </b-taginput> -->
+
+                            <b-select v-model="enrolProgram" placeholder="Select Program">
+                                <option v-for="(item, index) in this.programs" 
+                                    :key="index" 
+                                    :value="item.CCode">{{ item.CCode }}</option>
+                            </b-select>
+
                         </b-field>
 
                         <b-field label="Accept/Reject">
@@ -323,7 +347,7 @@ export default {
             report_data: [],
 
             btnClass: {
-                'is-success': true,
+                'is-info': true,
                 'button': true,
                 'is-loading':false,
             },
@@ -335,6 +359,10 @@ export default {
             },
 
             programs: [],
+
+            enrolProgram: '',
+            checkedRows: [],
+          
 
             filteredPrograms: {},
             isSelectOnly: false,
@@ -421,9 +449,10 @@ export default {
             this.errors = {};
             this.isModalActive = true;
             this.selectedData = dataRow;
-            this.programTags.push({
-                CCode: dataRow.first_program_choice,
-            });
+            this.enrolProgram = dataRow.first_program_choice;
+            // this.programTags.push({
+            //     CCode: dataRow.first_program_choice,
+            // });
 
             //if 1st program is same with 2nd program, then ignore the 2nd program
             // if(dataRow.first_program_choice !== dataRow.second_program_choice){
@@ -446,7 +475,7 @@ export default {
         },
 
         sendEmail: function(){
-            if(this.programTags.length < 1){
+            if(this.enrolProgram === null || this.enrolProgram === ''){
                 //this.errors.programTag = 'No program selected. Please select atleast 1 program.';
                 alert('No program selected. Please select atleast 1 program.');
                 return;
@@ -459,7 +488,7 @@ export default {
                 //ACCEPT EMAIL
                 axios.post('/send-accept-email', {
                     fields: this.selectedData,
-                    programs: this.programTags
+                    programs: this.enrolProgram
                 }).then(res=>{
                  
                     this.isModalActive = false;
@@ -494,7 +523,7 @@ export default {
             if(this.emailOption === 'REJECT'){
                 axios.post('/send-reject-email', {
                     fields: this.selectedData,
-                    programs: this.programTags
+                    programs: this.enrolProgram
                 }).then(res=>{
                     //console.log(res.data);
                     
@@ -517,9 +546,82 @@ export default {
         //initialize data
         initData: function(){
             this.programs = JSON.parse(this.propPrograms);
-            this.filteredPrograms = this.programs;
+            //this.filteredPrograms = this.programs;
 
             this.loadAsyncData();
+        },
+
+
+
+        //new module updated july 07, 2023 for faster accept/reject
+        submiResult(remarks){
+            this.isLoading = true;
+            
+            axios.post('/submit-result/' + remarks, {
+                fields: this.checkedRows,
+                programs: this.enrolProgram
+            }).then(res=>{
+                this.isLoading = false;
+                if(res.data.status === 'saved'){
+                    this.$buefy.dialog.alert({
+                        title: 'Saved.',
+                        message: 'Student succesfully saved.',
+                        type: 'is-success',
+                        onConfirm: ()=> {
+                            this.loadAsyncData();
+                            this.checkedRows = []
+                        }
+                    })
+                }
+
+                if(res.data.status === 'success_reject'){
+                    this.$buefy.dialog.alert({
+                        title: 'Saved.',
+                        message: 'Student remarks as reject.',
+                        type: 'is-success',
+                        onConfirm: ()=> this.loadAsyncData()
+                    })
+                }
+
+                if(res.data.status === 'success_nothing'){
+                    this.$buefy.dialog.alert({
+                        title: 'Saved.',
+                        message: 'Student remarks reset.',
+                        type: 'is-success',
+                        onConfirm: ()=> this.loadAsyncData()
+                    })
+                }
+            }).catch(err=>{
+                
+                this.isLoading = false;
+
+                if(err.response.status === 422){
+                    
+                    if(err.response.data.remark === 'duplicate'){
+                        this.$buefy.dialog.alert({
+                            title: 'DUPLICATE.',
+                            message: 'Another with same student name already admitted to the admission.',
+                            type: 'is-danger',
+                        })
+                    }
+                }
+
+                if(err.response.status === 500){
+                    if(err.response.data.errors === 'unknown'){
+                        this.$buefy.dialog.alert({
+                            title: 'Error!',
+                            message: err.response.data.errors.message + '. ' + err.response.data.errors.unknwon[0],
+                            type: 'is-danger',
+                        })
+                    }
+                }
+            })
+        },
+        reject(){
+
+        },
+        setNothing(){
+
         }
     },
 
@@ -537,6 +639,11 @@ export default {
                 return true;
                 //return true to disable button
             }
+        },
+
+        //if no data selected on rows, accept/reject buttons is disabled
+        disabledButtons(){
+            return this.checkedRows.length > 0 ? false : true;
         }
     }
 

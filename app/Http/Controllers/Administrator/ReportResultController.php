@@ -126,10 +126,12 @@ class ReportResultController extends Controller
             ->where('a.first_program_choice', 'like', $req->first_program . '%')
             ->get();
         return $data;
+
     }
 
 
     public function sendAcceptEmail(Request $req){
+
         $isAccept = $req->is_accept; //if reject email or not
         $n = time() . $req->user_id;
         $studentCode = substr(md5($n), -6);
@@ -240,8 +242,117 @@ class ReportResultController extends Controller
                 'remark' => 'error'
             ], 500);
         }
+
     }
 
+
+    /*set to accept, new module july 07, 2023
+    FOR FASTER REJECT/ACCEPT MODULE
+    ************************************************/
+
+    public function submitResult (Request $req, $remarks){
+
+        try {
+
+            if($remarks == 'accept'){
+                //update if email exist.. if not create new record
+                $ay = AcadYear::where('active', 1)->first();
+
+                //loop checkedRows
+                foreach($req->fields as $checkRow){
+                    //$count += 1;
+
+                    $n = time() . $checkRow['user_id'];
+                    $studentCode = substr(md5($n), -6);
+
+                    $programs = substr_replace($checkRow['first_program_choice'], '', -1);
+                    $status = strtoupper($checkRow['status']);
+
+                    Gadtest::updateOrCreate(
+                        [
+                            'email' => $checkRow['email'],
+                            'gadtest_user_id' => $checkRow['user_id']
+                        ],
+                        [
+                            'StudLName' => strtoupper($checkRow['lname']),
+                            'StudFName' => strtoupper($checkRow['fname']),
+                            'StudMName' => strtoupper($checkRow['mname']),
+                            'StudSex' => strtoupper($checkRow['sex']),
+                            'StudClass' => $status,
+                            'StudBDate' => $checkRow['bdate'],
+                            'StudCNum' => $checkRow['contact_no'],
+                            'StudCourse' => strtoupper($programs),
+                            'StudYear' => $status == 'NEW' ? '1' : '0',
+                            'StudYear' => '1',
+                            'email' => $checkRow['email'],
+                            'term' => $ay->code,
+                            'StudLSBrgyCode' => $checkRow['barangay_id'],
+                            'StudPStr' => $checkRow['street'],
+                            'password' => Hash::make($studentCode),
+                            'rating' => $checkRow['total'],
+                            'learning_mode' => $checkRow['learning_mode'],
+                            'gadtest_user_id' => $checkRow['user_id'],
+                            'test_code' => $studentCode
+                        ],
+                    );
+        
+                    User::where('user_id', $checkRow['user_id'])
+                        ->update(['is_submitted' => 1, 
+                            'remark' => 'ACCEPT',
+                            'admission_code' => $studentCode,
+                            'accepted_program' => $programs
+                        ]);
+                }//loop through checkRows
+                return response()->json([
+                    'status' => 'saved'
+                ], 200);
+            }
+            /*      if accept
+            //****************************** */
+            
+           
+
+            if($remarks == 'reject'){
+
+                foreach($req->fields as $checkRow){
+                    User::where('user_id', $checkRow['user_id'])
+                    ->update(['is_submitted' => 1, 
+                                'remark' => 'REJECT',
+                                'admission_code' => null,
+                                'accepted_program' => null
+                            ]);
+                }
+                
+                return response()->json([
+                    'status' => 'success_reject'
+                ], 200);
+            }
+
+            if($remarks == 'nothing'){
+                foreach($req->fields as $checkRow){
+                    User::where('user_id', $checkRow['user_id'])
+                    ->update(['is_submitted' => 0, 
+                                'remark' => null,
+                                'admission_code' => null,
+                                'accepted_program' => null
+                            ]);
+                }
+                
+                return response()->json([
+                    'status' => 'success_reject'
+                ], 200);
+            }
+
+        } catch (Exception $e) {
+            return response()->json([
+
+                'errors' => [
+                    'unkown' => ['Error occured during saving the data. Please contact system administrator.']
+                ],
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
 
 
 }

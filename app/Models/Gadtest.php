@@ -19,7 +19,7 @@ class Gadtest extends Model
         'StudLName', 'StudFName', 'StudMName', 'StudSex',
         'StudBType', 'StudClass', 'StudBDate', 'StudCNum',
         'StudCourse', 'StudYear', 'email', 'term', 'StudLSBrgyCode',
-        'StudPStr', 'password', 'rating', 'learning_mode'
+        'StudPStr', 'password', 'rating', 'learning_mode', 'gadtest_user_id', 'test_code'
     ];
 
     //StudLSBrgy -> address. ID

@@ -167,6 +167,9 @@ Route::get('/dashboard-report', [App\Http\Controllers\Administrator\DashboardRes
 Route::post('/send-accept-email', [App\Http\Controllers\Administrator\ReportResultController::class, 'sendAcceptEmail']);
 Route::post('/send-reject-email', [App\Http\Controllers\Administrator\ReportResultController::class, 'sendRejectEmail']);
 
+//new module july 07, 2023 for accept/reject module
+Route::post('/submit-result/{status}', [App\Http\Controllers\Administrator\ReportResultController::class, 'submitResult']);
+
 
 Route::get('/session-test', function(Request $req){
     return session()->all();

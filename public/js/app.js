@@ -2548,6 +2548,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -2597,7 +2621,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       report_data: [],
       btnClass: {
-        'is-success': true,
+        'is-info': true,
         'button': true,
         'is-loading': false
       },
@@ -2607,6 +2631,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         first_program: ''
       },
       programs: [],
+      enrolProgram: '',
+      checkedRows: [],
       filteredPrograms: {},
       isSelectOnly: false,
       programTags: [],
@@ -2699,9 +2725,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.errors = {};
       this.isModalActive = true;
       this.selectedData = dataRow;
-      this.programTags.push({
-        CCode: dataRow.first_program_choice
-      }); //if 1st program is same with 2nd program, then ignore the 2nd program
+      this.enrolProgram = dataRow.first_program_choice; // this.programTags.push({
+      //     CCode: dataRow.first_program_choice,
+      // });
+      //if 1st program is same with 2nd program, then ignore the 2nd program
       // if(dataRow.first_program_choice !== dataRow.second_program_choice){
       //     this.programTags.push({
       //         CCode: dataRow.first_program_choice,
@@ -2721,7 +2748,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     sendEmail: function sendEmail() {
       var _this2 = this;
 
-      if (this.programTags.length < 1) {
+      if (this.enrolProgram === null || this.enrolProgram === '') {
         //this.errors.programTag = 'No program selected. Please select atleast 1 program.';
         alert('No program selected. Please select atleast 1 program.');
         return;
@@ -2734,7 +2761,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         //ACCEPT EMAIL
         axios.post('/send-accept-email', {
           fields: this.selectedData,
-          programs: this.programTags
+          programs: this.enrolProgram
         }).then(function (res) {
           _this2.isModalActive = false;
           _this2.isLoading = false;
@@ -2769,7 +2796,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.emailOption === 'REJECT') {
         axios.post('/send-reject-email', {
           fields: this.selectedData,
-          programs: this.programTags
+          programs: this.enrolProgram
         }).then(function (res) {
           //console.log(res.data);
           _this2.isModalActive = false;
@@ -2791,10 +2818,81 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     //initialize data
     initData: function initData() {
-      this.programs = JSON.parse(this.propPrograms);
-      this.filteredPrograms = this.programs;
+      this.programs = JSON.parse(this.propPrograms); //this.filteredPrograms = this.programs;
+
       this.loadAsyncData();
-    }
+    },
+    //new module updated july 07, 2023 for faster accept/reject
+    submiResult: function submiResult(remarks) {
+      var _this3 = this;
+
+      this.isLoading = true;
+      axios.post('/submit-result/' + remarks, {
+        fields: this.checkedRows,
+        programs: this.enrolProgram
+      }).then(function (res) {
+        _this3.isLoading = false;
+
+        if (res.data.status === 'saved') {
+          _this3.$buefy.dialog.alert({
+            title: 'Saved.',
+            message: 'Student succesfully saved.',
+            type: 'is-success',
+            onConfirm: function onConfirm() {
+              _this3.loadAsyncData();
+
+              _this3.checkedRows = [];
+            }
+          });
+        }
+
+        if (res.data.status === 'success_reject') {
+          _this3.$buefy.dialog.alert({
+            title: 'Saved.',
+            message: 'Student remarks as reject.',
+            type: 'is-success',
+            onConfirm: function onConfirm() {
+              return _this3.loadAsyncData();
+            }
+          });
+        }
+
+        if (res.data.status === 'success_nothing') {
+          _this3.$buefy.dialog.alert({
+            title: 'Saved.',
+            message: 'Student remarks reset.',
+            type: 'is-success',
+            onConfirm: function onConfirm() {
+              return _this3.loadAsyncData();
+            }
+          });
+        }
+      })["catch"](function (err) {
+        _this3.isLoading = false;
+
+        if (err.response.status === 422) {
+          if (err.response.data.remark === 'duplicate') {
+            _this3.$buefy.dialog.alert({
+              title: 'DUPLICATE.',
+              message: 'Another with same student name already admitted to the admission.',
+              type: 'is-danger'
+            });
+          }
+        }
+
+        if (err.response.status === 500) {
+          if (err.response.data.errors === 'unknown') {
+            _this3.$buefy.dialog.alert({
+              title: 'Error!',
+              message: err.response.data.errors.message + '. ' + err.response.data.errors.unknwon[0],
+              type: 'is-danger'
+            });
+          }
+        }
+      });
+    },
+    reject: function reject() {},
+    setNothing: function setNothing() {}
   },
   mounted: function mounted() {
     this.initData();
@@ -2806,6 +2904,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         return true; //return true to disable button
       }
+    },
+    //if no data selected on rows, accept/reject buttons is disabled
+    disabledButtons: function disabledButtons() {
+      return this.checkedRows.length > 0 ? false : true;
     }
   }
 });
@@ -36261,6 +36363,9 @@ var render = function() {
                   "backend-pagination": "",
                   total: _vm.total,
                   narrowed: "",
+                  hoverable: "",
+                  checkable: "",
+                  "checked-rows": _vm.checkedRows,
                   "per-page": _vm.perPage,
                   "detail-transition": "",
                   "aria-next-label": "Next page",
@@ -36271,7 +36376,16 @@ var render = function() {
                   "backend-sorting": "",
                   "default-sort-direction": _vm.defaultSortDirection
                 },
-                on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
+                on: {
+                  "update:checkedRows": function($event) {
+                    _vm.checkedRows = $event
+                  },
+                  "update:checked-rows": function($event) {
+                    _vm.checkedRows = $event
+                  },
+                  "page-change": _vm.onPageChange,
+                  sort: _vm.onSort
+                }
               },
               [
                 _c("b-table-column", {
@@ -36716,76 +36830,39 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("b-table-column", {
-                  attrs: { field: "", label: "Action" },
+                  attrs: { field: "numerical", label: "Remarks", centered: "" },
                   scopedSlots: _vm._u([
                     {
                       key: "default",
                       fn: function(props) {
                         return [
-                          _c(
-                            "div",
-                            { staticClass: "buttons" },
-                            [
-                              props.row.is_submitted == 1
-                                ? _c(
-                                    "b-button",
-                                    {
-                                      staticClass:
-                                        "button is-small is-link mr-1",
-                                      attrs: {
-                                        outlined: "",
-                                        "icon-pack": "fa",
-                                        "icon-right": "arrow-circle-right"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.openModal(props.row)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      props.row.remark === "REJECT"
-                                        ? _c(
-                                            "span",
-                                            { staticStyle: { color: "red" } },
-                                            [_vm._v("REJECTED")]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      props.row.remark === "ACCEPT"
-                                        ? _c("span", [_vm._v("ACCEPTED")])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      props.row.remark === ""
-                                        ? _c("span", [_vm._v("SEND")])
-                                        : _vm._e()
-                                    ]
-                                  )
-                                : _c(
-                                    "b-button",
-                                    {
-                                      staticClass:
-                                        "button is-small is-success mr-1",
-                                      attrs: {
-                                        outlined: "",
-                                        "icon-pack": "fa",
-                                        "icon-right": "arrow-circle-right"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.openModal(props.row)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                SEND\n                        "
-                                      )
-                                    ]
-                                  )
-                            ],
-                            1
-                          )
+                          props.row.remark === "REJECT"
+                            ? _c(
+                                "span",
+                                {
+                                  staticStyle: {
+                                    color: "red",
+                                    "font-weight": "bold",
+                                    "font-size": "12px"
+                                  }
+                                },
+                                [_vm._v("REJECTED")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          props.row.remark === "ACCEPT"
+                            ? _c(
+                                "span",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold",
+                                    "font-size": "12px"
+                                  }
+                                },
+                                [_vm._v("ACCEPTED")]
+                              )
+                            : _vm._e()
                         ]
                       }
                     }
@@ -36798,28 +36875,91 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "buttons" },
-          [
+        _c("div", { staticClass: "columns" }, [
+          _c(
+            "div",
+            { staticClass: "column" },
+            [
+              _c(
+                "div",
+                { staticClass: "buttons is-left" },
+                [
+                  _c(
+                    "downloadexcel",
+                    {
+                      class: _vm.btnClass,
+                      attrs: {
+                        fetch: _vm.loadDataForReport,
+                        fields: _vm.json_fields,
+                        worksheet: "REPORT",
+                        "before-generate": _vm.startDownload,
+                        "before-finish": _vm.finishDownload,
+                        name: "student_result.xls"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Export to Excel\n                    "
+                      )
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("b-field", { attrs: { grouped: "", position: "is-left" } })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "columns" }, [
             _c(
-              "downloadexcel",
-              {
-                class: _vm.btnClass,
-                attrs: {
-                  fetch: _vm.loadDataForReport,
-                  fields: _vm.json_fields,
-                  worksheet: "REPORT",
-                  "before-generate": _vm.startDownload,
-                  "before-finish": _vm.finishDownload,
-                  name: "student_result.xls"
-                }
-              },
-              [_vm._v("\n                Export to Excel\n            ")]
+              "div",
+              { staticClass: "buttons is-right" },
+              [
+                _c("b-button", {
+                  attrs: {
+                    disabled: _vm.disabledButtons,
+                    type: "is-success is-right",
+                    label: "Accept"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.submiResult("accept")
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("b-button", {
+                  attrs: {
+                    disabled: _vm.disabledButtons,
+                    type: "is-danger",
+                    label: "Reject"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.submiResult("reject")
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("b-button", {
+                  attrs: {
+                    disabled: _vm.disabledButtons,
+                    type: "is-info",
+                    label: "Set Nothing"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.submiResult("nothing")
+                    }
+                  }
+                })
+              ],
+              1
             )
-          ],
-          1
-        )
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c(
@@ -36866,54 +37006,29 @@ var render = function() {
                   [
                     _c(
                       "b-field",
-                      { attrs: { label: "Add program" } },
+                      { attrs: { label: "Select program" } },
                       [
-                        _c("b-taginput", {
-                          attrs: {
-                            data: _vm.filteredPrograms,
-                            autocomplete: "",
-                            field: "CCode",
-                            icon: "label",
-                            "icon-pack": "fa",
-                            placeholder: "Type a program (eg. BSCS)"
-                          },
-                          on: { typing: _vm.getFilteredTags },
-                          scopedSlots: _vm._u([
-                            {
-                              key: "default",
-                              fn: function(props) {
-                                return [
-                                  _c("strong", [
-                                    _vm._v(_vm._s(props.option.CCode))
-                                  ]),
-                                  _vm._v(
-                                    ": " +
-                                      _vm._s(props.option.CDesc) +
-                                      "\n                            "
-                                  )
-                                ]
-                              }
-                            },
-                            {
-                              key: "empty",
-                              fn: function() {
-                                return [
-                                  _vm._v(
-                                    "\n                                There are no items\n                            "
-                                  )
-                                ]
+                        _c(
+                          "b-select",
+                          {
+                            attrs: { placeholder: "Select Program" },
+                            model: {
+                              value: _vm.enrolProgram,
+                              callback: function($$v) {
+                                _vm.enrolProgram = $$v
                               },
-                              proxy: true
+                              expression: "enrolProgram"
                             }
-                          ]),
-                          model: {
-                            value: _vm.programTags,
-                            callback: function($$v) {
-                              _vm.programTags = $$v
-                            },
-                            expression: "programTags"
-                          }
-                        })
+                          },
+                          _vm._l(this.programs, function(item, index) {
+                            return _c(
+                              "option",
+                              { key: index, domProps: { value: item.CCode } },
+                              [_vm._v(_vm._s(item.CCode))]
+                            )
+                          }),
+                          0
+                        )
                       ],
                       1
                     ),
