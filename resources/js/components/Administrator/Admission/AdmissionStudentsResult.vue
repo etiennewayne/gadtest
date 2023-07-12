@@ -157,13 +157,13 @@
 
                     </b-table-column>
 
-                    <!-- <b-table-column field="" label="Action" v-slot="props">
+                    <b-table-column field="" label="Action" v-slot="props">
                         <div class="buttons">
                             <b-button v-if="props.row.is_submitted == 1" outlined class="button is-small is-link mr-1" 
                                 icon-pack="fa" 
                                 icon-right="arrow-circle-right" 
                                 @click="openModal(props.row)">
-                                    <span style="color:red;" v-if="props.row.remark === 'REJECT'">REJECTED</span>
+                                    <span style="color:red; font-weight: bold;" v-if="props.row.remark === 'REJECT'">REJECTED</span>
                                     <span v-if="props.row.remark === 'ACCEPT'">ACCEPTED</span>
                                     <span v-if="props.row.remark === ''">SEND</span>
                             </b-button>
@@ -174,14 +174,12 @@
                                 @click="openModal(props.row)">
                                     SEND
                             </b-button>
-
-
                         </div>
-                    </b-table-column> -->
-                    <b-table-column field="numerical" label="Remarks" centered v-slot="props">
+                    </b-table-column>
+                    <!-- <b-table-column field="numerical" label="Remarks" centered v-slot="props">
                         <span style="color:red; font-weight: bold; font-size: 12px;" v-if="props.row.remark === 'REJECT'">REJECTED</span>
                         <span v-if="props.row.remark === 'ACCEPT'" style="color:green; font-weight: bold; font-size: 12px;">ACCEPTED</span>
-                    </b-table-column>
+                    </b-table-column> -->
                             
                 </b-table>
             </div> <!--table container-->
@@ -206,9 +204,9 @@
                 </div>
                 <div class="columns">
                     <div class="buttons is-right">
-                        <b-button :disabled="disabledButtons" @click="submiResult('accept')" type="is-success is-right" label="Accept"></b-button>
-                        <b-button :disabled="disabledButtons" @click="submiResult('reject')" type="is-danger" label="Reject"></b-button>
-                        <b-button :disabled="disabledButtons" @click="submiResult('nothing')" type="is-info" label="Set Nothing"></b-button>
+                        <b-button :disabled="disabledButtons" @click="confirmSubmitResult('accept')" type="is-success is-right" label="Accept"></b-button>
+                        <b-button :disabled="disabledButtons" @click="confirmSubmitResult('reject')" type="is-danger" label="Reject"></b-button>
+                        <!-- <b-button :disabled="disabledButtons" @click="submiResult('nothing')" type="is-info" label="Set Nothing"></b-button> -->
                     </div>
                     
                 </div>
@@ -230,7 +228,7 @@
 
                 <section class="modal-card-body">
                     <div>
-                        <b-field label="Select program">
+                        <b-field label="Select Program">
                             <!-- <b-taginput
                                 v-model="programTags"
                                 :data="filteredPrograms"
@@ -257,7 +255,7 @@
                         </b-field>
 
                         <b-field label="Accept/Reject">
-                            <b-select v-model="emailOption" expanded>
+                            <b-select v-model="statusOption" expanded>
                                 <option value="ACCEPT">ACCEPT</option>
                                 <option value="REJECT">REJECT</option>
                             </b-select>
@@ -270,7 +268,7 @@
                         label="Close"
                         @click="isModalActive=false"></b-button>
                     <b-button
-                        label="SEND EMAIL" class="is-success"
+                        label="SEND" class="is-success"
                         icon-pack="fa" icon-right="arrow-circle-right"
                         :disabled="validateAcceptReject"
                         @click="sendEmail"></b-button>
@@ -319,7 +317,7 @@ export default {
 
             errors: {},
 
-            emailOption: null,
+            statusOption: null,
 
             json_fields: {
                 'USER ID' : 'user_id',
@@ -484,7 +482,7 @@ export default {
             this.isModalActive = false;
             this.isLoading = true;
 
-            if(this.emailOption === 'ACCEPT'){
+            if(this.statusOption === 'ACCEPT'){
                 //ACCEPT EMAIL
                 axios.post('/send-accept-email', {
                     fields: this.selectedData,
@@ -493,10 +491,10 @@ export default {
                  
                     this.isModalActive = false;
                     this.isLoading = false;
-                    if(res.data.remark === 'success'){
+                    if(res.data.status === 'success'){
                         this.$buefy.dialog.alert({
-                            title: 'SUCCESSFULLY EMAILED.',
-                            message: 'Student was successfully emailed with their admission code.',
+                            title: 'Saved.',
+                            message: 'Student was successfully set their admission code.',
                             type: 'is-success',
                             onConfirm: ()=> this.loadAsyncData()
                         })
@@ -516,11 +514,11 @@ export default {
                         }
                     }
                 })
-                this.emailOption = '';
+                this.enrolProgram = '';
             }
 
 
-            if(this.emailOption === 'REJECT'){
+            if(this.statusOption === 'REJECT'){
                 axios.post('/send-reject-email', {
                     fields: this.selectedData,
                     programs: this.enrolProgram
@@ -529,16 +527,16 @@ export default {
                     
                     this.isModalActive = false;
                     this.isLoading = false;
-                    if(res.data.status === 'mailed'){
+                    if(res.data.status === 'success'){
                         this.$buefy.dialog.alert({
-                            title: 'SUCCESSFULLY EMAILED.',
-                            message: 'Student was successfully emailed :(',
+                            title: 'Set rejected.',
+                            message: 'Student was successfully set to rejected.',
                             type: 'is-warning',
                             onConfirm: ()=> this.loadAsyncData()
                         })
                     }
                 })
-                this.emailOption = '';
+                this.enrolProgram = '';
             }
 
         },
@@ -552,6 +550,19 @@ export default {
         },
 
 
+        confirmSubmitResult(remarks){
+
+            let msgReject = 'Are you sure you want to <b>reject</b> these/this row(s)? Rejecting will result the deletion of the information from admission application but still exist in the gadtest application.';
+            let msgAccept = 'Are you sure you want to <b>accept</b> these/this row(s)?';
+            this.$buefy.dialog.confirm({
+                title: 'Are you sure?',
+                message: remarks === 'reject' ? msgReject : msgAccept,
+                type: remarks === 'accept' ? 'is-info' : 'is-danger',
+                onConfirm: ()=> {
+                    this.submiResult(remarks);
+                }
+            })
+        },
 
         //new module updated july 07, 2023 for faster accept/reject
         submiResult(remarks){
@@ -577,9 +588,12 @@ export default {
                 if(res.data.status === 'success_reject'){
                     this.$buefy.dialog.alert({
                         title: 'Saved.',
-                        message: 'Student remarks as reject.',
+                        message: 'Student mark as reject.',
                         type: 'is-success',
-                        onConfirm: ()=> this.loadAsyncData()
+                        onConfirm: ()=> {
+                            this.loadAsyncData()
+                            this.checkedRows = []
+                        }
                     })
                 }
 
@@ -617,12 +631,6 @@ export default {
                 }
             })
         },
-        reject(){
-
-        },
-        setNothing(){
-
-        }
     },
 
     mounted(){
@@ -632,7 +640,7 @@ export default {
     computed: {
         
         validateAcceptReject(){
-            if(this.emailOption){
+            if(this.statusOption){
                 return false;
                 //return false to enable button
             }else{

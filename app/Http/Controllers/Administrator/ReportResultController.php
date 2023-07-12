@@ -132,7 +132,10 @@ class ReportResultController extends Controller
 
     public function sendAcceptEmail(Request $req){
 
-        $isAccept = $req->is_accept; //if reject email or not
+        //return $req;
+
+
+        //$isAccept = $req->is_accept; //if reject email or not
         $n = time() . $req->user_id;
         $studentCode = substr(md5($n), -6);
 
@@ -140,12 +143,13 @@ class ReportResultController extends Controller
         //return $req->fields;
 
         //make obj(programs) in one string
-        $programs = '';
-        foreach ($req->programs as $row){
-            $programs = $programs .  $row['CCode'] . ',';
-        }
+        // $programs = '';
+        // foreach ($req->programs as $row){
+        //     $programs = $programs .  $row['CCode'] . ',';
+        // }
 
-        $programs = substr_replace($programs, '', -1);
+        //$programs = substr_replace($programs, '', -1);
+        $program = strtoupper($req->program);
         $status = strtoupper($req->fields['status']);
         //return $req->fields;
 
@@ -179,7 +183,7 @@ class ReportResultController extends Controller
                     'StudClass' => $status,
                     'StudBDate' => $req->fields['bdate'],
                     'StudCNum' => $req->fields['contact_no'],
-                    'StudCourse' => strtoupper($programs),
+                    'StudCourse' => strtoupper($program),
                     'StudYear' => $status == 'NEW' ? '1' : '0',
                     'StudYear' => '1',
                     'email' => $req->fields['email'],
@@ -188,13 +192,14 @@ class ReportResultController extends Controller
                     'StudPStr' => $req->fields['street'],
                     'password' => Hash::make($studentCode),
                     'rating' => $req->fields['total'],
-                    'learning_mode' => $req->fields['learning_mode'
+                    'learning_mode' => $req->fields['learning_mode'],
+                    'gadtest_user_id' => $req->fields['user_id'],
+                    'test_code' => $studentCode
                 ],
-            ]);
+            );
             
 
             //GINOO NLAANG JUD NAKABLO GE UNSA NI NAKO
-
             // $when = now()->addSeconds(10);
             // Mail::to($req->fields['email'])
             //     ->later($when, new AcceptanceEmail($req->fields, $studentCode, $req->programs));
@@ -202,18 +207,18 @@ class ReportResultController extends Controller
 
             User::where('user_id', $req->fields['user_id'])
                 ->update(['is_submitted' => 1, 
-                            'remark' => 'ACCEPT',
-                            'admission_code' => $studentCode,
-                            'accepted_program' => $req->programs
-                        ]);
+                    'remark' => 'ACCEPT',
+                    'admission_code' => $studentCode,
+                    'accepted_program' => $req->programs
+                ]);
 
 
                 return response()->json([
-                    'remark' => 'success'
+                    'status' => 'success'
                 ], 200);
         } catch (Exception $e) {
             return response()->json([
-                'remark' => 'error'
+                'status' => 'error'
             ], 500);
         }
     }
@@ -226,20 +231,24 @@ class ReportResultController extends Controller
             // $when = now()->addSeconds(10);
             // Mail::to($req->fields['email'])
             //     ->later($when, new RejectEmail($req->fields));
+            $userId = $req->fields['user_id'];
 
-            User::where('user_id', $req->fields['user_id'])
+            User::where('user_id', $userId)
                 ->update(['is_submitted' => 1, 
-                            'remark' => 'REJECT',
-                            'admission_code' => null,
-                            'accepted_program' => null
-                        ]);
+                    'remark' => 'REJECT',
+                    'admission_code' => null,
+                    'accepted_program' => null
+                ]);
+
+            Gadtest::where('gadtest_user_id', $userId)
+                ->delete();
 
             return response()->json([
-                'remark' => 'success'
+                'status' => 'success'
             ], 200);
         } catch (Exception $e) {
             return response()->json([
-                'remark' => 'error'
+                'status' => 'error'
             ], 500);
         }
 
@@ -254,6 +263,8 @@ class ReportResultController extends Controller
 
         try {
 
+            /*      if accept
+            //****************************** */
             if($remarks == 'accept'){
                 //update if email exist.. if not create new record
                 $ay = AcadYear::where('active', 1)->first();
@@ -265,7 +276,8 @@ class ReportResultController extends Controller
                     $n = time() . $checkRow['user_id'];
                     $studentCode = substr(md5($n), -6);
 
-                    $programs = substr_replace($checkRow['first_program_choice'], '', -1);
+                    //$programs = substr_replace($checkRow['first_program_choice'], '', -1);
+                    $programs = strtoupper($checkRow['first_program_choice']);
                     $status = strtoupper($checkRow['status']);
 
                     Gadtest::updateOrCreate(
@@ -310,38 +322,29 @@ class ReportResultController extends Controller
             /*      if accept
             //****************************** */
             
-           
-
+           /*      if reject
+            //****************************** */
             if($remarks == 'reject'){
 
                 foreach($req->fields as $checkRow){
-                    User::where('user_id', $checkRow['user_id'])
+                    $userId = $checkRow['user_id'];
+                    User::where('user_id', $userId)
                     ->update(['is_submitted' => 1, 
-                                'remark' => 'REJECT',
-                                'admission_code' => null,
-                                'accepted_program' => null
-                            ]);
-                }
-                
-                return response()->json([
-                    'status' => 'success_reject'
-                ], 200);
-            }
+                        'remark' => 'REJECT',
+                        'admission_code' => null,
+                        'accepted_program' => null
+                    ]);
 
-            if($remarks == 'nothing'){
-                foreach($req->fields as $checkRow){
-                    User::where('user_id', $checkRow['user_id'])
-                    ->update(['is_submitted' => 0, 
-                                'remark' => null,
-                                'admission_code' => null,
-                                'accepted_program' => null
-                            ]);
+                    Gadtest::where('gadtest_user_id', $userId)
+                        ->delete();
                 }
                 
                 return response()->json([
                     'status' => 'success_reject'
                 ], 200);
             }
+            /*      if reject
+            //****************************** */
 
         } catch (Exception $e) {
             return response()->json([
