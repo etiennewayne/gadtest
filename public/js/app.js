@@ -2570,6 +2570,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -37001,7 +37018,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "table-container" },
+          {
+            staticClass: "table-container",
+            staticStyle: { "font-size": "16px" }
+          },
           [
             _c(
               "b-table",
@@ -37022,6 +37042,8 @@ var render = function() {
                   "aria-next-label": "Next page",
                   "aria-previous-label": "Previous page",
                   "aria-page-label": "Page",
+                  "range-before": "2",
+                  "range-after": "4",
                   "show-detail-icon": true,
                   "aria-current-label": "Current page",
                   "backend-sorting": "",
@@ -37080,11 +37102,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("b-table-column", {
-                  attrs: {
-                    field: "contact_no",
-                    label: "Contact",
-                    centered: ""
-                  },
+                  attrs: { field: "contact_no", label: "Contact" },
                   scopedSlots: _vm._u([
                     {
                       key: "default",
@@ -37108,11 +37126,15 @@ var render = function() {
                       key: "default",
                       fn: function(props) {
                         return [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(props.row.sex) +
-                              "\n                "
-                          )
+                          props.row.sex
+                            ? _c("span", [
+                                _vm._v(
+                                  "\n                        " +
+                                    _vm._s(props.row.sex[0]) +
+                                    "\n                    "
+                                )
+                              ])
+                            : _vm._e()
                         ]
                       }
                     }
@@ -37120,7 +37142,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("b-table-column", {
-                  attrs: { field: "city", label: "City", centered: "" },
+                  attrs: { field: "city", label: "City" },
                   scopedSlots: _vm._u([
                     {
                       key: "default",
@@ -37176,7 +37198,7 @@ var render = function() {
                 _c("b-table-column", {
                   attrs: {
                     field: "abstraction",
-                    label: "ABSTRACTION",
+                    label: "ABS",
                     centered: "",
                     numeric: ""
                   },
@@ -37223,7 +37245,7 @@ var render = function() {
                 _c("b-table-column", {
                   attrs: {
                     field: "logical",
-                    label: "LOGICAL",
+                    label: "LOG",
                     centered: "",
                     numeric: ""
                   },
@@ -37270,7 +37292,7 @@ var render = function() {
                 _c("b-table-column", {
                   attrs: {
                     field: "english",
-                    label: "ENGLISH",
+                    label: "ENGL",
                     centered: "",
                     numeric: ""
                   },
@@ -37317,7 +37339,7 @@ var render = function() {
                 _c("b-table-column", {
                   attrs: {
                     field: "numerical",
-                    label: "NUMERICAL",
+                    label: "NUM",
                     centered: "",
                     numeric: ""
                   },
@@ -37364,7 +37386,7 @@ var render = function() {
                 _c("b-table-column", {
                   attrs: {
                     field: "general",
-                    label: "GENERAL",
+                    label: "GEN",
                     centered: "",
                     numeric: ""
                   },
@@ -37471,6 +37493,60 @@ var render = function() {
                                     }
                                   },
                                   [_vm._v(_vm._s(props.row.total))]
+                                )
+                              ])
+                            : _vm._e()
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "code", label: "Code" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          props.row.test_code
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "#727272",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.test_code))]
+                                )
+                              ])
+                            : _vm._e()
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "approved_program", label: "AP" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          props.row.StudCourse
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "#727272",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.StudCourse))]
                                 )
                               ])
                             : _vm._e()

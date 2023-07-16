@@ -70,10 +70,11 @@ class ReportResultController extends Controller
                 join questions as dd on cc.question_id = dd.question_id
                 where aa.user_id = a.user_id and aa.section_id = 5 and cc.is_answer = 1 and aa.code = (select code from acad_years where active = 1)), 0) as general'),
             DB::raw('(select abstraction) + (select logical) + (select english) + (select numerical) + (select general) as total'),
-            'c.from', 'c.to',
+            'c.from', 'c.to', 'd.test_code', 'd.StudCourse'
             )
             ->join('student_schedules as b', 'a.user_id', 'b.user_id')
             ->join('test_schedules as c', 'b.test_schedule_id', 'c.test_schedule_id')
+            ->leftJoin('registrar_gadtc.tblgadtest as d', 'a.user_id', 'd.gadtest_user_id')
             ->where('c.acad_year_id', $acad->acad_year_id)
             ->where('a.lname', 'like', $req->lname . '%')
             ->where('a.fname', 'like', $req->fname . '%')
@@ -134,7 +135,6 @@ class ReportResultController extends Controller
 
         //return $req;
 
-
         //$isAccept = $req->is_accept; //if reject email or not
         $n = time() . $req->user_id;
         $studentCode = substr(md5($n), -6);
@@ -149,7 +149,7 @@ class ReportResultController extends Controller
         // }
 
         //$programs = substr_replace($programs, '', -1);
-        $program = strtoupper($req->program);
+        $program = strtoupper($req->programs);
         $status = strtoupper($req->fields['status']);
         //return $req->fields;
 
@@ -173,7 +173,8 @@ class ReportResultController extends Controller
             //update if email exist.. if not create new record
              Gadtest::updateOrCreate(
                  [
-                     'email' => $req->fields['email']
+                     'email' => $req->fields['email'],
+                     'gadtest_user_id' => $req->fields['user_id']
                  ],
                  [
                     'StudLName' => strtoupper($req->fields['lname']),

@@ -36,7 +36,7 @@
                 <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
             </div>
 
-            <div class="table-container">
+            <div class="table-container" style="font-size: 16px;">
                 <b-table
                     :data="data"
                     :loading="loading"
@@ -53,6 +53,8 @@
                     aria-next-label="Next page"
                     aria-previous-label="Previous page"
                     aria-page-label="Page"
+                    range-before="2"
+                    range-after="4"
                     :show-detail-icon=true
                     aria-current-label="Current page"
                     backend-sorting
@@ -68,15 +70,18 @@
                         {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
                     </b-table-column>
 
-                    <b-table-column field="contact_no" label="Contact" centered v-slot="props">
+                    <b-table-column field="contact_no" label="Contact" v-slot="props">
                         {{ props.row.contact_no }}
                     </b-table-column>
 
                     <b-table-column field="sex" label="Sex" centered v-slot="props">
-                        {{ props.row.sex }}
+                        <span v-if="props.row.sex">
+                            {{ props.row.sex[0] }}
+                        </span>
+                        
                     </b-table-column>
 
-                    <b-table-column field="city" label="City" centered v-slot="props">
+                    <b-table-column field="city" label="City" v-slot="props">
                         {{ props.row.city }}
                     </b-table-column>
 
@@ -88,7 +93,7 @@
                         {{ props.row.second_program_choice }}
                     </b-table-column>
 
-                    <b-table-column field="abstraction" label="ABSTRACTION" centered numeric v-slot="props">
+                    <b-table-column field="abstraction" label="ABS" centered numeric v-slot="props">
                         <div v-if="props.row.abstraction < 1">
                             <span style="color:red; font-weight: bold;">{{ props.row.abstraction }}</span>
                         </div>
@@ -97,7 +102,7 @@
                         </div>
                     </b-table-column>
 
-                    <b-table-column field="logical" label="LOGICAL" centered numeric v-slot="props">
+                    <b-table-column field="logical" label="LOG" centered numeric v-slot="props">
 
                         <div v-if="props.row.logical < 1">
                             <span style="color:red; font-weight: bold;">{{ props.row.logical }}</span>
@@ -107,7 +112,7 @@
                         </div>
                     </b-table-column>
 
-                    <b-table-column field="english" label="ENGLISH" centered numeric v-slot="props">
+                    <b-table-column field="english" label="ENGL" centered numeric v-slot="props">
 
                         <div v-if="props.row.english < 1">
                             <span style="color:red; font-weight: bold;">{{ props.row.english }}</span>
@@ -118,7 +123,7 @@
 
                     </b-table-column>
 
-                    <b-table-column field="numerical" label="NUMERICAL" centered numeric v-slot="props">
+                    <b-table-column field="numerical" label="NUM" centered numeric v-slot="props">
 
                         <div v-if="props.row.numerical < 1">
                             <span style="color:red; font-weight: bold;">{{ props.row.numerical }}</span>
@@ -129,7 +134,7 @@
 
                     </b-table-column>
 
-                    <b-table-column field="general" label="GENERAL" centered numeric v-slot="props">
+                    <b-table-column field="general" label="GEN" centered numeric v-slot="props">
 
                         <div v-if="props.row.general < 1">
                             <span style="color:red; font-weight: bold;">{{ props.row.general }}</span>
@@ -155,6 +160,18 @@
                             <span style="color:white; background-color: green; padding: 3px 10px; border-radius: 5px; font-weight: bold;">{{ props.row.total }}</span>
                         </div>
 
+                    </b-table-column>
+
+                    <b-table-column field="code" label="Code" v-slot="props">
+                        <div v-if="props.row.test_code">
+                            <span style="color:#727272; font-weight: bold;">{{ props.row.test_code }}</span>
+                        </div>
+                    </b-table-column>
+
+                    <b-table-column field="approved_program" label="AP" v-slot="props">
+                        <div v-if="props.row.StudCourse">
+                            <span style="color:#727272; font-weight: bold;">{{ props.row.StudCourse }}</span>
+                        </div>
                     </b-table-column>
 
                     <b-table-column field="" label="Action" v-slot="props">
