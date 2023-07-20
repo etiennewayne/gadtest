@@ -22,7 +22,7 @@ class RegistrationController extends Controller
 
     public function store(Request $req){
 
-        return $req;
+        //return $req;
 
         $validate = $req->validate([
             'username' => ['string', 'max:255', 'required', 'unique:users'],
