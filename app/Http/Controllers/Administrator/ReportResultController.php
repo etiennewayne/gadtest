@@ -150,8 +150,12 @@ class ReportResultController extends Controller
 
         //$programs = substr_replace($programs, '', -1);
         $program = strtoupper($req->programs);
-        $status = strtoupper($req->fields['status']);
-        //return $req->fields;
+        //$status = strtoupper($req->fields['status']);
+        $status = strtoupper($req->studentStatus);
+
+
+
+        //return $studentStatus;
 
         
         try {
@@ -252,7 +256,6 @@ class ReportResultController extends Controller
                 'status' => 'error'
             ], 500);
         }
-
     }
 
 
@@ -279,7 +282,7 @@ class ReportResultController extends Controller
 
                     //$programs = substr_replace($checkRow['first_program_choice'], '', -1);
                     $programs = strtoupper($checkRow['first_program_choice']);
-                    $status = strtoupper($checkRow['status']);
+                    $status = $checkRow['status'] == '' ? 'NEW' : strtoupper($checkRow['status']);
 
                     Gadtest::updateOrCreate(
                         [

@@ -78,7 +78,6 @@
                         <span v-if="props.row.sex">
                             {{ props.row.sex[0] }}
                         </span>
-                        
                     </b-table-column>
 
                     <b-table-column field="city" label="City" v-slot="props">
@@ -197,7 +196,6 @@
                         <span style="color:red; font-weight: bold; font-size: 12px;" v-if="props.row.remark === 'REJECT'">REJECTED</span>
                         <span v-if="props.row.remark === 'ACCEPT'" style="color:green; font-weight: bold; font-size: 12px;">ACCEPTED</span>
                     </b-table-column> -->
-                            
                 </b-table>
             </div> <!--table container-->
 
@@ -233,7 +231,7 @@
 
 
 
-        <b-modal v-model="this.isModalActive" has-modal-card
+        <b-modal v-model="isModalActive" has-modal-card
                  trap-focus aria-role="dialog" aria-modal>
             <div class="modal-card" style="height: 350px;">
                 <header class="modal-card-head">
@@ -245,7 +243,7 @@
 
                 <section class="modal-card-body">
                     <div>
-                        <b-field label="Select Program">
+                        <b-field label="Select Program & Status">
                             <!-- <b-taginput
                                 v-model="programTags"
                                 :data="filteredPrograms"
@@ -267,6 +265,11 @@
                                 <option v-for="(item, index) in this.programs" 
                                     :key="index" 
                                     :value="item.CCode">{{ item.CCode }}</option>
+                            </b-select>
+
+                            <b-select v-model="studentStatus" placeholder="Select Status">
+                                <option value="NEW">NEW</option>
+                                <option value="TRANSFEREE">TRANSFEREE</option>
                             </b-select>
 
                         </b-field>
@@ -335,6 +338,7 @@ export default {
             errors: {},
 
             statusOption: null,
+            studentStatus: '',
 
             json_fields: {
                 'USER ID' : 'user_id',
@@ -465,6 +469,8 @@ export default {
             this.isModalActive = true;
             this.selectedData = dataRow;
             this.enrolProgram = dataRow.first_program_choice;
+            this.studentStatus = dataRow.status;
+
             // this.programTags.push({
             //     CCode: dataRow.first_program_choice,
             // });
@@ -503,7 +509,8 @@ export default {
                 //ACCEPT EMAIL
                 axios.post('/send-accept-email', {
                     fields: this.selectedData,
-                    programs: this.enrolProgram
+                    programs: this.enrolProgram,
+                    studentStatus: this.studentStatus
                 }).then(res=>{
                  
                     this.isModalActive = false;
@@ -516,6 +523,8 @@ export default {
                             onConfirm: ()=> this.loadAsyncData()
                         })
                     }
+                    this.enrolProgram = '';
+                    this.studentStatus = ''
                 }).catch(err=>{
                     this.isModalActive = false;
                     this.isLoading = false;
@@ -530,15 +539,19 @@ export default {
                             })
                         }
                     }
+                    this.enrolProgram = '';
+                    this.studentStatus = ''
                 })
-                this.enrolProgram = '';
+                
+
             }
 
 
             if(this.statusOption === 'REJECT'){
                 axios.post('/send-reject-email', {
                     fields: this.selectedData,
-                    programs: this.enrolProgram
+                    programs: this.enrolProgram,
+                    studentStatus: this.studentStatus
                 }).then(res=>{
                     //console.log(res.data);
                     
