@@ -58,11 +58,10 @@ class AdmitController extends Controller
                     'StudPStr' => $req->fields['street'],
                     'password' => Hash::make($studentCode),
                     'rating' => $req->fields['total'],
-                    'learning_mode' => $req->fields['learning_mode'
-                ],
+                    'learning_mode' => $req->fields['learning_mode'],
             ]);
 
-             Mail::to($req->fields['email'])->send(new AdmitStudent($req->fields, $studentCode, $req->programs));
+            Mail::to($req->fields['email'])->send(new AdmitStudent($req->fields, $studentCode, $req->programs));
 
             User::where('user_id', $req->fields['user_id'])
                 ->update(['is_submitted' => 1]);
