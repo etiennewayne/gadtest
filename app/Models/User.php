@@ -36,7 +36,7 @@ class User extends Authenticatable
         'learning_mode',
         'last_school_attended',
         'province', 'city', 'barangay', 'barangay_id', 'street',
-        'password', 'role'
+        'password', 'role', 'academic_year_code'
     ];
 
     /**

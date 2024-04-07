@@ -7,11 +7,11 @@
                     alt="Gov. Alfonso D. Tan College"
                 >
                 <div>
-                    <div class="brand-title-desktop">GOV. ALFONSO D. TAN COLLEGE</div>
-                    <div class="brand-subtitle-desktop">GADTest</div>
+                    <div class="brand-title-desktop">TANGUB CITY GLOBAL COLLEGE</div>
+                    <div class="brand-subtitle-desktop">TCGCAT</div>
 
                     <div class="brand-title-mobile">GADTC</div>
-                    <div class="brand-subtitle-mobile">GADTest</div>
+                    <div class="brand-subtitle-mobile">TCGCAT</div>
                 </div>
 
             </b-navbar-item>

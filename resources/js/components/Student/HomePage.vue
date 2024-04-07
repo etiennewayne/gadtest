@@ -26,7 +26,7 @@
                                 </div>
                                 <hr>
 
-                                <h1 class="title is-5">GADTEST SCHEDULE</h1>
+                                <h1 class="title is-5">TCGCAT SCHEDULE</h1>
                                 <b-notification v-if="isNotScheduled == 1"
                                     type="is-danger"
                                     aria-close-label="Close notification"
@@ -53,7 +53,7 @@
 
                                 <hr>
                                 <div class="instruction">
-                                    <p class="title is-5">ADMISSION TEST DIRECTIONS</p>
+                                    <p class="title is-5">TCGCAT DIRECTIONS</p>
                                     <ul>
                                         <li>1. You will  take  five (5) sets of  tests; each consists of 18 - item multiple choice test.</li>
                                         <li>2. You will take a total of 90  test items randomly generated from our system.</li>

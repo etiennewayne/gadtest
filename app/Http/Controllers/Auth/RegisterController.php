@@ -13,6 +13,7 @@ use Illuminate\Contracts\Validation\Rule;
 
 use App\Models\Program;
 use App\Models\LearningModality;
+use App\Models\AcadYear;
 
 class RegisterController extends Controller
 {
@@ -106,6 +107,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         //return $data['barangay']['barangay'];
+        $ay = AcadYear::where('active', 1)->first();
 
         $ndate = date("Y-m-d", strtotime($data['bdate'])); //convert to date format UNIX
 
@@ -132,6 +134,7 @@ class RegisterController extends Controller
             'barangay_id' => $data['barangay']['barangay_id'],
             'street' => $data['street'],
             'role' => 'STUDENT',
+            'academic_year_code' => $ay->code
         ]);
 
     }

@@ -2,12 +2,12 @@
     <div>
        <div class="welcome-container mt-6">
             <div class="left-box animate__animated animate__fadeInLeft">
-                <div class="welcome-title">Hello Future Alfonsos!</div> 
+                <div class="welcome-title">Hello <span style="color:orange;">Globalians!</span></div> 
 
                 <div class="w-subtitle">
-                    The GADTC Admission Test for 1st Semester AY 2023-2024 will  
-                    officially start on June 5, 2023. The exam will be administered at the 2nd Floor, GADTC Computer Laboratory. 
-                    You may begin reserving your slots from April 12 - May 31, 2023 by clicking 
+                    The TCGCAT (Tangub City Global College Admission Test) for 1st Semester AY 2024-2025 will  
+                    officially start on June 5, 2024. The exam will be administered at the 2nd Floor, GADTC Computer Laboratory. 
+                    You may begin reserving your slots from April 12 - May 31, 2024 by clicking 
                     <b>PRE-REGISTER</b> button.
                 </div>
 

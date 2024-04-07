@@ -19,11 +19,16 @@ class DashboardResultController extends Controller
     public function dashboardReport(){
         $ay = AcadYear::where('active', 1)->first();
 
-        $countAccepted = User::where('remark', 'ACCEPT')->count();
-        $countRejected = User::where('remark', 'REJECT')->count();
-        $countReturnee = User::where('status', 'RETURNEE')->count();
-        $countTransferee = User::where('status', 'TRANSFEREE')->count();
-        $countNewStudent = User::where('status', 'NEW')->count();
+        $countAccepted = User::where('remark', 'ACCEPT')
+            ->where('academic_year_code', $ay->code)->count();
+        $countRejected = User::where('remark', 'REJECT')
+            ->where('academic_year_code', $ay->code)->count();
+        $countReturnee = User::where('status', 'RETURNEE')
+            ->where('academic_year_code', $ay->code)->count();
+        $countTransferee = User::where('status', 'TRANSFEREE')
+            ->where('academic_year_code', $ay->code)->count();
+        $countNewStudent = User::where('status', 'NEW')
+            ->where('academic_year_code', $ay->code)->count();
 
         
 

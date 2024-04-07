@@ -21,8 +21,8 @@ class RegistrationController extends Controller
     }
 
     public function store(Request $req){
-
-        //return $req;
+        $ay = AcadYear::where('active', 1)->first();
+        return $req;
 
         $validate = $req->validate([
             'username' => ['string', 'max:255', 'required', 'unique:users'],
@@ -64,6 +64,7 @@ class RegistrationController extends Controller
             'barangay_id' => $req->barangay['barangay_id'],
             'street' => $req->street,
             'role' => 'STUDENT',
+            'academic_year_code' => $ay->code
         ]);
         
         return ['status' => 'saved'];

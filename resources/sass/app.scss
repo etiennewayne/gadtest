@@ -120,7 +120,7 @@ html body{
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";
 // Set your colors
-$primary: hsl(136, 55%, 28%);
+$primary: #da4e2b;
 $primary-light: findLightColor($primary);
 $primary-dark: findDarkColor($primary);
 $primary-invert: findColorInvert($primary);
