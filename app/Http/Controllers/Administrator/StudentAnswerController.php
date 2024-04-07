@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use App\Models\Program;
+use App\Models\AcadYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -30,6 +31,7 @@ class StudentAnswerController extends Controller
     public function index_data(Request $req){
         //return Question::all();
         $sortkey = explode(".",$req->sort_by);
+        $ay = AcadYear::where('active', 1)->first();
 
         return DB::table('answer_sheets as a')
             ->join('users as b', 'a.user_id', 'b.user_id')
@@ -37,6 +39,7 @@ class StudentAnswerController extends Controller
             ->where('a.user_id', $req->user_id == '' ? 'like' : '=', $req->user_id == '' ? '%' : $req->user_id)
             ->where('b.lname', 'like', $req->lname .'%')
             ->where('b.fname', 'like', $req->fname .'%')
+            ->where('a.code', $ay->code)
             ->where('b.first_program_choice', 'like', $req->first_program_choice .'%')
             ->select('a.answer_sheet_id', 'a.code', 'a.user_id', 'b.lname', 'b.fname', 'b.mname',
                 'b.sex', 'b.first_program_choice', 'b.second_program_choice',

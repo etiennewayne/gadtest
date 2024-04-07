@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use DB;
 
 use App\Models\User;
+use App\Models\AcadYear;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -28,8 +29,9 @@ class UserController extends Controller
         return User::find($id);
     }
 
+  
+
     public function getUsers(Request $req){
-        
         $sort = explode('.', $req->sort_by);
         return User::where('lname', 'like', $req->lname . '%')
             ->where('fname', 'like', $req->fname . '%')
@@ -194,5 +196,28 @@ class UserController extends Controller
         return response()->json([
             'status' => 'reset'
         ]);
+    }
+
+
+
+
+
+
+
+    public function currentUserIndex(){
+        return view('panel.user.current-user');
+    }
+    public function getCurrentUsers(Request $req){
+        
+        $sort = explode('.', $req->sort_by);
+
+        $ay = AcadYear::where('active', 1)->first();
+
+        return User::where('lname', 'like', $req->lname . '%')
+            ->where('fname', 'like', $req->fname . '%')
+            ->where('academic_year_code', $ay->code)
+            ->where('user_id', $req->user_id == '' ? 'like' : '=', $req->user_id == '' ? '%' : $req->user_id)
+            ->orderBy($sort[0], $sort[1])
+            ->paginate($req->perpage);
     }
 }

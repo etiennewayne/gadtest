@@ -8,7 +8,7 @@ Dear Mr./Ms. {{ $student['lname'] }} {{ $student['fname'] }},<br><br>
 
 # CONGRATULATIONS
 <br>
-Thank you for your active participation in the GADTC Admission 2021-2022. 
+Thank you for your active participation in the GADTC Admission 2023-2024. 
 We would like to inform you that after carefully examining your scores, 
 your application has complied all necessary requirements of your chosen program. 
 <br><br>

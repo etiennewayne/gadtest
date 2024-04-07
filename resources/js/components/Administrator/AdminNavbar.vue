@@ -1,6 +1,6 @@
 
 <template>
-    <b-navbar class="is-primary">
+    <b-navbar class="is-primary" spaced>
         <template #brand>
             <b-navbar-item>
                 <img
@@ -55,9 +55,9 @@
                 <b-navbar-item href="/panel/student-answer">
                     Student Answer
                 </b-navbar-item>
-                <b-navbar-item href="/panel/student-result">
+                <!-- <b-navbar-item href="/panel/student-result">
                     Student Result
-                </b-navbar-item>
+                </b-navbar-item> -->
             </b-navbar-dropdown>
 
             <b-navbar-dropdown label="Admission">
@@ -71,13 +71,19 @@
                 
             </b-navbar-dropdown>
 
-            <b-navbar-item href="/panel/user">
-                User
-            </b-navbar-item>
+            <b-navbar-dropdown label="Manage Users">
+                <b-navbar-item href="/panel/current-users">
+                    Current Users
+                </b-navbar-item>
+                <b-navbar-item href="/panel/all-users">
+                    All Users
+                </b-navbar-item>
+            </b-navbar-dropdown>
+            
 
             <b-navbar-item tag="div">
                 <div class="buttons">
-                    <a v-if="isAuth == 1" class="button is-danger" @click="logout">
+                    <a v-if="isAuth == 1" class="button is-warning" @click="logout">
                         <i class="fa fa-sign-out"></i>&nbsp;<strong>Logout</strong>
                     </a>
                     <a v-else class="button is-light" href="/login">

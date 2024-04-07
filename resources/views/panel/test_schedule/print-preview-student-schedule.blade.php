@@ -54,7 +54,7 @@
 @section('content')
 
 <div class="print-title">STUDENT LIST</div>
-<div class="print-title">Schedule: {{ date('Y-m-d', strtotime($schedule->from)) }}, 
+<div class="print-title">Schedule: {{ date('M-d-Y', strtotime($schedule->from)) }}, 
     {{ date('h:i A', strtotime($schedule->from)) }} - 
     {{ date('h:i A', strtotime($schedule->to)) }}
 

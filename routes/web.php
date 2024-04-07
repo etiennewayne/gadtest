@@ -87,6 +87,9 @@ Route::get('/panel/home', [App\Http\Controllers\Administrator\PanelHomeControlle
 //ACAD YEAR
 Route::resource('/panel/acadyear', App\Http\Controllers\Administrator\AcadYearController::class);
 Route::get('/fetch-acadyears', [App\Http\Controllers\Administrator\AcadYearController::class, 'index_data']);
+Route::post('/panel/acad-set-active/{id}', [App\Http\Controllers\Administrator\AcadYearController::class, 'setActive']);
+
+
 
 
 //SECTIONS
@@ -142,8 +145,13 @@ Route::resource('/panel/students-result', App\Http\Controllers\Administrator\Stu
 
 
 //USER
-Route::resource('/panel/user', App\Http\Controllers\Administrator\UserController::class);
+Route::resource('/panel/all-users', App\Http\Controllers\Administrator\UserController::class);
 Route::get('/get-users', [App\Http\Controllers\Administrator\UserController::class, 'getUsers']);
+
+Route::get('/panel/current-users', [App\Http\Controllers\Administrator\UserController::class, 'currentUserIndex']);
+Route::get('/get-current-active-users', [App\Http\Controllers\Administrator\UserController::class, 'getCurrentUsers']);
+
+
 Route::get('/fetch-students', [App\Http\Controllers\Administrator\UserController::class, 'allStudents']);
 Route::post('/verify-email-students/{userid}', [App\Http\Controllers\Administrator\UserController::class, 'verifyEmailStudents']);
 Route::post('/user-reset-password/{id}', [App\Http\Controllers\Administrator\UserController::class, 'resetPassword']);

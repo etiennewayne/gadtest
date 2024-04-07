@@ -1,6 +1,7 @@
 <template>
     <div>
         <div class="section">
+
             <div class="section-wrapper">
                 <div v-for="(item, index) in sectionsJSON" :key="index" @click="proceedTakingExam(schedid, item.section_id)" class="img-wrapper">
                     <img :src="'/img/' + item.img_filename" class="img-size" alt="..." />

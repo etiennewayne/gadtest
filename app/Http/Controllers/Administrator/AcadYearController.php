@@ -66,6 +66,22 @@ class AcadYearController extends Controller
     }
 
 
+    public function setActive($id){
+        AcadYear::where('active', 1)
+            ->update([
+            'active' => 0
+        ]);
+
+       $data = AcadYear::find($id);
+       $data->active = 1;
+       $data->save();
+
+        return response()->json([
+            'status' => 'updated'
+        ], 200);;
+    }
+
+
     public function destroy($id){
         AcadYear::destroy($id);
     }

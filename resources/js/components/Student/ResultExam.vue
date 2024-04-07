@@ -24,7 +24,7 @@
                             <!-- ACCEPTANCE LETTER -->
                             <div v-if="this.results.remark === 'ACCEPT'" class="panel mypanel">
                                 <div>Guidance and Admission Office</div>
-                                <div>Gov. Alfonso D. Tan College</div>
+                                <div>Tangub City Global College</div>
                                 <div>Maloro, Tangub City, Misamis Occidental</div>
                                 <br>
                                 
@@ -33,7 +33,7 @@
                                 <h2 style="font-weight: bold;">CONGRATULATIONS</h2>
                                 <br>
                                 <p>
-                                    Thank you for your active participation in the GADTC Admission 2023-2024. 
+                                    Thank you for your active participation in the TCGCAT 2024-2025. 
                                     We would like to inform you that after carefully examining your scores, 
                                     your application has complied all necessary requirements of your chosen program.
                                 </p>
@@ -44,7 +44,7 @@
                                 </ul>
                                 <br>
                                 <p>
-                                    To be part of the dynamic community of GADTC,  enroll via our student portal on July 17, 2023 and use <b>{{ this.results.email }}</b> as 
+                                    To be part of the dynamic community of TCGC,  enroll via our student portal and use <b>{{ this.results.email }}</b> as 
                                     your username and <b>{{this.results.admission_code}}</b> (admission code) as your temporary password. 
                                     
                                 </p><br>
@@ -54,11 +54,11 @@
                                 </div>
                                 <br>
                                 <p>
-                                    We look forward to welcoming you to GADTC this coming school year.
+                                    We look forward to welcoming you to TCGC this coming school year.
                                 </p><br><br><br>
 
                                 <p>Thanks,</p>
-                                <p>GADTC Guidance and Admission Office</p>
+                                <p>TCGC Guidance and Admission Office</p>
                             </div>
                             <!-- ACCEPTANCE LETTER -->
 
@@ -66,7 +66,7 @@
                             <div v-if="this.results.remark === 'REJECT'" class="panel mypanel">
                                
                                 <div>Guidance and Admission Office</div>
-                                <div>Gov. Alfonso D. Tan College</div>
+                                <div>Tangub City Global College</div>
                                 <div>Maloro, Tangub City, Misamis Occidental</div>
                                 <br>
                                 
@@ -74,7 +74,7 @@
                                 <br>
 
                                 <p>
-                                    The Gov. Alfonso D. Tan College appreciates your interest in applying for admission through the GADTEST.
+                                    The Tangub City Global College appreciates your interest in applying for admission through the TCGCAT.
                                 </p>
                                 <br>
                                 <p>
@@ -88,7 +88,7 @@
                                 <br><br>
                                 <p>
                                     Best Regards,<br>
-                                    GADTC Guidance and Admission Office
+                                    TCGC Guidance and Admission Office
                                 </p>
 
 

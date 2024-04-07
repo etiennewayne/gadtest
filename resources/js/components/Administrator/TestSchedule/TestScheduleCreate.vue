@@ -45,11 +45,12 @@
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="Schedule From"
-                                        :type="this.errors.from ? 'is-danger' : ''"
-                                        :message="this.errors.from ? this.errors.from[0] : ''">
+                                        :type="errors.from ? 'is-danger' : ''"
+                                        :message="errors.from ? errors.from[0] : ''">
                                         <b-datetimepicker
                                             placeholder="Click to select..."
                                             icon="calendar-today"
+                                            editable
                                             v-model="sched_from"
                                             :locale="locale"
                                             @input="formattedFromDate"
@@ -57,12 +58,13 @@
                                     </b-field>
 
                                     <b-field label="Schedule To"
-                                        :type="this.errors.to ? 'is-danger' : ''"
-                                        :message="this.errors.to ? this.errors.to[0] : ''">
+                                        :type="errors.to ? 'is-danger' : ''"
+                                        :message="errors.to ? errors.to[0] : ''">
                                         <b-datetimepicker
                                             placeholder="Click to select..."
                                             icon="calendar-today"
                                             v-model="sched_to"
+                                            editable
                                             :locale="locale"
                                             @input="formattedToDate"
                                             :timepicker="{ hourFormat }"></b-datetimepicker>
@@ -71,7 +73,10 @@
                             </div>
 
                             <div class="buttons is-right">
-                                <button class="button is-success">SUBMIT</button>
+                                <button class="button is-primary">
+                                    <b-icon icon="calendar" icon-pack="fa" class="mr-2"></b-icon>
+                                    <b>SAVE SCHEDULE</b>
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -95,12 +100,15 @@ export default {
     data(){
         return{
             fields: {
+                acad_year_id: 0,
                 max_user: 50,
+
+                
             },
             errors: {},
 
-            sched_from: null,
-            sched_to: null,
+            sched_from: new Date(),
+            sched_to: new Date(),
             hourFormat: '12',
 
             academicyears: [],
@@ -111,6 +119,8 @@ export default {
     },
     methods: {
         submit(){
+
+            
             axios.post('/panel/test-schedule', this.fields).then(res=>{
                 if(res.data.status === 'saved'){
                     this.$buefy.dialog.alert({
@@ -129,9 +139,11 @@ export default {
 
         formattedFromDate(){
             let ndate = new Date(Date.parse(this.sched_from));
+
             let realDateTime = ndate.getFullYear() + "-" + ("0" + (ndate.getMonth() + 1)).slice(-2) + "-"+ ("0" + (ndate.getDate())).slice(-2)
                 +' ' +("0" + ndate.getHours()).slice(-2) + ':'+ ("0" + ndate.getMinutes()).slice(-2) + ':00';
             console.log(realDateTime);
+
             this.fields.from = realDateTime;
         },
         formattedToDate(){
@@ -147,7 +159,7 @@ export default {
 
         initData(){
             this.academicyears = JSON.parse(this.dataAcademics);
-
+            this.fields.acad_year_id = this.academicyears.filter(item=> item.active === 1)[0].acad_year_id;
         }
 
     },
@@ -159,7 +171,5 @@ export default {
 </script>
 
 <style scoped>
-    .box{
-        border-top: 4px solid blueviolet;
-    }
+
 </style>

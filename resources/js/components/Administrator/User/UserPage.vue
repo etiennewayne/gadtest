@@ -6,8 +6,9 @@
 
                 <div class="column is-10 is-12-mobile">
 
-                    <div class="panel">
-
+                    <div class="box">
+                        <div class="has-text-weight-bold is-size-5 has-text-centered">ALL USERS</div>
+                        <div class="has-text-weight-bold is-size-6 has-text-centered">All users registered on the system.</div>
                         <div class="panel-body">
                             <div class="level">
                                 <div class="level-left">

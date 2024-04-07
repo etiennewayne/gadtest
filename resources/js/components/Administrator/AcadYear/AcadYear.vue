@@ -1,85 +1,99 @@
 <template>
     <div>
+
+        
         <section class="section">
-            <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF ACADEMIC YEAR</div>
-            <div class="columns">
-                <div class="column is-8 is-offset-2">
-                    <div class="level">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <b-field label="Page">
-                                    <b-select v-model="perPage" @input="setPerPage">
-                                        <option value="5">5 per page</option>
-                                        <option value="10">10 per page</option>
-                                        <option value="15">15 per page</option>
-                                        <option value="20">20 per page</option>
-                                    </b-select>
-                                </b-field>
+            <div class="columns is-centered">
+                <div class="column is-8">
+
+                    <div class="box">
+                        <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF ACADEMIC YEAR</div>
+
+                        <div class="level">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <b-field label="Page">
+                                        <b-select v-model="perPage" @input="setPerPage">
+                                            <option value="5">5 per page</option>
+                                            <option value="10">10 per page</option>
+                                            <option value="15">15 per page</option>
+                                            <option value="20">20 per page</option>
+                                        </b-select>
+                                    </b-field>
+                                </div>
+                            </div>
+    
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <b-field label="Search Code">
+                                        <b-input type="text" v-model="search.code" placeholder="Code..."
+                                            @keyup.native.enter="loadAsyncData"></b-input>
+                                    </b-field>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="level-right">
-                            <div class="level-item">
-                                <b-field label="Search Code">
-                                    <b-input type="text" v-model="search.code" placeholder="Code..."
-                                        @keyup.native.enter="loadAsyncData"></b-input>
-                                </b-field>
-                            </div>
+                        <div style="display:flex; justify-content: flex-end;">
+                            <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
                         </div>
-                    </div>
+                        <b-table
+                            :data="data"
+                            :loading="loading"
+                            paginated
+                            backend-pagination
+                            :total="total"
+                            :per-page="perPage"
+                            @page-change="onPageChange"
+                            aria-next-label="Next page"
+                            aria-previous-label="Previous page"
+                            aria-page-label="Page"
+                            aria-current-label="Current page"
+                            backend-sorting
+                            :default-sort-direction="defaultSortDirection"
+                            @sort="onSort">
+    
+                            <b-table-column field="acad_year_id" label="ID" v-slot="props">
+                                {{ props.row.acad_year_id }}
+                            </b-table-column>
+    
+                            <b-table-column field="code" label="Code" v-slot="props">
+                                {{ props.row.code }}
+                            </b-table-column>
+    
+                            <b-table-column field="description" label="Description" v-slot="props">
+                                {{ props.row.description }}
+                            </b-table-column>
+    
+                            <b-table-column field="descriactiveption" label="Active" v-slot="props">
+                                <span v-if="props.row.active === 1" class="active">ACTIVE</span>
+                                <span v-else class="inactive">NO</span>
+                            </b-table-column>
+    
+                            <b-table-column field="ay_id" label="Action" v-slot="props">
+                                <div class="is-flex">
+                                    <b-button class="button is-small is-info mr-1" 
+                                        icon-pack="fa" 
+                                        icon-right="thumbs-o-up" 
+                                        @click="setActive(props.row.acad_year_id)"></b-button>
+                                    <b-button class="button is-small is-warning mr-1" 
+                                        icon-right="pencil" 
+                                        icon-pack="fa" 
+                                        @click="openModal(props.row.acad_year_id)"></b-button>
+                                    <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.acad_year_id)"></b-button>
+                                </div>
+                            </b-table-column>
+    
+                        </b-table>
+    
+                        <div class="buttons mt-3">
+                            <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
+                            <b-button icon-pack="fa" icon-left="plus" @click="openModal(0)" class="is-primary">New Acad Year</b-button>
+                        </div>
 
-                    <div style="display:flex; justify-content: flex-end;">
-                        <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
-                    </div>
+                    </div> <!--box-->
+                </div> <!--col-->
+            </div> <!-- cols-->
 
-                    <b-table
-                        :data="data"
-                        :loading="loading"
-                        paginated
-                        backend-pagination
-                        :total="total"
-                        :per-page="perPage"
-                        @page-change="onPageChange"
-                        aria-next-label="Next page"
-                        aria-previous-label="Previous page"
-                        aria-page-label="Page"
-                        aria-current-label="Current page"
-                        backend-sorting
-                        :default-sort-direction="defaultSortDirection"
-                        @sort="onSort">
-
-                        <b-table-column field="acad_year_id" label="ID" v-slot="props">
-                            {{ props.row.acad_year_id }}
-                        </b-table-column>
-
-                        <b-table-column field="code" label="Code" v-slot="props">
-                            {{ props.row.code }}
-                        </b-table-column>
-
-                        <b-table-column field="description" label="Description" v-slot="props">
-                            {{ props.row.description }}
-                        </b-table-column>
-
-                        <b-table-column field="descriactiveption" label="Active" v-slot="props">
-                            <span v-if="props.row.active === 1" class="active">ACTIVE</span>
-                            <span v-else class="inactive">NO</span>
-                        </b-table-column>
-
-                        <b-table-column field="ay_id" label="Action" v-slot="props">
-                            <div class="is-flex">
-                                <b-button class="button is-small is-warning mr-1" icon-right="pencil" icon-pack="fa" @click="openModal(props.row.acad_year_id)"></b-button>
-                                <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.acad_year_id)"></b-button>
-                            </div>
-                        </b-table-column>
-
-                    </b-table>
-
-                    <div class="buttons mt-3">
-                        <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                        <b-button icon-pack="fa" icon-left="plus" @click="openModal(0)" class="is-primary">New Acad Year</b-button>
-                    </div>
-                </div><!--close column-->
-            </div>
         </section>
 
         <b-modal v-model="isModalActive" has-modal-card
@@ -291,6 +305,21 @@ export default {
                 })
             }
         },
+
+        setActive(id){
+            axios.post('/panel/acad-set-active/' + id).then(res=>{
+                if(res.data.status === 'updated'){
+                    this.$buefy.snackbar.open({
+                        duration: 4000,
+                        message: 'Successfully set to <b>active</b>.',
+                        type: 'is-success',
+                        position: 'is-bottom-left',
+                    })
+                    this.loadAsyncData()
+
+                }
+            })
+        }
 
 
     },

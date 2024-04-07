@@ -26,6 +26,9 @@ class StudentSectionTakenController extends Controller
     }
 
     public function index_data(Request $req){
+
+        $ay = AcadYear::where('active', 1)->first();
+
         $sort = explode('.', $req->sort_by);
         $data = DB::table('taking_test as a')
             ->join('acad_years as b', 'a.acad_year_id', 'b.acad_year_id')
@@ -42,6 +45,7 @@ class StudentSectionTakenController extends Controller
             ->where('lname', 'like', $req->lname . '%')
             ->where('fname', 'like', $req->fname . '%')
             ->where('a.user_id', 'like', $req->id . '%')
+            ->where('b.acad_year_id', $ay->acad_year_id)
             ->paginate($req->perpage);
         return $data;
     }

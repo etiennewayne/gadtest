@@ -25,8 +25,12 @@ class TestScheduleController extends Controller
 
     public function getData(Request $req){
         $sort = explode('.', $req->sort_by);
+
+        $ay = AcadYear::where('active', 1)->first();
+
         return TestSchedule::with(['students'])->orderBy($sort[0], $sort[1])
             ->where('description', 'like', '%' .$req->description . '%')
+            ->where('acad_year_id', $ay->acad_year_id)
             ->paginate($req->perpage);
     }
 

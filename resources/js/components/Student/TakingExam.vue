@@ -84,6 +84,8 @@
 </template>
 
 <script>
+import { type } from 'jquery';
+
 export default {
     props: ['sectionId', 'studentschedId'],
     data(){
@@ -153,6 +155,7 @@ export default {
                         title: 'SAVED.',
                         message: 'Your test successfully saved.',
                         confirmText: 'OK',
+                        type: 'is-success',
                         onConfirm: ()=> this.proceedToSectionPage()
                     });
                 }

@@ -23,17 +23,17 @@
 @import "~animate.css/animate";
 //npm install animate
 
-html body{
-    //font-family:'Amaranth', sans-serif;
-    font-family: Raleway, Arial, sans-serif !important;
-    background: white;
-}
+
 
 
 .page-footer{
     margin-bottom: 2em;
 }
 
+
+.box{
+    border-top: 2px solid orange;
+}
 
 .debug{
     border: 1px solid red;

@@ -1,125 +1,143 @@
 <template>
     <div>
         <section class="section">
-            <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF SCHEDULES</div>
-            <div class="columns">
-                <div class="column is-8 is-offset-2">
-                    <div class="level">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <b-field label="Page" label-position="on-border">
-                                    <b-select v-model="perPage" @input="setPerPage">
-                                        <option value="5">5 per page</option>
-                                        <option value="10">10 per page</option>
-                                        <option value="15">15 per page</option>
-                                        <option value="20">20 per page</option>
-                                    </b-select>
-                                    <b-select v-model="sortOrder" @input="loadAsyncData">
-                                        <option value="asc">ASC</option>
-                                        <option value="desc">DESC</option>
-                                    </b-select>
-                                </b-field>
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="box">
+                        <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF SCHEDULES</div>
+
+                        <div class="level">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <b-field label="Page" label-position="on-border">
+                                        <b-select v-model="perPage" @input="setPerPage">
+                                            <option value="5">5 per page</option>
+                                            <option value="10">10 per page</option>
+                                            <option value="15">15 per page</option>
+                                            <option value="20">20 per page</option>
+                                        </b-select>
+                                        <b-select v-model="sortOrder" @input="loadAsyncData">
+                                            <option value="asc">ASC</option>
+                                            <option value="desc">DESC</option>
+                                        </b-select>
+                                    </b-field>
+                                </div>
+                                
                             </div>
-                            
+    
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <b-field label="Search" label-position="on-border">
+                                        <b-input type="text" placeholder="Search Description..."
+                                            v-model="search.description" @keyup.native.enter="loadAsyncData" />
+                                    </b-field>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="level-right">
-                            <div class="level-item">
-                                <b-field label="Search" label-position="on-border">
-                                    <b-input type="text" placeholder="Search Description..."
-                                        v-model="search.description" @keyup.native.enter="loadAsyncData" />
-                                </b-field>
-                            </div>
+                        <div style="display:flex; justify-content: flex-end;">
+                            <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
                         </div>
-                    </div>
+    
+                        <div class="buttons mt-3">
+                            <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
+                            <b-button icon-pack="fa" icon-left="plus" tag="a"
+                                      :href="'/panel/test-schedule/create'" class="is-primary">New Schedule</b-button>
+                        </div>
 
 
-                    <div style="display:flex; justify-content: flex-end;">
-                        <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
-                    </div>
-
-                    <div class="buttons mt-3">
-                        <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                        <b-button icon-pack="fa" icon-left="plus" tag="a"
-                                  :href="'/panel/test-schedule/create'" class="is-primary">New Schedule</b-button>
-                    </div>
-                    <b-table
-                        :data="data"
-                        :loading="loading"
-                        paginated
-                        backend-pagination
-                        :total="total"
-                        :per-page="perPage"
-                        @page-change="onPageChange"
-                        aria-next-label="Next page"
-                        aria-previous-label="Previous page"
-                        aria-page-label="Page"
-                        aria-current-label="Current page"
-                        backend-sorting
-                        detailed
-                        :default-sort-direction="defaultSortDirection"
-                        @sort="onSort">
-
-                        <b-table-column field="test_schedule_id" label="ID" v-slot="props">
-                            {{ props.row.test_schedule_id }}
-                        </b-table-column>
-
-                        <b-table-column field="description" label="Description" v-slot="props">
-                            {{ props.row.description }}
-                        </b-table-column>
-
-                        <b-table-column field="from" label="From" v-slot="props">
-                            {{ new Date(props.row.from).toLocaleString() }}
-                        </b-table-column>
-
-                        <b-table-column field="to" label="To" v-slot="props">
-                            {{ new Date(props.row.to).toLocaleString() }}
-                        </b-table-column>
-
-                        <b-table-column field="max_user" label="Max Examinee" v-slot="props">
-                            {{ props.row.max_user }}
-                        </b-table-column>
-
-                        <b-table-column field="ay_id" label="Action" v-slot="props">
-                            <div class="is-flex">
-                                <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" :href="'/panel/test-schedule/'+ props.row.test_schedule_id + '/edit'"></b-button>
-                                <b-button class="button is-small is-danger mr-1" icon-right="delete" @click="confirmDelete(props.row.test_schedule_id)"></b-button>
-                                <b-button class="button is-small is-info mr-1" icon-right="printer" @click="printPreview(props.row.test_schedule_id)"></b-button>
-                            
-                            </div>
-                        </b-table-column>
-
-                        <template #detail="props">
-                            <div v-if="props.row.students">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Sex</th>
-                                    <th>Status</th>
-                                    <th>1st Program</th>
-                                    <th>2nd Program</th>
-                                </tr>
-
-                                <tr v-for="(i, ix) in props.row.students" :key="ix">
-                                    <td>{{ (ix + 1) }}</td>
-                                    <td>{{ i.lname }}, {{ i.fname }} {{ i.mname }}</td>
-                                    <td>{{ i.sex }}</td>
-                                    <td>{{ i.status }}</td>
-                                    <td>{{ i.first_program_choice }}</td>
-                                    <td>{{ i.second_program_choice }}</td>
-                                </tr>
-                            </div>
-                        </template>
-
-                    </b-table>
-
-                    <div class="buttons mt-3">
-                        <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                        <b-button icon-pack="fa" icon-left="plus" tag="a"
-                            :href="'/panel/test-schedule/create'" class="is-primary">New Schedule</b-button>
-                    </div>
+                        <b-table
+                            :data="data"
+                            :loading="loading"
+                            paginated
+                            backend-pagination
+                            :total="total"
+                            :per-page="perPage"
+                            @page-change="onPageChange"
+                            aria-next-label="Next page"
+                            aria-previous-label="Previous page"
+                            aria-page-label="Page"
+                            aria-current-label="Current page"
+                            backend-sorting
+                            detailed
+                            :default-sort-direction="defaultSortDirection"
+                            @sort="onSort">
+    
+                            <b-table-column field="test_schedule_id" label="ID" v-slot="props">
+                                {{ props.row.test_schedule_id }}
+                            </b-table-column>
+    
+                            <b-table-column field="description" label="Description" v-slot="props">
+                                {{ props.row.description }}
+                            </b-table-column>
+    
+                            <b-table-column field="from" label="From" v-slot="props">
+                                {{ new Date(props.row.from).toLocaleString('en-US', {
+                                    month: 'long', // Full month name
+                                    day: '2-digit', // 2-digit day
+                                    year: 'numeric', // Full year
+                                    hour: 'numeric', // 12-hour format
+                                    minute: '2-digit', // 2-digit minutes
+                                    hour12: true // 12-hour format
+                                }) }}
+                            </b-table-column>
+    
+                            <b-table-column field="to" label="To" v-slot="props">
+                                {{ new Date(props.row.to).toLocaleString('en-US', {
+                                    month: 'long', // Full month name
+                                    day: '2-digit', // 2-digit day
+                                    year: 'numeric', // Full year
+                                    hour: 'numeric', // 12-hour format
+                                    minute: '2-digit', // 2-digit minutes
+                                    hour12: true // 12-hour format
+                                }) }}
+                            </b-table-column>
+    
+                            <b-table-column field="max_user" label="Max Examinee" v-slot="props">
+                                {{ props.row.max_user }}
+                            </b-table-column>
+    
+                            <b-table-column field="ay_id" label="Action" v-slot="props">
+                                <div class="is-flex">
+                                    <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" :href="'/panel/test-schedule/'+ props.row.test_schedule_id + '/edit'"></b-button>
+                                    <b-button class="button is-small is-danger mr-1" icon-right="delete" @click="confirmDelete(props.row.test_schedule_id)"></b-button>
+                                    <b-button class="button is-small is-info mr-1" icon-right="printer" @click="printPreview(props.row.test_schedule_id)"></b-button>
+                                
+                                </div>
+                            </b-table-column>
+    
+                            <template #detail="props">
+                                <div v-if="props.row.students">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Sex</th>
+                                        <th>Status</th>
+                                        <th>1st Program</th>
+                                        <th>2nd Program</th>
+                                    </tr>
+    
+                                    <tr v-for="(i, ix) in props.row.students" :key="ix">
+                                        <td>{{ (ix + 1) }}</td>
+                                        <td>{{ i.lname }}, {{ i.fname }} {{ i.mname }}</td>
+                                        <td>{{ i.sex }}</td>
+                                        <td>{{ i.status }}</td>
+                                        <td>{{ i.first_program_choice }}</td>
+                                        <td>{{ i.second_program_choice }}</td>
+                                    </tr>
+                                </div>
+                            </template>
+    
+                        </b-table>
+    
+                        <div class="buttons mt-3">
+                            <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
+                            <b-button icon-pack="fa" icon-left="plus" tag="a"
+                                :href="'/panel/test-schedule/create'" class="is-primary">New Schedule</b-button>
+                        </div>
+                    </div> <!--box-->
                 </div><!--close column-->
-            </div>
+            </div> <!--cols-->
         </section>
 
     </div>

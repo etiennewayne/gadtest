@@ -74,6 +74,7 @@ class TakingExamController extends Controller
             ->join('levels', 'questions.level_id', 'levels.level_id')
             //->where('acad_year_id', $ay->acad_year_id)
             ->where('level', 'EASY')
+            ->where('active', 1)
             ->where('section_id', $section_id)
             ->inRandomOrder()->take(6)->get();
 
@@ -82,6 +83,7 @@ class TakingExamController extends Controller
             ->join('levels', 'questions.level_id', 'levels.level_id')
             //->where('acad_year_id', $ay->acad_year_id)
             ->where('level', 'AVERAGE')
+            ->where('active', 1)
             ->where('section_id', $section_id)
             ->inRandomOrder()->take(6)->get();
 
@@ -89,6 +91,7 @@ class TakingExamController extends Controller
             ->join('levels', 'questions.level_id', 'levels.level_id')
             //->where('acad_year_id', $ay->acad_year_id)
             ->where('level', 'DIFFICULT')
+            ->where('active', 1)
             ->where('section_id', $section_id)
             ->inRandomOrder()->take(6)->get();
 

@@ -6,8 +6,8 @@
 
                 <div class="w-subtitle">
                     The TCGCAT (Tangub City Global College Admission Test) for 1st Semester AY 2024-2025 will  
-                    officially start on June 5, 2024. The exam will be administered at the 2nd Floor, GADTC Computer Laboratory. 
-                    You may begin reserving your slots from April 12 - May 31, 2024 by clicking 
+                    officially start on May 27, 2024. The exam will be administered at the 2nd Floor, TCGC Computer Laboratory. 
+                    You may begin reserving your slots from April 08 - May 26, 2024 by clicking 
                     <b>PRE-REGISTER</b> button.
                 </div>
 

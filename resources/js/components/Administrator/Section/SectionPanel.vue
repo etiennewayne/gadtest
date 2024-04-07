@@ -1,71 +1,87 @@
 <template>
     <div>
         <section class="section">
-        <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF SECTION</div>
-        <div class="columns">
-            <div class="column is-8 is-offset-2">
-                <div class="level">
-                    <div class="level-right">
-                        <div class="level-item">
-                            <b-field label="Page">
-                                <b-select v-model="perPage" @input="setPerPage">
-                                    <option value="5">5 per page</option>
-                                    <option value="10">10 per page</option>
-                                    <option value="15">15 per page</option>
-                                    <option value="20">20 per page</option>
-                                </b-select>
-                            </b-field>
+
+            <div class="columns is-centered">
+                <div class="column is-6">
+
+                    <div class="box">
+
+                        <div style="font-size: 20px; text-align: center; font-weight: bold;" class="mb-4">LIST OF SECTION</div>
+    
+    
+                        <div class="level">
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <b-field label="Page">
+                                        <b-select v-model="perPage" @input="setPerPage">
+                                            <option value="5">5 per page</option>
+                                            <option value="10">10 per page</option>
+                                            <option value="15">15 per page</option>
+                                            <option value="20">20 per page</option>
+                                        </b-select>
+                                    </b-field>
+                                </div>
+                            </div>
+    
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <b-field label="Search Section">
+                                        <b-input type="text" v-model="search.section" placeholder="Search section..." @keyup.native.enter="loadAsyncData"/>
+                                    </b-field>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="level-left">
-                        <div class="level-item">
-                            <b-field label="Search Section">
-                                <b-input type="text" v-model="search.section" placeholder="Search section..." @keyup.native.enter="loadAsyncData"/>
-                            </b-field>
+    
+                        <b-table
+                            :data="data"
+                            :loading="loading"
+                            paginated
+                            backend-pagination
+                            :total="total"
+                            :per-page="perPage"
+                            @page-change="onPageChange"
+                            aria-next-label="Next page"
+                            aria-previous-label="Previous page"
+                            aria-page-label="Page"
+                            aria-current-label="Current page"
+                            backend-sorting
+                            :default-sort-direction="defaultSortDirection"
+                            @sort="onSort">
+    
+                            <b-table-column field="category_id" label="ID" v-slot="props">
+                                {{ props.row.section_id }}
+                            </b-table-column>
+    
+                            <b-table-column field="category" label="Category" v-slot="props">
+                                {{ props.row.section }}
+                            </b-table-column>
+    
+                            <b-table-column field="ay_id" label="Action" v-slot="props">
+                                <div class="is-flex">
+                                    <b-button outlined class="button is-small is-warning mr-1" 
+                                        tag="a" icon-right="pencil" 
+                                        icon-pack="fa" 
+                                        @click="getData(props.row.category_id)"></b-button>
+                                    <b-button 
+                                        outlined 
+                                        class="button is-small is-danger mr-1" 
+                                        icon-pack="fa" 
+                                        icon-right="trash" @click="confirmDelete(props.row.category_id)"></b-button>
+                                </div>
+                            </b-table-column>
+    
+                        </b-table>
+                        
+                        <div class="buttons mt-3">
+                            <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
+                            <b-button @click="openModal" 
+                                icon-right="plus" icon-pack="fa" class="is-primary">Create Section</b-button>
                         </div>
-                    </div>
-                </div>
-                
-                <b-table
-                    :data="data"
-                    :loading="loading"
-                    paginated
-                    backend-pagination
-                    :total="total"
-                    :per-page="perPage"
-                    @page-change="onPageChange"
-                    aria-next-label="Next page"
-                    aria-previous-label="Previous page"
-                    aria-page-label="Page"
-                    aria-current-label="Current page"
-                    backend-sorting
-                    :default-sort-direction="defaultSortDirection"
-                    @sort="onSort">
-
-                    <b-table-column field="category_id" label="ID" v-slot="props">
-                        {{ props.row.section_id }}
-                    </b-table-column>
-
-                    <b-table-column field="category" label="Category" searchable v-slot="props">
-                        {{ props.row.section }}
-                    </b-table-column>
-
-                    <b-table-column field="ay_id" label="Action" v-slot="props">
-                        <div class="is-flex">
-                            <b-button outlined class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" @click="getData(props.row.category_id)">EDIT</b-button>
-                            <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.category_id)">DELETE</b-button>
-                        </div>
-                    </b-table-column>
-
-                </b-table>
-
-                <div class="buttons mt-3">
-                    <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                    <b-button @click="openModal" class="is-primary is-fullwidth">Create Section</b-button>
-                </div>
-            </div><!--close column-->
-        </div>
+                    </div> <!--box-->
+                </div> <!--col-->
+            </div> <!--cols-->
+       
     </section>
 
     </div>

@@ -1,152 +1,168 @@
 <template>
     <div>
         <div class="section">
-            <div style="font-size: 20px; text-align: center; font-weight: bold; margin-bottom: 20px;">LIST OF QUESTIONS</div>
-            <div class="columns">
-                <div class="column is-10 is-offset-1">
+           
+            <div class="columns is-centered">
+                <div class="column is-10">
+                    <div class="box">
 
-                    <div class="level">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <b-select v-model="perPage" @input="setPerPage">
-                                    <option value="5">5 per page</option>
-                                    <option value="10">10 per page</option>
-                                    <option value="15">15 per page</option>
-                                    <option value="20">20 per page</option>
-                                </b-select>
-                            </div>
-                        </div>
-
-                        <div class="level-right">
-                            <div class="level-item">
-                                <b-field label="Section" label-position="on-border">
-                                    <b-select placeholder="Search Section..."
-                                        v-model="search.section" @input="loadAsyncData">
-                                        <option value="">ALL</option>
-                                        <option :value="item.section" v-for="(item, index) in this.sections" :key="index">{{ item.section }}</option>
+                        <div style="font-size: 20px; text-align: center; font-weight: bold; margin-bottom: 20px;">LIST OF QUESTIONS</div>
+                        <div class="level">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <b-select v-model="perPage" @input="setPerPage">
+                                        <option value="5">5 per page</option>
+                                        <option value="10">10 per page</option>
+                                        <option value="15">15 per page</option>
+                                        <option value="20">20 per page</option>
                                     </b-select>
-                                </b-field>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="level">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <b-field label="Question ID" label-position="on-border">
-                                    <b-input type="text" placeholder="Search Question ID..."
-                                    v-model="search.question_id" @keyup.native.enter="loadAsyncData"/>
-                                </b-field>
-                            </div>
-                            <div class="level-item">
-                                <b-field label="Question" label-position="on-border">
-                                    <b-input type="text" placeholder="Search Question..."
-                                    v-model="search.question" @keyup.native.enter="loadAsyncData"/>
-                                </b-field>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="level">
-                        <div class="item-left">
-                            <div class="level-item">
-                                <div class="buttons">
-                                    <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                                    <b-button @click="openModal" class="is-primary" icon-pack="fa" icon-right="plus">New</b-button>
+    
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <b-field label="Section" label-position="on-border">
+                                        <b-select placeholder="Search Section..."
+                                            v-model="search.section" @input="loadAsyncData">
+                                            <option value="">ALL</option>
+                                            <option :value="item.section" v-for="(item, index) in this.sections" :key="index">{{ item.section }}</option>
+                                        </b-select>
+                                    </b-field>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div style="display:flex; justify-content: flex-end;">
-                        <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
-                    </div>
-
-                    <b-table
-                        :data="data"
-                        :loading="loading"
-                        paginated
-                        backend-pagination
-                        :total="total"
-                        :per-page="perPage"
-                        @page-change="onPageChange"
-                        detailed
-                        detail-transition = ""
-                        aria-next-label="Next page"
-                        aria-previous-label="Previous page"
-                        aria-page-label="Page"
-                        :show-detail-icon=true
-                        aria-current-label="Current page"
-                        backend-sorting
-                        :default-sort-direction="defaultSortDirection"
-                        @sort="onSort">
-
-                        <b-table-column field="category_id" label="ID" v-slot="props">
-                            {{ props.row.question_id }}
-                        </b-table-column>
-
-                        <b-table-column field="question" label="Question" v-slot="props">
-                            <template>
-                                <span v-if="props.row.is_question_img == 0"> {{ props.row.question }}</span>
-                                <a v-else @click="showImg(props.row.question_img)">{{ props.row.question_img }}</a>
-                            </template>
-                        </b-table-column>
-
-                        <b-table-column field="section" label="Section" v-slot="props">
-                            {{ props.row.section.section }}
-                        </b-table-column>
-
-                        <b-table-column field="level" label="Level" v-slot="props">
-                            {{ props.row.level.level }}
-                        </b-table-column>
-
-                        <b-table-column field="score" label="Score" v-slot="props">
-                            {{ props.row.score }}
-                        </b-table-column>
-
-                        <b-table-column field="" label="Action" v-slot="props">
-                            <div class="is-flex">
-                                <b-button outlined class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" @click="getData(props.row.question_id)"></b-button>
-                                <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.question_id)"></b-button>
+    
+                        <div class="level">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <b-field label="Question ID" label-position="on-border">
+                                        <b-input type="text" placeholder="Search Question ID..."
+                                        v-model="search.question_id" @keyup.native.enter="loadAsyncData"/>
+                                    </b-field>
+                                </div>
+                                <div class="level-item">
+                                    <b-field label="Question" label-position="on-border">
+                                        <b-input type="text" placeholder="Search Question..."
+                                        v-model="search.question" @keyup.native.enter="loadAsyncData"/>
+                                    </b-field>
+                                </div>
                             </div>
-                        </b-table-column>
+                        </div>
+    
+                        <div class="level">
+                            <div class="item-left">
+                                <div class="level-item">
+                                    <div class="buttons">
+                                        <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
+                                        <b-button @click="openModal" class="is-primary" icon-pack="fa" icon-right="plus">New</b-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div style="display:flex; justify-content: flex-end;">
+                            <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
+                        </div>
 
-                        <template slot="detail" slot-scope="props">
-                            <div class="title is-6">OPTIONS</div>
-                            <table>
-                                <thead>
-                                    <th>Letter</th>
-                                    <th>Content</th>
-                                    <th>Answer</th>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="item in props.row.options" :key="item.option_id">
-                                        <td>{{ item.letter }}</td>
-                                        <td v-if="item.content != ''">{{ item.content }}</td>
-                                        <td v-else><a @click="showImg(item.img_path)">{{ item.img_path }}</a></td>
-                                        <td>
-                                            <b-icon v-if="item.is_answer === 1"
-                                                    pack="fa"
-                                                    icon="check"
-                                                    size="is-small" type="is-success">
-                                            </b-icon>
-                                            <b-icon v-else
-                                                    pack="fa"
-                                                    icon="times"
-                                                    size="is-small" type="is-danger">
-                                            </b-icon>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </template>
-                        
-                    </b-table>
+
+                        <b-table
+                            :data="data"
+                            :loading="loading"
+                            paginated
+                            backend-pagination
+                            :total="total"
+                            :per-page="perPage"
+                            @page-change="onPageChange"
+                            detailed
+                            detail-transition = ""
+                            aria-next-label="Next page"
+                            aria-previous-label="Previous page"
+                            aria-page-label="Page"
+                            :show-detail-icon=true
+                            aria-current-label="Current page"
+                            backend-sorting
+                            :default-sort-direction="defaultSortDirection"
+                            @sort="onSort">
+    
+                            <b-table-column field="category_id" label="ID" v-slot="props">
+                                {{ props.row.question_id }}
+                            </b-table-column>
+    
+                            <b-table-column field="question" label="Question" v-slot="props">
+                                <template>
+                                    <span v-if="props.row.is_question_img == 0"> {{ props.row.question }}</span>
+                                    <a v-else @click="showImg(props.row.question_img)">{{ props.row.question_img }}
+                                        <img :src="`/storage/q/${props.row.question_img}`" width="100"/>
+                                    </a>
+                                </template>
+                            </b-table-column>
+    
+                            <b-table-column field="section" label="Section" v-slot="props">
+                                {{ props.row.section.section }}
+                            </b-table-column>
+    
+                            <b-table-column field="level" label="Level" v-slot="props">
+                                {{ props.row.level.level }}
+                            </b-table-column>
+    
+                            <b-table-column field="score" label="Score" v-slot="props">
+                                {{ props.row.score }}
+                            </b-table-column>
+
+                            <b-table-column field="active" label="Active" v-slot="props">
+                                <span v-if="props.row.active === 1" class="yes">
+                                    YES
+                                </span>
+                                <span v-else class="no">
+                                    
+                                    NO
+                                </span>
+
+                            </b-table-column>
+                            <b-table-column field="" label="Action" v-slot="props">
+                                <div class="is-flex">
+                                    <b-button outlined class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" @click="getData(props.row.question_id)"></b-button>
+                                    <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.question_id)"></b-button>
+                                </div>
+                            </b-table-column>
+    
+                            <template slot="detail" slot-scope="props">
+                                <div class="title is-6">OPTIONS</div>
+                                <table>
+                                    <thead>
+                                        <th>Letter</th>
+                                        <th>Content</th>
+                                        <th>Answer</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="item in props.row.options" :key="item.option_id">
+                                            <td>{{ item.letter }}</td>
+                                            <td v-if="item.content != ''">{{ item.content }}</td>
+                                            <td v-else><a @click="showImg(item.img_path)">{{ item.img_path }}
+                                                <img :src="`/storage/q/${item.img_path}`" width="100"/>
+                                            </a></td>
+                                            <td>
+                                                <b-icon v-if="item.is_answer === 1"
+                                                        pack="fa"
+                                                        icon="check"
+                                                        size="is-small" type="is-success">
+                                                </b-icon>
+                                                <b-icon v-else
+                                                        pack="fa"
+                                                        icon="times"
+                                                        size="is-small" type="is-danger">
+                                                </b-icon>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </template>
+                            
+                        </b-table>
+                    </div> <!--box-->
                 </div><!--close column-->
-            </div>
-        </div>
-
-
+            </div> <!--cols-->
+        </div><!--section-->
 
 
         <!-- MODAL HERE -->
@@ -201,13 +217,11 @@
                                 </div>
                             </div>
 
-
-
-                            <b-field v-if="this.radioInputOption === 'TEXT'" label="Question">
+                            <b-field v-if="radioInputOption === 'TEXT'" label="Question">
                                 <b-input type="textarea" v-model="question" expanded placeholder="Question" />
                             </b-field>
 
-                            <b-field v-if="this.radioInputOption === 'IMG' && this.globalId == 0" label="Question">
+                            <b-field v-if="radioInputOption === 'IMG' && globalId == 0" label="Question">
                                 <b-field grouped class="file is-primary" :class="{'has-name': !!question_img}">
                                     <b-upload v-model="question_img" class="file-label">
                                         <span class="file-cta">
@@ -222,13 +236,13 @@
                             </b-field>
 
 
-                            <div v-if="this.radioInputOption === 'IMG' && this.globalId > 0">
-                                <p>{{ this.question_img }}</p>
+                            <div v-if="radioInputOption === 'IMG' && globalId > 0">
+                                <p>{{ question_img }}</p>
                                 <p style="color:red; font-size: 14px; font-style: italic;">Restricted from editing. If you want to edit this question, you may delete this and create new one.</p>
                             </div>
 
 
-                            <b-field v-if="this.globalId < 1">
+                            <b-field v-if="globalId < 1">
                                 <b-radio-button v-model="radioInputOption"
                                         native-value="TEXT"
                                         @input="radioClick"
@@ -249,7 +263,7 @@
                             <hr>
 
                             <!--LOOP -->
-                            <div class="option-panel" v-for="(option, k) in this.options" :key="k">
+                            <div class="option-panel" v-for="(option, k) in options" :key="k">
                                 <b-field :label="`Option ` + letters[k]">
                                     <input type="hidden" v-model='option.option_id' />
                                     <b-input v-if="option.is_img === 0" type="text" v-model="option.content" placeholder="Option here..."/>
@@ -290,7 +304,7 @@
 
                             <div style="margin-top: 20px;">
                                 <!--HOVER BUTTON SO THAT USER WILL SELECT IF OPTION IS IMAGE OR TEXT-->
-                                <b-dropdown position="is-top-right" v-show="this.options.length < 5" :triggers="['click']" aria-role="list">
+                                <b-dropdown position="is-top-right" v-show="options.length < 5" :triggers="['click']" aria-role="list">
                                     <template #trigger>
                                         <b-button
                                             label="Add Option"
@@ -303,9 +317,18 @@
                                 </b-dropdown>
                             </div>
 
+                            <div>
+                                <b-field label="Active">
+                                    <b-checkbox v-model="active"
+                                        :true-value="1"
+                                        :false-value="0">
+                                    </b-checkbox>
+                                </b-field>
+                            </div>
+
                             <div class="mt-3">
                                 <ul>
-                                    <li v-for="(err,i) in this.errors" :key="i">
+                                    <li v-for="(err,i) in errors" :key="i">
                                         <span style="color: red; font-style: italic;"><b-icon pack="fa" icon="exclamation" />{{err[0]}}</span>
                                     </li>
                                 </ul>
@@ -418,6 +441,7 @@ export default {
             is_question_img: 0,
             question_img: null,
             score: 0,
+            active: null,
 
             options: [],
             letters: ['A', 'B', 'C', 'D', 'E'],
@@ -580,6 +604,8 @@ export default {
             formData.append('section', this.section);
             formData.append('level', this.level);
             formData.append('score', this.score);
+            formData.append('active', this.active);
+
             for(var index = 0; index < this.options.length; index++){
                 formData.append('optionImg['+index+']', this.options[index].img_path);
                 //console.log(this.options[index].img_path);
@@ -637,6 +663,7 @@ export default {
                 section: this.section,
                 score: this.score,
                 options: this.options,
+                active: this.active
             }).then(res=>{
 
                 if(res.data.status === 'updated'){
@@ -660,6 +687,7 @@ export default {
                     this.question_img = null;
                     this.score = 0;
                     this.options = [];
+                    this.active = null
 
                 }
             }).catch(error=>{
@@ -720,6 +748,7 @@ export default {
                 this.score = res.data.score;
 
                 this.options = res.data.options;
+                this.active = res.data.active
             });
         },
 
@@ -771,5 +800,22 @@ export default {
 .option-panel{
     margin-left: 30px;
 }
+
+.yes{
+    padding: 5px;
+    color: white;
+    background-color: green;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.no{
+    padding: 5px;
+    color: white;
+    background-color: red;
+    font-weight: bold;
+    font-size: 10px;
+}
+
 
 </style>

@@ -84,7 +84,8 @@ class QuestionController extends Controller
                     'is_question_img' => 1,
                     'question_img' => $pathQuestion,
                     'question' => trim($req->question),
-                    'score' => $req->score
+                    'score' => $req->score,
+                    'active' => $req->active
                 ]);
                 //$file->move($destinationPath , $fileName);   //move the file to the folder
             }else{
@@ -94,7 +95,8 @@ class QuestionController extends Controller
                     'section_id' => $req->section,
                     'level_id' => $req->level,
                     'question' => trim($req->question),
-                    'score' => $req->score
+                    'score' => $req->score,
+                    'active' => $req->active
                 ]);
             }
 
@@ -169,6 +171,7 @@ class QuestionController extends Controller
                 $question->level_id = $req->level;
                 $question->question = trim($req->question);
                 $question->score = $req->score;
+                $question->active = $req->active;
                 $question->save();
             }
 
