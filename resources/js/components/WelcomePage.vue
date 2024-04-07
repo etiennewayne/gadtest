@@ -2,7 +2,7 @@
     <div>
        <div class="welcome-container mt-6">
             <div class="left-box animate__animated animate__fadeInLeft">
-                <div class="welcome-title">Hello <span style="color:orange;">Globalians!</span></div> 
+                <div class="welcome-title">Hello <span style="color:orange;">Luxmundis!</span></div> 
 
                 <div class="w-subtitle">
                     The TCGCAT (Tangub City Global College Admission Test) for 1st Semester AY 2024-2025 will  
