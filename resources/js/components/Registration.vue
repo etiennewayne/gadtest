@@ -118,19 +118,19 @@
                                     <div class="columns">
                                         <div class="column">
                                             <b-field label="1st Program Choice" label-position="on-border" 
-                                                :type="this.errors.first_program_choice ? 'is-danger' : ''"
-                                                :message="this.errors.first_program_choice ? this.errors.first_program_choice : ''" expanded>
+                                                :type="errors.first_program_choice ? 'is-danger' : ''"
+                                                :message="errors.first_program_choice ? errors.first_program_choice : ''" expanded>
                                                 <b-select placeholder="1st program choice" v-model="fields.first_program_choice" required expanded>
-                                                    <option :value="item.CCode" v-for="(item, index) in this.programs" :key="index">{{ item.CDesc }} ({{ item.CCode }})</option>
+                                                    <option :value="item.CCode" v-for="(item, index) in programs" :key="index">{{ item.CDesc }} ({{ item.CCode }})</option>
                                                 </b-select>
                                             </b-field>
                                         </div>
                                         <div class="column">
                                             <b-field label="2nd Program Choice" label-position="on-border" expanded
-                                                :type="this.errors.second_program_choice ? 'is-danger' : ''"
-                                                :message="this.errors.second_program_choice ? this.errors.second_program_choice : ''">
+                                                :type="errors.second_program_choice ? 'is-danger' : ''"
+                                                :message="errors.second_program_choice ? errors.second_program_choice : ''">
                                                 <b-select placeholder="2nd program choice" v-model="fields.second_program_choice" required expanded>
-                                                    <option :value="item.CCode" v-for="(item, index) in this.programs" :key="index">{{ item.CDesc }} ({{ item.CCode }})</option>
+                                                    <option :value="item.CCode" v-for="(item, index) in programs" :key="index">{{ item.CDesc }} ({{ item.CCode }})</option>
                                                 </b-select>
                                             </b-field>
                                         </div>
@@ -139,10 +139,10 @@
                                     <div class="columns">
                                         <div class="column">
                                             <b-field label="Preferred mode of learning" label-position="on-border" expanded
-                                                :type="this.errors.learning_mode ? 'is-danger' : ''"
-                                                :message="this.errors.learning_mode ? this.errors.learning_mode : ''">
+                                                :type="errors.learning_mode ? 'is-danger' : ''"
+                                                :message="errors.learning_mode ? errors.learning_mode : ''">
                                                 <b-select placeholder="Mode of Learning" v-model="fields.learning_mode" required expanded>
-                                                    <option :value="item.learning_mode" v-for="(item, index) in this.learningModes" :key="index">{{ item.learning_mode }} - {{ item.learning_desc }}</option>
+                                                    <option :value="item.learning_mode" v-for="(item, index) in learningModes" :key="index">{{ item.learning_mode }} - {{ item.learning_desc }}</option>
                                                 </b-select>
                                             </b-field>
                                         </div>
@@ -158,8 +158,8 @@
                                         </div>
                                         <div class="column">
                                             <b-field label="Email" label-position="on-border"
-                                                :type="this.errors.email ? 'is-danger' : ''"
-                                                :message="this.errors.email ? this.errors.email : ''">
+                                                :type="errors.email ? 'is-danger' : ''"
+                                                :message="errors.email ? errors.email : ''">
                                                 <b-input type="email" placeholder="Email" v-model="fields.email" required />
                                             </b-field>
                                         </div>
@@ -170,8 +170,8 @@
                                     <div class="columns">
                                         <div class="column">
                                             <b-field label="Last School Attended (Indicate the full name of school)" label-position="on-border"
-                                                :type="this.errors.last_school_attended ? 'is-danger' : ''"
-                                                :message="this.errors.last_school_attended ? this.errors.last_school_attended : ''">
+                                                :type="errors.last_school_attended ? 'is-danger' : ''"
+                                                :message="errors.last_school_attended ? errors.last_school_attended : ''">
                                                 <b-input type="text" placeholder="Last School Attended" v-model="fields.last_school_attended" required />
                                             </b-field>
                                         </div>
