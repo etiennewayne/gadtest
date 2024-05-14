@@ -53,7 +53,7 @@
 
                             <div class="buttons mt-3">
                                 <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                                <b-button icon-pack="fa" icon-left="plus" tag="a" href="/panel/user/create" class="is-primary">New User</b-button>
+                                <b-button icon-pack="fa" icon-left="plus" tag="a" href="/panel/current-users/create" class="is-primary">New User</b-button>
                             </div>
 
                             <b-table
@@ -107,7 +107,7 @@
                                         </template>
 
                                         <b-dropdown-item aria-role="listitem" icon-right="envelope-o" icon-pack="fa" @click="verifyEmail(props.row)">Verfiy Email</b-dropdown-item>
-                                        <b-dropdown-item aria-role="listitem" icon-right="pencil" icon-pack="fa" :href="'/panel/user/'+ props.row.user_id + '/edit'" tag="a">Edit</b-dropdown-item>
+                                        <b-dropdown-item aria-role="listitem" icon-right="pencil" icon-pack="fa" :href="'/panel/current-users/'+ props.row.user_id + '/edit'" tag="a">Edit</b-dropdown-item>
                                         <b-dropdown-item aria-role="listitem" @click="openModalResetPassword(props.row.user_id)">Reset Password</b-dropdown-item>
 
                                         <b-dropdown-item aria-role="listitem" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.user_id)">Delete</b-dropdown-item>
@@ -132,7 +132,7 @@
 
                             <div class="buttons mt-3">
                                 <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                                <b-button icon-pack="fa" icon-left="plus" tag="a" href="/panel/user/create" class="is-primary">New User</b-button>
+                                <b-button icon-pack="fa" icon-left="plus" tag="a" href="/panel/current-users/create" class="is-primary">New User</b-button>
                             </div>
                         </div>
                     </div>
@@ -293,7 +293,7 @@ export default {
         //actions here below
 
         deleteSubmit(delete_id){
-            axios.delete('/panel/user/'+ delete_id).then(res=>{
+            axios.delete('/panel/current-user/'+ delete_id).then(res=>{
                 this.loadAsyncData();
             }).catch(err=>{
                 console.log(err);

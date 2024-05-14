@@ -62,7 +62,7 @@ class UserController extends Controller
         $learningmodes = LearningModality::all();
 
 
-        return view('panel.user.user-create')
+        return view('panel.user.user-create-edit')
             ->with('userid', 0)
             ->with('programs', $programs ? $programs : '')
             ->with('learningmodes', $learningmodes);
@@ -119,7 +119,7 @@ class UserController extends Controller
         $learningmodes = LearningModality::all();
 
         //$data = User::find($id);
-        return view('panel.user.user-create')
+        return view('panel.user.user-create-edit')
             ->with('userid', $id)
             ->with('programs', $programs ? $programs : '')
             ->with('learningmodes', $learningmodes);

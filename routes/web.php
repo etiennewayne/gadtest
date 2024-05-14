@@ -149,6 +149,8 @@ Route::resource('/panel/all-users', App\Http\Controllers\Administrator\UserContr
 Route::get('/get-users', [App\Http\Controllers\Administrator\UserController::class, 'getUsers']);
 
 Route::get('/panel/current-users', [App\Http\Controllers\Administrator\UserController::class, 'currentUserIndex']);
+Route::get('/panel/current-users/{id}/edit', [App\Http\Controllers\Administrator\UserController::class, 'edit']);
+Route::put('/panel/current-users/{id}', [App\Http\Controllers\Administrator\UserController::class, 'update']);
 Route::get('/get-current-active-users', [App\Http\Controllers\Administrator\UserController::class, 'getCurrentUsers']);
 
 
@@ -179,9 +181,9 @@ Route::post('/send-reject-email', [App\Http\Controllers\Administrator\ReportResu
 Route::post('/submit-result/{status}', [App\Http\Controllers\Administrator\ReportResultController::class, 'submitResult']);
 
 
-Route::get('/session-test', function(Request $req){
-    return session()->all();
-});
+// Route::get('/session-test', function(Request $req){
+//     return session()->all();
+// });
 
 
 
