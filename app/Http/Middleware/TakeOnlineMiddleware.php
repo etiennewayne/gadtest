@@ -16,7 +16,7 @@ class TakeOnlineMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $isOnline = 1; //manual set.. env take cache.
+        $isOnline = 0; //manual set.. env take cache.
         //set to 0 if not allowed,
         //set 1 if allowed the exam of the application
 

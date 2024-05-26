@@ -41,7 +41,6 @@ Route::get('/barangays', [App\Http\Controllers\AddressController::class, 'barang
 
 
 //////////////////ADDRESS///////////////////
-
 //registration of account
 //Route::resource('/registration', App\Http\Controllers\Student\RegistrationController::class);
 
@@ -56,6 +55,10 @@ Route::get('/barangays', [App\Http\Controllers\AddressController::class, 'barang
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('/section', [App\Http\Controllers\Student\SectionPageController::class, 'index']);
+Route::get('/section', function(){
+    return redirect('/home');
+});
+
 Route::resource('/section-question', App\Http\Controllers\Student\SectionQuestionController::class);
 
 
@@ -169,7 +172,7 @@ Route::resource('/panel/report-result', App\Http\Controllers\Administrator\Repor
 Route::get('/panel/ajax-studentlist-result', [App\Http\Controllers\Administrator\ReportResultController::class, 'index_data']);
 Route::get('/panel/report-excel-studentlist-result', [App\Http\Controllers\Administrator\ReportResultController::class, 'reportExcel']);
 //admit student under the report controller
-//
+
 Route::get('/dashboard-report', [App\Http\Controllers\Administrator\DashboardResultController::class, 'dashboardReport']);
 
 
