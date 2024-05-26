@@ -13992,8 +13992,14 @@ var render = function render() {
   return _c("div", [_c("section", {
     staticClass: "section"
   }, [_c("div", {
+    staticClass: "columns is-centered"
+  }, [_c("div", {
+    staticClass: "column is-10"
+  }, [_c("div", {
+    staticClass: "box"
+  }, [_c("div", {
     staticClass: "table-title"
-  }, [_vm._v("LIST OF STUDENT TAKEN")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("LIST OF STUDENT TAKEN BY SECTION")]), _vm._v(" "), _c("div", {
     staticClass: "level"
   }, [_c("div", {
     staticClass: "level-left"
@@ -14151,7 +14157,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(props) {
-        return [_vm._v("\n                " + _vm._s(props.row.taking_test_id) + "\n            ")];
+        return [_vm._v("\n                                " + _vm._s(props.row.taking_test_id) + "\n                            ")];
       }
     }])
   }), _vm._v(" "), _c("b-table-column", {
@@ -14162,7 +14168,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(props) {
-        return [_vm._v("\n                " + _vm._s(props.row.code) + "\n            ")];
+        return [_vm._v("\n                                " + _vm._s(props.row.code) + "\n                            ")];
       }
     }])
   }), _vm._v(" "), _c("b-table-column", {
@@ -14173,7 +14179,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(props) {
-        return [_vm._v("\n                " + _vm._s(props.row.lname) + ", " + _vm._s(props.row.fname) + " " + _vm._s(props.row.mname) + "\n            ")];
+        return [_vm._v("\n                                " + _vm._s(props.row.lname) + ", " + _vm._s(props.row.fname) + " " + _vm._s(props.row.mname) + "\n                            ")];
       }
     }])
   }), _vm._v(" "), _c("b-table-column", {
@@ -14184,7 +14190,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(props) {
-        return [_vm._v("\n                " + _vm._s(props.row.from) + " - " + _vm._s(props.row.from) + "\n            ")];
+        return [_vm._v("\n                                " + _vm._s(props.row.from) + " - " + _vm._s(props.row.from) + "\n                            ")];
       }
     }])
   }), _vm._v(" "), _c("b-table-column", {
@@ -14195,7 +14201,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(props) {
-        return [_vm._v("\n                " + _vm._s(props.row.section) + "\n            ")];
+        return [_vm._v("\n                                " + _vm._s(props.row.section) + "\n                            ")];
       }
     }])
   }), _vm._v(" "), _c("b-table-column", {
@@ -14206,7 +14212,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(props) {
-        return [_vm._v("\n                " + _vm._s(props.row.created_date) + " " + _vm._s(props.row.created_time) + "\n            ")];
+        return [_vm._v("\n                                " + _vm._s(props.row.created_date) + " " + _vm._s(props.row.created_time) + "\n                            ")];
       }
     }])
   }), _vm._v(" "), _c("b-table-column", {
@@ -14233,7 +14239,7 @@ var render = function render() {
         })], 1)];
       }
     }])
-  })], 1)], 1)]);
+  })], 1)], 1)])])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
