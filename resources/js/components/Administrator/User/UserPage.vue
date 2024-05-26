@@ -53,7 +53,7 @@
 
                             <div class="buttons mt-3">
                                 <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                                <b-button icon-pack="fa" icon-left="plus" tag="a" href="/panel/user/create" class="is-primary">New User</b-button>
+                                <b-button icon-pack="fa" icon-left="plus" tag="a" href="/panel/users/create" class="is-primary">New User</b-button>
                             </div>
 
                             <b-table
@@ -107,10 +107,10 @@
                                         </template>
 
                                         <b-dropdown-item aria-role="listitem" icon-right="envelope-o" icon-pack="fa" @click="verifyEmail(props.row)">Verfiy Email</b-dropdown-item>
-                                        <b-dropdown-item aria-role="listitem" icon-right="pencil" icon-pack="fa" :href="'/panel/user/'+ props.row.user_id + '/edit'" tag="a">Edit</b-dropdown-item>
+                                        <b-dropdown-item aria-role="listitem" icon-right="pencil" icon-pack="fa" :href="'/panel/users/'+ props.row.user_id + '/edit'" tag="a">Edit</b-dropdown-item>
                                         <b-dropdown-item aria-role="listitem" @click="openModalResetPassword(props.row.user_id)">Reset Password</b-dropdown-item>
 
-                                        <b-dropdown-item aria-role="listitem" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.user_id)">Delete</b-dropdown-item>
+                                        <!-- <b-dropdown-item aria-role="listitem" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.user_id)">Delete</b-dropdown-item> -->
                                         <b-dropdown-item aria-role="listitem" icon-pack="fa" icon-right="trash" :href="`/panel/user-test-info/${props.row.user_id}`">Info</b-dropdown-item>
 
                                     </b-dropdown>
@@ -248,7 +248,7 @@ export default {
             ].join('&')
 
             this.loading = true
-            axios.get(`/get-users?${params}`)
+            axios.get(`/panel/get-users?${params}`)
                 .then(({ data }) => {
                     this.data = []
                     let currentTotal = data.total
@@ -293,7 +293,7 @@ export default {
         //actions here below
 
         deleteSubmit(delete_id){
-            axios.delete('/panel/user/'+ delete_id).then(res=>{
+            axios.delete('/panel/users/'+ delete_id).then(res=>{
                 this.loadAsyncData();
             }).catch(err=>{
                 console.log(err);
@@ -314,7 +314,7 @@ export default {
         },
 
         verifyEmail: function(dataRow){
-            axios.post('/verify-email-students/' + dataRow.user_id).then(res=>{
+            axios.post('/panel/verify-email-students/' + dataRow.user_id).then(res=>{
                 console.log(res.data);
                 if(res.data.status === 'verified'){
                     this.$buefy.dialog.alert({
@@ -334,7 +334,7 @@ export default {
         },
 
         submitResetPassword: function(){
-            axios.post('/user-reset-password/' +this.dataId, this.fields).then(res=>{
+            axios.post('/panel/user-reset-password/' +this.dataId, this.fields).then(res=>{
                 if(res.data.status === 'reset'){
                     this.$buefy.dialog.alert({
                         title: 'RESET SUCCESSFULLY!',

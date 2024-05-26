@@ -3,8 +3,8 @@
 <?php $__env->startSection('content'); ?>
 
         <home-page is-not-scheduled="<?php if(session('error') == 'not_scheduled'): ?>1 <?php endif; ?>"
-                   already-visited-section="<?php if(session('error') == 'already_visited_section'): ?>visited <?php endif; ?>"
-                    is-exist="<?php if(session('error') == 'exist'): ?>exist <?php endif; ?>" prop-user='<?php echo json_encode(auth()->user(), 15, 512) ?>'></home-page>
+                already-visited-section="<?php if(session('error') == 'already_visited_section'): ?>visited <?php endif; ?>"
+                is-exist="<?php if(session('error') == 'exist'): ?>exist <?php endif; ?>" prop-user='<?php echo json_encode(auth()->user(), 15, 512) ?>'></home-page>
 
 
 

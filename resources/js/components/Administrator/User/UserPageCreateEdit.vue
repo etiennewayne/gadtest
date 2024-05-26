@@ -261,13 +261,13 @@ export default {
 
         submit(){
             if(this.userId > 0){
-                axios.put('/panel/current-users/'+this.userId, this.fields).then(res=>{
+                axios.put('/panel/users/'+this.userId, this.fields).then(res=>{
                     if(res.data.status === 'updated'){
                         this.$buefy.dialog.alert({
                             title: 'SAVED!',
                             message: 'User updated successfully.',
                             type: 'is-success',
-                            onConfirm: ()=> window.location = '/panel/current-users'
+                            onConfirm: ()=> window.location = '/panel/users'
                         });
                     }
                 }).catch(err=>{
@@ -283,7 +283,7 @@ export default {
                             title: 'SAVED!',
                             message: 'User added successfully.',
                             type: 'is-success',
-                            onConfirm: ()=> window.location = '/panel/current-users'
+                            onConfirm: ()=> window.location = '/panel/users'
                         });
                     }
                 }).catch(err=>{
@@ -318,7 +318,7 @@ export default {
             this.clearFields();
         
             //nested axios for getting the address 1 by 1 or request by request
-            axios.get('/panel/current-users/'+this.userId).then(res=>{
+            axios.get('/panel/users/'+this.userId).then(res=>{
 
                 var tempData = res.data;
                 //load city first

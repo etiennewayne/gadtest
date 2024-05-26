@@ -8,8 +8,8 @@
                 aria-close-label="Close notification"
                 role="alert">
                 No online exam is allowed at this moment. Please take the exam on-site.
-                For more intormation about the GADTEST Exam,
-                click <a href="https://www.facebook.com/gadtcluxmundi/posts/pfbid02JzSVGT5CmsCYouQPezitMPGhoEuuoWSbtLS1zL8hWjbFMuBdmfWMAawjizv2Yx7ml">here</a>.
+                For more intormation about the TCGCAT,
+                click <a href="https://www.facebook.com/tcgcGAO">here</a>.
             </b-notification>
 
         </div>

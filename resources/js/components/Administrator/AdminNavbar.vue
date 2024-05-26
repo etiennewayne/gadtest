@@ -75,7 +75,7 @@
                 <b-navbar-item href="/panel/current-users">
                     Current Users
                 </b-navbar-item>
-                <b-navbar-item href="/panel/all-users">
+                <b-navbar-item href="/panel/users">
                     All Users
                 </b-navbar-item>
             </b-navbar-dropdown>

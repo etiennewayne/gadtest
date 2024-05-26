@@ -148,22 +148,20 @@ Route::resource('/panel/students-result', App\Http\Controllers\Administrator\Stu
 
 
 //USER
-Route::resource('/panel/all-users', App\Http\Controllers\Administrator\UserController::class);
+Route::resource('/panel/users', App\Http\Controllers\Administrator\UserController::class);
+Route::get('/panel/get-users', [App\Http\Controllers\Administrator\UserController::class, 'getData']);
+Route::post('/panel/verify-email-students/{userid}', [App\Http\Controllers\Administrator\UserController::class, 'verifyEmailStudents']);
+Route::post('/panel/user-reset-password/{id}', [App\Http\Controllers\Administrator\UserController::class, 'resetPassword']);
+
+
 Route::get('/get-users', [App\Http\Controllers\Administrator\UserController::class, 'getUsers']);
 
-Route::get('/panel/current-users', [App\Http\Controllers\Administrator\UserController::class, 'currentUserIndex']);
-Route::get('/panel/current-users/{id}/edit', [App\Http\Controllers\Administrator\UserController::class, 'edit']);
-Route::put('/panel/current-users/{id}', [App\Http\Controllers\Administrator\UserController::class, 'update']);
-Route::get('/get-current-active-users', [App\Http\Controllers\Administrator\UserController::class, 'getCurrentUsers']);
-
-
-Route::get('/fetch-students', [App\Http\Controllers\Administrator\UserController::class, 'allStudents']);
-Route::post('/verify-email-students/{userid}', [App\Http\Controllers\Administrator\UserController::class, 'verifyEmailStudents']);
-Route::post('/user-reset-password/{id}', [App\Http\Controllers\Administrator\UserController::class, 'resetPassword']);
+Route::resource('/panel/current-users', App\Http\Controllers\Administrator\CurrentUserController::class);
+Route::get('/panel/get-current-users', [App\Http\Controllers\Administrator\CurrentUserController::class, 'getData']);
+Route::post('/panel/current-verify-email-students/{userid}', [App\Http\Controllers\Administrator\CurrentUserController::class, 'verifyEmailStudents']);
+Route::post('/panel/current-user-reset-password/{id}', [App\Http\Controllers\Administrator\CurrentUserController::class, 'resetPassword']);
 
 Route::get('/panel/user-test-info/{userid}', [App\Http\Controllers\Administrator\UserTestInfoController::class, 'userInfo']);
-
-
 
 
 
