@@ -1,70 +1,84 @@
 <template>
     <div>
-        <div class="section">
-           <div class="h-box">
-               <div class="h-box-header">
-                   DASHBOARD
-               </div>
 
-               <div class="h-box-body">
+        <div class="columns mt-4 is-centered">
+            <div class="column is-8-widescreen is-10-tablet">
 
-                   <div class="h-entity">
-                        <div class="h-title">
-                            NEW STUDENTS :
+                <div class="section">
+                    <div class="columns">
+                        <div class="column">
+                            <div class="box">
+                                <div class="subtitle">
+                                    NEW STUDENTS ACCOUNT
+                                </div>
+                                <div class="is-size-1 mt-3 has-text-weight-bold has-text-centered">
+                                    {{ this.reportData.new_students }} &nbsp; 
+                                </div>
+                            </div>
                         </div>
-                        <div class="h-count">
-                            {{ this.reportData.new_students }} &nbsp; <small><i>(multiple account)</i></small>
+                        <div class="column">
+                            <div class="box">
+                                <div class="subtitle">
+                                    ACCEPTED STUDENTS
+                                </div>
+                                <div class="is-size-1 mt-3 has-text-weight-bold has-text-centered">
+                                    {{ this.reportData.accepted }}
+                                </div>
+                            </div>
                         </div>
-                   </div>
+                        <div class="column">
+                            <div class="box">
+                                <div class="subtitle">
+                                    REJECTED STUDENTS 
+                                </div>
+                                <div class="is-size-1 mt-3 has-text-weight-bold has-text-centered">
+                                    {{ this.reportData.rejected }}
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div> <!--section -->
 
-                   <div class="h-entity">
-                        <div class="h-title">
-                            ACCEPTED STUDENTS :
+                <!--another section -->
+                <div class="section">
+                    <div class="columns">
+                        <div class="column">
+                            <div class="box">
+                                <div class="subtitle">
+                                    TRANSFEREES 
+                                </div>
+                                <div class="is-size-1 mt-3 has-text-weight-bold has-text-centered">
+                                    {{ this.reportData.no_transferees }}
+                                </div>
+                            </div>
                         </div>
-                        <div class="h-count">
-                            {{ this.reportData.accepted }}
+                        <div class="column">
+                            <div class="box">
+                                <div class="subtitle">
+                                    RETURNEES
+                                </div>
+                                <div class="is-size-1 mt-3 has-text-weight-bold has-text-centered">
+                                    {{ this.reportData.no_returnees }}
+                                </div>
+                            </div>
                         </div>
-                   </div>
-
-                   <div class="h-entity">
-                        <div class="h-title">
-                            REJECTED STUDENTS :
+                        <div class="column">
+                            <div class="box">
+                                <div class="subtitle">
+                                    TAKERS
+                                </div>
+                                <div class="is-size-1 mt-3 has-text-weight-bold has-text-centered">
+                                    {{ this.reportData.no_takers }}
+                                </div>
+                            </div>
                         </div>
-                        <div class="h-count">
-                            {{ this.reportData.rejected }}
-                        </div>
-                   </div>
-
-                   <div class="h-entity">
-                        <div class="h-title">
-                            NO OF TRANSFEREES :
-                        </div>
-                        <div class="h-count">
-                            {{ this.reportData.no_transferees }}
-                        </div>
-                   </div>
-                   <div class="h-entity">
-                        <div class="h-title">
-                            NO OF RETURNEES :
-                        </div>
-                        <div class="h-count">
-                            {{ this.reportData.no_returnees }}
-                        </div>
-                   </div>
-
-                   <div class="h-entity">
-                        <div class="h-title">
-                            NO. OF TAKERS :
-                        </div>
-                        <div class="h-count">
-                            {{ this.reportData.no_takers }}
-                        </div>
-                   </div>
-
-
-               </div>
-           </div>
-        </div>
+                    
+                    </div>
+                </div> <!--section -->
+            </div>
+        </div> <!--container -->
+        
     </div>
 </template>
 

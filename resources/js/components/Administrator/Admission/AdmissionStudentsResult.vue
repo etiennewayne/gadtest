@@ -31,7 +31,9 @@
         <div class="section">
             <div style="display:flex; justify-content: flex-end; margin-bottom: 10px;">
                
-                <b-button class="is-small is-success is-outlined" style="margin-right:auto;" icon-pack="fa" icon-right="refresh" @click="loadAsyncData">REFRESH</b-button>
+                <b-button class="is-small is-success is-outlined" style="margin-right:auto;" 
+                    icon-pack="fa" icon-right="refresh" 
+                    @click="loadAsyncData">REFRESH</b-button>
                
                 <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
             </div>
